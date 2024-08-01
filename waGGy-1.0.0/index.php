@@ -133,9 +133,9 @@ include("header.php");
               New
             </div>
             <div class="card position-relative">
-              <a href="single-product.html"><img src="images/item1.jpg" class="img-fluid rounded-4" alt="image"></a>
+              <a href="filter1.php"><img src="images/item1.jpg" class="img-fluid rounded-4" alt="image"></a>
               <div class="card-body p-0">
-                <a href="single-product.html">
+                <a href="filter1.php">
                   <h3 class="card-title pt-4 m-0">Grey hoodie</h3>
                 </a>
 

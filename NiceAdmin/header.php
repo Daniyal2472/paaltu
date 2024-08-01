@@ -1,3 +1,13 @@
+<?php
+session_start();
+include("connection.php");
+
+if (isset($_SESSION['user_id'])) {
+    $user_id = $_SESSION['user_id'];
+    $email = $_SESSION['email'];
+}else{
+    $username='Guest';}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
