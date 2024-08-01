@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 31, 2024 at 09:39 PM
+-- Generation Time: Aug 01, 2024 at 08:53 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -35,6 +35,17 @@ CREATE TABLE `accessories` (
   `image` varchar(255) DEFAULT NULL,
   `description` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `accessories`
+--
+
+INSERT INTO `accessories` (`id`, `name`, `price`, `category_id`, `image`, `description`) VALUES
+(1, 'Mahad', 32435432.00, 1, '../accessories/images.jpeg', 'fdsfdsfs'),
+(2, 'Mahad', 32435432.00, 1, './accessories/images.jpeg', 'fdsfdsfs'),
+(3, 'Mahad', 32435432.00, 1, '../paltoo/accessories/images.jpeg', 'fdsfdsfs'),
+(4, 'Mahad', 32435432.00, 1, './paltoo/accessories/images.jpeg', 'fdsfdsfs'),
+(5, 'Mahad', 32435432.00, 2, 'C:xampphtdocspaltooaccessories/images.jpeg', 'fdsfdsfs');
 
 -- --------------------------------------------------------
 
@@ -233,7 +244,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `accessories`
 --
 ALTER TABLE `accessories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `appointments`
