@@ -51,6 +51,10 @@ if (isset($_SESSION['user_id'])) {
 
   <!-- Animate.css Stylesheet -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+
+    <script src="https://code.iconify.design/2/2.1.2/iconify.min.js"></script>
+
+
 </head>
 
 
@@ -223,7 +227,7 @@ if (isset($_SESSION['user_id'])) {
           </div>
           <div class="support-box text-end d-none d-xl-block">
             <span class="fs-6 secondary-font text-muted">Email</span>
-            <h5 class="mb-0"><?php echo $email; ?></h5>
+            <h5 class="mb-0">Paalto@gmail.com</h5>
           </div>
 
 
@@ -311,9 +315,7 @@ if (isset($_SESSION['user_id'])) {
                   <li><a href="Birdsctg.php" class="dropdown-item">BIRDS</a></li>
                 </ul>
               </li>
-              <li class="nav-item">
-                <a href="blog.php" class="nav-link">Blog</a>
-              </li>
+           
               <li class="nav-item">
                 <a href="contact.php" class="nav-link">Contact</a>
               </li>
@@ -345,13 +347,9 @@ if (isset($_SESSION['user_id'])) {
                                    
              </ul>
 
-            <div class="d-none d-lg-flex align-items-end">
+             <div class="d-none d-lg-flex align-items-end">
               <ul class="d-flex justify-content-end list-unstyled m-0">
-                <li>
-                  <a href="account.php" class="mx-3">
-                    <iconify-icon icon="healthicons:person" class="fs-4"></iconify-icon>
-                  </a>
-                </li>
+              
                 <li>
                   <a href="wishlist.php" class="mx-3">
                     <iconify-icon icon="mdi:heart" class="fs-4"></iconify-icon>
@@ -370,6 +368,68 @@ if (isset($_SESSION['user_id'])) {
               </ul>
 
             </div>
+
+            <div class="dropdown">
+    <a class="dropdown-toggle" href="#" role="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+        <span class="iconify w-50" data-icon="healthicons:person"></span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile" aria-labelledby="userDropdown">
+        <li class="dropdown-header">
+            <h6><?php echo $email; ?></h6>
+            <span>Web Designer</span> <!-- You can replace this with another role or description if needed -->
+        </li>
+        <li>
+            <hr class="dropdown-divider">
+        </li>
+
+        <li>
+            <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+                <i class="bi bi-person"></i>
+                <span>My Profile</span>
+            </a>
+        </li>
+        <li>
+            <hr class="dropdown-divider">
+        </li>
+
+        <li>
+            <hr class="dropdown-divider">
+        </li>
+
+        <li>
+            <a class="dropdown-item d-flex align-items-center" href="pages-faq.html">
+                <i class="bi bi-question-circle"></i>
+                <span>Need Help?</span>
+            </a>
+        </li>
+        <li>
+            <hr class="dropdown-divider">
+        </li>
+
+        <?php if (isset($_SESSION['user_id'])): ?>
+            <li>
+                <a class="dropdown-item d-flex align-items-center" href="logout.php">
+                    <i class="bi bi-box-arrow-right"></i>
+                    <span>Sign Out</span>
+                </a>
+            </li>
+        <?php else: ?>
+            <li>
+                <a class="dropdown-item d-flex align-items-center" href="login.php">
+                    <i class="bi bi-box-arrow-right"></i>
+                    <span>Login</span>
+                </a>
+            </li>
+        <?php endif; ?>
+    </ul>
+</div>
+
+
+
+            
+             
+              
+             
 
           </div>
 

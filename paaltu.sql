@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 30, 2024 at 07:30 PM
+-- Generation Time: Jul 31, 2024 at 09:39 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -44,12 +44,14 @@ CREATE TABLE `accessories` (
 
 CREATE TABLE `appointments` (
   `id` int(11) NOT NULL,
+  `name` varchar(250) NOT NULL,
+  `email` varchar(250) NOT NULL,
+  `phone number` int(11) NOT NULL,
   `doctor_id` int(11) DEFAULT NULL,
   `date` varchar(50) NOT NULL,
   `time` varchar(50) NOT NULL,
   `city` varchar(50) NOT NULL,
   `area` varchar(100) DEFAULT NULL,
-  `province` varchar(50) NOT NULL,
   `postal_code` varchar(20) DEFAULT NULL,
   `user_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -58,8 +60,9 @@ CREATE TABLE `appointments` (
 -- Dumping data for table `appointments`
 --
 
-INSERT INTO `appointments` (`id`, `doctor_id`, `date`, `time`, `city`, `area`, `province`, `postal_code`, `user_id`) VALUES
-(11, 1, '2024-07-03', '23:46', 'sadas', 'asd', 'sadsa', '12', 2);
+INSERT INTO `appointments` (`id`, `name`, `email`, `phone number`, `doctor_id`, `date`, `time`, `city`, `area`, `postal_code`, `user_id`) VALUES
+(1, 'a', 'abc@gmial.com', 123, 1, '12-06-2024', '12:00', 'karachi', 'gulshan', '75300', 4),
+(15, 'Abeer Hussain', 'abeerhussain922@gmail.com ', 11616161, 1, '2024-07-10', '16:37', 'Karachi', 'jndasda', '74600', 4);
 
 -- --------------------------------------------------------
 
@@ -92,7 +95,10 @@ CREATE TABLE `categories` (
 
 INSERT INTO `categories` (`id`, `name`) VALUES
 (1, 'Cat'),
-(2, 'Dog');
+(2, 'Dog'),
+(3, 'bird'),
+(4, 'bird'),
+(5, 'bili');
 
 -- --------------------------------------------------------
 
@@ -112,7 +118,8 @@ CREATE TABLE `doctors` (
 --
 
 INSERT INTO `doctors` (`id`, `name`, `email`, `qualification`) VALUES
-(1, 'Usman', 'usman@gmail.com', 'MBBS');
+(1, 'Usman', 'usman@gmail.com', 'MBBS'),
+(2, 'Abeer Hussain', 'abeerhussain922@gmail.com', 'mbbs');
 
 -- --------------------------------------------------------
 
@@ -161,7 +168,10 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `role`) VALUES
 (1, 'daniyal', 'daniyal2472@gmail.com', '123', 'User'),
-(2, 'mahad', 'mahad@abc.com', '123', 'User');
+(2, 'mahad', 'mahad@abc.com', '123', 'User'),
+(3, 'Saad', 'abeerhussain922@gmail.com', '123', 'User'),
+(4, 'Ayaz', 'ayaz@gmail.com', '123', 'User'),
+(5, 'Saad12', 'abeerhussain888888@gmail.com', '123', 'User');
 
 --
 -- Indexes for dumped tables
@@ -229,7 +239,7 @@ ALTER TABLE `accessories`
 -- AUTO_INCREMENT for table `appointments`
 --
 ALTER TABLE `appointments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `blogs`
@@ -241,13 +251,13 @@ ALTER TABLE `blogs`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `doctors`
 --
 ALTER TABLE `doctors`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `pets`
@@ -259,7 +269,7 @@ ALTER TABLE `pets`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Constraints for dumped tables

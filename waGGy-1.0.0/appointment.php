@@ -123,7 +123,7 @@ include("header.php");
       </div>
       <?php
 include("footer.php");
-
+include("connection.php");
 if (isset($_POST['book'])) {
   $name = $_POST['name'];
   $phone = $_POST['phone'];
@@ -137,7 +137,7 @@ if (isset($_POST['book'])) {
   
 
   
-  $query = mysqli_query($con, "INSERT INTO `appointments`(`id`, `doctor_id`, `date`, `time`, `city`, `area`, `province`, `postal_code`, `user_id`) VALUES ('','1','$date','$time','$city','$area','$state','$post_code','$user_id')");
+  $query = mysqli_query($con, "INSERT INTO `appointments`(`id`, `name`, `email`, `phone number`, `doctor_id`, `date`, `time`, `city`, `area`, `postal_code`, `user_id`) VALUES ('','$name','$email ','$phone','1','$date','$time','$city','$area','$post_code','4')");
   
   if ($query) {
     echo "<script>location.assign('index.php')</script>";
