@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 01, 2024 at 08:53 PM
+-- Generation Time: Aug 02, 2024 at 02:10 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -41,11 +41,7 @@ CREATE TABLE `accessories` (
 --
 
 INSERT INTO `accessories` (`id`, `name`, `price`, `category_id`, `image`, `description`) VALUES
-(1, 'Mahad', 32435432.00, 1, '../accessories/images.jpeg', 'fdsfdsfs'),
-(2, 'Mahad', 32435432.00, 1, './accessories/images.jpeg', 'fdsfdsfs'),
-(3, 'Mahad', 32435432.00, 1, '../paltoo/accessories/images.jpeg', 'fdsfdsfs'),
-(4, 'Mahad', 32435432.00, 1, './paltoo/accessories/images.jpeg', 'fdsfdsfs'),
-(5, 'Mahad', 32435432.00, 2, 'C:xampphtdocspaltooaccessories/images.jpeg', 'fdsfdsfs');
+(14, 'Abeer Hussain', 1.00, 1, '../accessories/Screenshot 2024-07-21 211410.png', 'face cream');
 
 -- --------------------------------------------------------
 
@@ -156,8 +152,30 @@ CREATE TABLE `pets` (
 --
 
 INSERT INTO `pets` (`id`, `user_id`, `name`, `category_id`, `breed`, `price`, `age`, `description`, `image`, `role`) VALUES
-(1, 2, 'Usman', 1, 'Austrailian', '15000', 7, 'sdsfdsfs', './images/petsUntitled.jpg', 'User'),
-(2, 2, 'Usman', 1, 'Austrailian', '15000', 7, 'dfdsfsd', './images/pets/Untitled.jpg', 'User');
+(1, 2, 'Usman', 1, 'Austrailian', '15000', 7, 'eqweqw', '../accessories/images.jpeg', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `products`
+--
+
+CREATE TABLE `products` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `price` decimal(10,2) NOT NULL,
+  `category_id` int(11) NOT NULL,
+  `image` varchar(255) DEFAULT NULL,
+  `description` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `products`
+--
+
+INSERT INTO `products` (`id`, `name`, `price`, `category_id`, `image`, `description`) VALUES
+(5, 'Abeer Hussain', 1.00, 1, '../accessories/Screenshot 2024-07-28 182612.png', 'ssfesf'),
+(6, 'Mahad', 32435432.00, 2, '../accessories/images.jpeg', 'fdsfdsfs');
 
 -- --------------------------------------------------------
 
@@ -231,6 +249,12 @@ ALTER TABLE `pets`
   ADD KEY `category_id` (`category_id`);
 
 --
+-- Indexes for table `products`
+--
+ALTER TABLE `products`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -244,7 +268,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `accessories`
 --
 ALTER TABLE `accessories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `appointments`
@@ -274,7 +298,13 @@ ALTER TABLE `doctors`
 -- AUTO_INCREMENT for table `pets`
 --
 ALTER TABLE `pets`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `products`
+--
+ALTER TABLE `products`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `users`

@@ -1,5 +1,17 @@
 <?php
 include("header.php");
+if(isset($_SESSION['status'])){?>
+<script>
+  swal({
+  title: "<?php echo $_SESSION['status']; ?>!",
+  icon: "success",
+  button: "Okay",
+});
+</script>
+  
+  <?php
+  unset($_SESSION['status']);
+  }
 ?>
 
   <section id="banner" style="background: #F9F3EC;">

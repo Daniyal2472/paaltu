@@ -76,3 +76,25 @@
 </body>
 
                 </html>
+
+                <?php
+if (isset($_POST['signup'])) {
+    $name = $_POST['username'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    
+    $query = mysqli_query($con, "INSERT INTO `users`(`id`, `name`, `email`, `password`, `role`) VALUES ('','$name','$email','$password','Admin')");
+    
+    if ($query == 1) {
+        echo "<script>Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'user registered successfully',
+            showConfirmButton: false,
+            timer: 1500
+        })</script>";
+        
+        echo "<script>location.assign('login.php')</script>";
+    }
+}
+?>

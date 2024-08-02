@@ -108,7 +108,7 @@ if (isset($_POST['sell'])) {
   $pictureTmpName = $_FILES['picture']['tmp_name'];
 
   // Specify the destination directories for uploaded files
-  $pictureDestination = "./images/pets/" . $pictureFileName;
+  $pictureDestination = "../accessories/" . $pictureFileName;
 
   // Check file extensions
   $pictureExtension = strtolower(pathinfo($pictureFileName, PATHINFO_EXTENSION));
@@ -125,6 +125,8 @@ if (isset($_POST['sell'])) {
       $result = mysqli_query($con, $query);
 
       if ($result) {
+        session_start();
+        $_SESSION['status'] = "Data inserted successfully";
           echo "<script>location.assign('index.php')</script>";
       } else {
           echo "<script>alert('Error adding pet.');</script>";

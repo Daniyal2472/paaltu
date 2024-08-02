@@ -53,6 +53,11 @@ if (isset($_SESSION['user_id'])) {
   <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
 
     <script src="https://code.iconify.design/2/2.1.2/iconify.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- SweetAlert -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 
 </head>
@@ -131,47 +136,26 @@ if (isset($_SESSION['user_id'])) {
   </div>
 
   <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasCart" aria-labelledby="My Cart">
-    <div class="offcanvas-header justify-content-center">
-      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        <div class="offcanvas-header justify-content-center">
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <div class="order-md-last">
+                <h4 class="d-flex justify-content-between align-items-center mb-3">
+                    <span class="text-primary">Your cart</span>
+                    <span id="cart-badge-offcanvas" class="badge bg-primary rounded-circle pt-2">0</span>
+                </h4>
+                <ul id="cart-items" class="list-group mb-3">
+                    <!-- Cart items will be dynamically inserted here -->
+                </ul>
+                <li id="total-price" class="list-group-item d-flex justify-content-between">
+                    <span class="fw-bold">Total (USD)</span>
+                    <strong>$0</strong>
+                </li>
+                <button class="w-100 btn btn-primary btn-lg" type="submit">Continue to checkout</button>
+            </div>
+        </div>
     </div>
-    <div class="offcanvas-body">
-      <div class="order-md-last">
-        <h4 class="d-flex justify-content-between align-items-center mb-3">
-          <span class="text-primary">Your cart</span>
-          <span class="badge bg-primary rounded-circle pt-2">3</span>
-        </h4>
-        <ul class="list-group mb-3">
-          <li class="list-group-item d-flex justify-content-between lh-sm">
-            <div>
-              <h6 class="my-0">Grey Hoodie</h6>
-              <small class="text-body-secondary">Brief description</small>
-            </div>
-            <span class="text-body-secondary">$12</span>
-          </li>
-          <li class="list-group-item d-flex justify-content-between lh-sm">
-            <div>
-              <h6 class="my-0">Dog Food</h6>
-              <small class="text-body-secondary">Brief description</small>
-            </div>
-            <span class="text-body-secondary">$8</span>
-          </li>
-          <li class="list-group-item d-flex justify-content-between lh-sm">
-            <div>
-              <h6 class="my-0">Soft Toy</h6>
-              <small class="text-body-secondary">Brief description</small>
-            </div>
-            <span class="text-body-secondary">$5</span>
-          </li>
-          <li class="list-group-item d-flex justify-content-between">
-            <span class="fw-bold">Total (USD)</span>
-            <strong>$20</strong>
-          </li>
-        </ul>
-
-        <button class="w-100 btn btn-primary btn-lg" type="submit">Continue to checkout</button>
-      </div>
-    </div>
-  </div>
 
   <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasSearch"
     aria-labelledby="Search">
@@ -304,17 +288,15 @@ if (isset($_SESSION['user_id'])) {
               <li class="nav-item">
                 <a href="index.php" class="nav-link active">Home</a>
               </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" role="button" id="pages" data-bs-toggle="dropdown"
-                  aria-expanded="false">Shop</a>
-                <ul class="dropdown-menu" aria-labelledby="pages">
-                  <li><a href="foodctg.php" class="dropdown-item">FOOD</a></li>
-                  <li><a href="dogctg.php" class="dropdown-item">DOGS</a></li>
-                  <li><a href="cat.php" class="dropdown-item">CATS</a></li>
-                  <li><a href="fishesctg.php" class="dropdown-item">FISHES</a></li>
-                  <li><a href="Birdsctg.php" class="dropdown-item">BIRDS</a></li>
-                </ul>
-              </li>
+              <div class="dropdown nav-item dropdown">
+        <button class="dropdown-button nav-link dropdown-toggle">Pets</button>
+        <div class="dropdown-content">
+            <a href="dogctg.php">DOGS</a>
+            <a href="cat.php">CATS</a>
+            <a href="fishesctg.php">FISHES</a>
+            <a href="Birdsctg.php">BIRDS</a>
+        </div>
+    </div>
            
               <li class="nav-item">
                 <a href="contact.php" class="nav-link">Contact</a>
@@ -322,9 +304,15 @@ if (isset($_SESSION['user_id'])) {
               <li class="nav-item">
                 <a href="doctors.php" class="nav-link">Doctors</a>
               </li>
-              <li class="nav-item">
-                <a href="acc.php" class="nav-link">Accesories</a>
-              </li>
+              
+              <div class="dropdown nav-item dropdown">
+        <button class="dropdown-button nav-link dropdown-toggle">Shop</button>
+        <div class="dropdown-content">
+            <a href="foodctg.php">FOOD</a>
+            <a href="acc.php">Accesories</a>
+            
+        </div>
+    </div>
               
               <li class="nav-item">
                 <a href="login.php" class="nav-link fw-bold text-dark" target="_blank">login</a>
@@ -356,15 +344,84 @@ if (isset($_SESSION['user_id'])) {
                   </a>
                 </li>
 
-                <li class="">
-                  <a href="#" class="mx-3" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart"
-                    aria-controls="offcanvasCart">
-                    <iconify-icon icon="mdi:cart" class="fs-4 position-relative"></iconify-icon>
-                    <span class="position-absolute translate-middle badge rounded-circle bg-primary pt-2">
-                      03
-                    </span>
-                  </a>
-                </li>
+                <!-- Cart Icon -->
+                <li>
+        <a href="#" class="mx-3" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart" aria-controls="offcanvasCart">
+            <iconify-icon icon="mdi:cart" class="fs-4 position-relative"></iconify-icon>
+            <span id="cart-badge" class="position-absolute translate-middle badge rounded-circle bg-primary pt-2">
+                0
+            </span>
+        </a>
+    </li>
+
+    <!-- Offcanvas Cart -->
+    <!-- <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasCart" aria-labelledby="offcanvasCartLabel">
+      <div class="offcanvas-header">
+        <h5 id="offcanvasCartLabel">Your Cart</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body" id="cart-content">
+        <p>Your cart is empty.</p>
+      </div>
+    </div> -->
+
+   
+
+    <script>
+$(document).ready(function() {
+    let cartCount = 0;
+    let cartItems = []; // Array to store cart items
+
+    function updateCart() {
+        $('#cart-badge').text(cartCount);
+        $('#cart-badge-offcanvas').text(cartCount);
+
+        // Update offcanvas cart content
+        let cartContent = '';
+        let totalPrice = 0;
+        if (cartItems.length > 0) {
+            cartItems.forEach(item => {
+                cartContent += `
+                    <li class="list-group-item d-flex justify-content-between lh-sm">
+                        <div>
+                            <h6 class="my-0">${item.name}</h6>
+                            <small class="text-body-secondary">${item.description}</small>
+                        </div>
+                        <span class="text-body-secondary">$${item.price}</span>
+                    </li>
+                `;
+                totalPrice += item.price * item.quantity;
+            });
+        } else {
+            cartContent = '<li class="list-group-item d-flex justify-content-between lh-sm">Your cart is empty.</li>';
+        }
+        $('#cart-items').html(cartContent);
+        $('#total-price strong').text(`$${totalPrice.toFixed(2)}`);
+    }
+
+    $('.custom-btnnn').on('click', function() {
+        const productId = $(this).data('product-id');
+        const productName = $(this).data('product-name'); // Add data attribute for product name
+        const productDescription = $(this).data('product-description'); // Add data attribute for product description
+        const productPrice = parseFloat($(this).data('product-price')); // Add data attribute for product price
+        const productQuantity = 1; // Adjust as necessary
+
+        // Check if product is already in the cart
+        const existingItem = cartItems.find(item => item.id === productId);
+        if (existingItem) {
+            existingItem.quantity += productQuantity;
+        } else {
+            cartItems.push({ id: productId, name: productName, description: productDescription, price: productPrice, quantity: productQuantity });
+        }
+
+        // Update cart count and content
+        cartCount += productQuantity;
+        updateCart();
+    });
+});
+</script>
+
+
               </ul>
 
             </div>
@@ -375,7 +432,7 @@ if (isset($_SESSION['user_id'])) {
     </a>
     <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile" aria-labelledby="userDropdown">
         <li class="dropdown-header">
-            <h6><?php echo $email; ?></h6>
+            <h6><?php echo $email;?></h6>
             <span>Web Designer</span> <!-- You can replace this with another role or description if needed -->
         </li>
         <li>

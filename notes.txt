@@ -1,0 +1,13 @@
+1. Show the products category wise on their page (Done)
+2. Differentiate the company products from the seller's product
+3. Complete "Add to cart" functionality
+4. Add a pop-up success message on every form when data submits successfully
+5. "Shop now" button
+6. pet list on the adminpanel
+7. Search bar
+8. Add a form filled with user details so he/she can edit the details "My profile"
+9. Wishlist
+10. Login/Register/Session on Adminpanel
+
+
+https://sweetalert.js.org/guides/

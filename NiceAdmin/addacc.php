@@ -1,38 +1,7 @@
 <?php
 include("header.php");
+include("connection.php");
 ?>
-
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="utf-8">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
-    <title>Add Accessory</title>
-    <meta content="" name="description">
-    <meta content="" name="keywords">
-
-    <!-- Favicons -->
-    <link href="assets/img/favicon.png" rel="icon">
-    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
-
-    <!-- Google Fonts -->
-    <link href="https://fonts.gstatic.com" rel="preconnect">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
-
-    <!-- Vendor CSS Files -->
-    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-    <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-    <link href="assets/vendor/quill/quill.snow.css" rel="stylesheet">
-    <link href="assets/vendor/quill/quill.bubble.css" rel="stylesheet">
-    <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
-    <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
-
-    <!-- Template Main CSS File -->
-    <link href="assets/css/style.css" rel="stylesheet">
-</head>
 
 <body>
     <section id="register" style="background: url('images/background-img.png') no-repeat;">
@@ -52,14 +21,16 @@ include("header.php");
                             <select class="form-select" id="category" name="category" required>
                                 <option value="">Select Category</option>
                                 <?php
-                    $query = "SELECT * FROM `categories`";
-                    $result = mysqli_query($con, $query);
-                    if ($result) {
-                        while ($row = mysqli_fetch_assoc($result)) {
-                    ?>
+                                $query = "SELECT * FROM `categories`";
+                                $result = mysqli_query($con, $query);
+                                if ($result) {
+                                    while ($row = mysqli_fetch_assoc($result)) {
+                                ?>
                                     <option value="<?php echo $row['id']; ?>"><?php echo $row['name']; ?></option>
-                                    <?php
-                    }} ?>
+                                <?php
+                                    }
+                                }
+                                ?>
                             </select>
                         </div>
                         <div class="mb-3">
@@ -89,27 +60,23 @@ if (isset($_POST['add_acc'])) {
     $price = $_POST['price'];
     $category = $_POST['category'];
     $description = $_POST['description'];
-       
 
-// Handle file uploads
-$pictureFileName = $_FILES['picture']['name'];
-$pictureTmpName = $_FILES['picture']['tmp_name'];
+    // Handle file uploads
+    $pictureFileName = $_FILES['picture']['name'];
+    $pictureTmpName = $_FILES['picture']['tmp_name'];
 
-// Specify the destination directories for uploaded files
-$pictureDestination = realpath(__DIR__ . '/../accessories') . '/' . $pictureFileName;
+    // Specify the destination directory for uploaded files
+    $pictureDestination = '../accessories/' . $pictureFileName; // Relative path
 
-// Check file extensions
-$pictureExtension = strtolower(pathinfo($pictureFileName, PATHINFO_EXTENSION));
+    // Check file extensions
+    $pictureExtension = strtolower(pathinfo($pictureFileName, PATHINFO_EXTENSION));
 
-
-
-if (in_array($pictureExtension, ['jpg', 'jpeg', 'png'])) {
-    // Move uploaded files to specific directories
-    move_uploaded_file($pictureTmpName, $pictureDestination);
-    // move_uploaded_file($trailerTmpName, $trailerDestination);
+    if (in_array($pictureExtension, ['jpg', 'jpeg', 'png'])) {
+        // Move uploaded files to specific directory
+        move_uploaded_file($pictureTmpName, $pictureDestination);
 
         // Insert data into the database
-        $query = "INSERT INTO accessories(id, name, price, category_id, image, description) VALUES ('','$name','$price','$category','$pictureDestination','$description')";
+        $query = "INSERT INTO accessories(name, price, category_id, image, description) VALUES ('$name', '$price', '$category', '$pictureDestination', '$description')";
         $result = mysqli_query($con, $query);
 
         if ($result) {

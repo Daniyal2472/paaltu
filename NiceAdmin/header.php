@@ -281,137 +281,143 @@ if (isset($_SESSION['user_id'])) {
 
   <!-- ======= Sidebar ======= -->
   <aside id="sidebar" class="sidebar">
-
     <ul class="sidebar-nav" id="sidebar-nav">
-
-      <li class="nav-item">
-        <a class="nav-link " href="index.php">
-          <i class="bi bi-grid"></i>
-          <span>Dashboard</span>
-        </a>
-      </li>
- 
-      <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
-        <i class="bi bi-person"></i><span>Users</span><i class="bi bi-chevron-down ms-auto"></i>
-        </a>
-        <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-          <li>
-            <a href="currentuser.php">
-              <i class="bi bi-circle"></i><span>Current Users</span>
+        <li class="nav-item">
+            <a class="nav-link" href="index.php">
+                <i class="bi bi-grid"></i>
+                <span>Dashboard</span>
             </a>
-          </li>
-          <li>
-            <a href="adduser.php">
-              <i class="bi bi-circle"></i><span>Add Users</span>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#users-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-person"></i><span>Users</span><i class="bi bi-chevron-down ms-auto"></i>
             </a>
-          </li>
-        </ul>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="applist.php">
-          <i class="bi bi-card-list"></i>
-          <span>Appointment</span>
-        </a>
-      </li>
-      
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="sellerlist.php">
-          <i class="bi bi-file-earmark"></i>
-          <span>Seller list</span>
-        </a>
-      </li>
+            <ul id="users-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+                <li>
+                    <a href="currentuser.php">
+                        <i class="bi bi-circle"></i><span>Current Users</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="adduser.php">
+                        <i class="bi bi-circle"></i><span>Add Users</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
 
-
-      
-      <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-journal-text"></i><span>Categories</span><i class="bi bi-chevron-down ms-auto"></i>
-        </a>
-        <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-          <li>
-            <a href="catlist.php">
-              <i class="bi bi-circle"></i><span>Current Categories</span>
+        <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#categories-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-journal-text"></i><span>Categories</span><i class="bi bi-chevron-down ms-auto"></i>
             </a>
-          </li>
-          <li>
-            <a href="addcat.php">
-              <i class="bi bi-circle"></i><span>Add Categories</span>
+            <ul id="categories-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+                <li>
+                    <a href="catlist.php">
+                        <i class="bi bi-circle"></i><span>Current Categories</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="addcat.php">
+                        <i class="bi bi-circle"></i><span>Add Categories</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#doctors-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-journal-text"></i><span>Doctors</span><i class="bi bi-chevron-down ms-auto"></i>
             </a>
-          </li>
-        </ul>
-      </li>
-      
+            <ul id="doctors-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+                <li>
+                    <a href="doclist.php">
+                        <i class="bi bi-circle"></i><span>Current Doctors</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="adddoc.php">
+                        <i class="bi bi-circle"></i><span>Add Doctors</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
 
-      <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-journal-text"></i><span>Doctors</span><i class="bi bi-chevron-down ms-auto"></i>
-        </a>
-        <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-          <li>
-            <a href="doclist.php">
-              <i class="bi bi-circle"></i><span>Current Doctors</span>
+        <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#products-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-journal-text"></i><span>Products</span><i class="bi bi-chevron-down ms-auto"></i>
             </a>
-          </li>
-          <li>
-            <a href="adddoc.php">
-              <i class="bi bi-circle"></i><span>Add Doctors</span>
+            <ul id="products-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+                <li>
+                    <a href="productlist.php">
+                        <i class="bi bi-circle"></i><span>Current food</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="addproduct.php">
+                        <i class="bi bi-circle"></i><span>Add food</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="acclist.php">
+                        <i class="bi bi-circle"></i><span>Current Accessories</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="addacc.php">
+                        <i class="bi bi-circle"></i><span>Add Accessories</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="petlist.php">
+                        <i class="bi bi-circle"></i><span>Current Pets</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="addpet.php">
+                        <i class="bi bi-circle"></i><span>Add Pets</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="applist.php">
+                <i class="bi bi-card-list"></i>
+                <span>Appointment</span>
             </a>
-          </li>
-        </ul>
-      </li>
+        </li>
 
-      <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-journal-text"></i><span>Products</span><i class="bi bi-chevron-down ms-auto"></i>
-        </a>
-        <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-          <li>
-            <a href="#">
-              <i class="bi bi-circle"></i><span>Current Doctors</span>
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="sellerlist.php">
+                <i class="bi bi-file-earmark"></i>
+                <span>Seller list</span>
             </a>
-          </li>
-          <li>
-            <a href="#">
-              <i class="bi bi-circle"></i><span>Add Products</span>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="pages-contact.php">
+                <i class="bi bi-envelope"></i>
+                <span>Contact</span>
             </a>
-          </li>
-        </ul>
-      </li>
+        </li>
 
-      
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="pages-register.php">
+                <i class="bi bi-card-list"></i>
+                <span>Register</span>
+            </a>
+        </li>
 
-      
-      
-      
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="pages-contact.php">
-          <i class="bi bi-envelope"></i>
-          <span>Contact</span>
-        </a>
-      </li>
-      <!-- End Contact Page Nav -->
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="pages-register.php">
-          <i class="bi bi-card-list"></i>
-          <span>Register</span>
-        </a>
-      </li><!-- End Register Page Nav -->
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="pages-login.php">
-          <i class="bi bi-box-arrow-in-right"></i>
-          <span>Login</span>
-        </a>
-      </li><!-- End Login Page Nav -->
-
-      
-
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="pages-login.php">
+                <i class="bi bi-box-arrow-in-right"></i>
+                <span>Login</span>
+            </a>
+        </li>
     </ul>
-
-  </aside><!-- End Sidebar-->
+</aside>
+<!-- End Sidebar-->
 
       
 

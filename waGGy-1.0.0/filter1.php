@@ -1,5 +1,10 @@
 <?php
 include("header.php");
+if (isset($_GET['id'])) {
+    $ed = $_GET['id'];
+    $update = mysqli_query($con, "SELECT * FROM `pets` WHERE id=$ed");
+    $row = mysqli_fetch_assoc($update);
+  }
 ?>
 
 <body>
@@ -12,26 +17,20 @@ include("header.php");
         <div class="row">
             <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6">
                 <div class="shadow-lg ms-5 bgg-gray mt-5 mb-5">
-                    <img src="images/blog-lg1.jpg" alt="img not found" class="img-fluid w-100">
+                    <img src="<?php echo $row['image']; ?>" alt="img not found" class="img-fluid w-100">
                 </div>
             </div>
             <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6">
                 <div class="me-5 ms-4 pb-2 mt-5 border-bottom">
-                    <p class="h2 blue-color">Bull Dog</p>
-                    <p class="h5 mt-4 text-gray2 mb-0">Rs.138,900.00 PKR</p>
+                    <p class="h2 blue-color"><?php echo $row['name']; ?></p>
+                    <p class="h5 mt-4 text-gray2 mb-0">Rs.<?php echo $row['price']; ?> PKR</p>
                     <p class="card-text text-yellow small mt-1">
-                        <small>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                        </small>
-                        <span class="ps-2 blue-color">No reviews</span>
+                     
+                        <!-- <span class="ps-2 blue-color">No reviews</span> -->
                     </p>
                 </div>
                 <div class="p-2 ms-4 mt-2">
-                    <p class="text-gray2">Age : 1 Year</p>
+                    <p class="text-gray2">Age : <?php echo $row['age']; ?> Year</p>
                     <button type="button" class="btn border border-2 text-gray rounded-0 custom-btn">1 Year</button>
                     <button type="button" class="btn border border-2 text-gray rounded-0 custom-btn">2 Years</button>
                 </div>
@@ -51,17 +50,17 @@ include("header.php");
                         </span>
                     </div>
                 </div>
-                <div class="p-2 ms-4 mt-2">
+                <!-- <div class="p-2 ms-4 mt-2">
                     <p class="blue-color fw-bolder">SHARE 
                         <span><i class="fa-brands fa-facebook-f ps-2 text-gray2"></i></span>
                         <span><i class="fa-brands fa-pinterest-p ps-2 text-gray2"></i></span> 
                         <span><i class="fa-brands fa-whatsapp ps-2 text-gray2"></i></span>
                         <span><i class="fa-brands fa-twitter ps-2 text-gray2"></i></span>
                     </p>
-                </div>
+                </div> -->
                 <div class="ps-4 me-5 pe-5 mt-2">
-                    <input type="button" value="Add to cart" class="form-control p-3 text-white bg-blue custom-btnnn">
-                </div>
+    <input type="button" value="Add to cart" class="form-control p-3 text-white bg-blue custom-btnnn">
+</div>
             </div>
         </div>
     </div>
