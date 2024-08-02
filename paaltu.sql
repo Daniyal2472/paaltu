@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 02, 2024 at 02:10 PM
+-- Generation Time: Aug 02, 2024 at 10:48 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -101,11 +101,10 @@ CREATE TABLE `categories` (
 --
 
 INSERT INTO `categories` (`id`, `name`) VALUES
-(1, 'Cat'),
-(2, 'Dog'),
-(3, 'bird'),
-(4, 'bird'),
-(5, 'bili');
+(1, 'Dogs'),
+(2, 'Cats'),
+(3, 'Birds'),
+(4, 'Fishes');
 
 -- --------------------------------------------------------
 
@@ -152,7 +151,23 @@ CREATE TABLE `pets` (
 --
 
 INSERT INTO `pets` (`id`, `user_id`, `name`, `category_id`, `breed`, `price`, `age`, `description`, `image`, `role`) VALUES
-(1, 2, 'Usman', 1, 'Austrailian', '15000', 7, 'eqweqw', '../accessories/images.jpeg', '');
+(1, 2, 'Usman', 1, 'Austrailian', '15000', 7, 'eqweqw', '../accessories/images.jpeg', ''),
+(2, 2, 'Usman', 1, 'Austrailian', '15000', 7, 'ww', '../accessories/images.jpeg', ''),
+(3, 2, 'Usman', 1, 'Austrailian', '15000', 7, 'ww', '../accessories/images.jpeg', ''),
+(4, 2, 'Usman', 1, 'Austrailian', '15000', 7, 'wefewf', '../accessories/images.jpeg', ''),
+(5, 2, 'Usman', 1, 'Austrailian', '15000', 7, 'wefewf', '../accessories/images.jpeg', ''),
+(6, 2, 'Usman', 1, 'Austrailian', '15000', 7, 'wewewf', '../accessories/images.jpeg', ''),
+(7, 2, 'Usman', 1, 'Austrailian', '15000', 7, 'dsfds', '../accessories/images.jpeg', ''),
+(8, 2, 'Usman', 1, 'Austrailian', '15000', 7, 'dsfds', '../accessories/images.jpeg', ''),
+(9, 2, 'Usman', 1, 'Austrailian', '15000', 7, 'dsfds', '../accessories/images.jpeg', ''),
+(10, 2, 'Usman', 1, 'Austrailian', '15000', 7, 'dsfdsf', '../accessories/images.jpeg', ''),
+(11, 2, 'Usman', 1, 'Austrailian', '15000', 7, 'cdsvds', '../accessories/images.jpeg', ''),
+(12, 2, 'Usman', 1, 'Austrailian', '15000', 7, 'cdsvds', '../accessories/images.jpeg', ''),
+(13, 2, 'Usman', 1, 'Austrailian', '15000', 7, 'cdsvds', '../accessories/images.jpeg', ''),
+(14, 2, 'Usman', 1, 'Austrailian', '15000', 7, 'cdsvds', '../accessories/images.jpeg', ''),
+(15, 2, 'Usman', 1, 'Austrailian', '15000', 7, 'cdsvds', '../accessories/images.jpeg', ''),
+(16, 2, 'Usman', 1, 'Austrailian', '15000', 7, 'cdsvds', '../accessories/images.jpeg', ''),
+(20, 1, 'Mahad', 1, 'dsdsfds', '21321', 23, '', '../accessories/images.jpeg', 'Admin');
 
 -- --------------------------------------------------------
 
@@ -286,7 +301,7 @@ ALTER TABLE `blogs`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `doctors`
@@ -298,7 +313,7 @@ ALTER TABLE `doctors`
 -- AUTO_INCREMENT for table `pets`
 --
 ALTER TABLE `pets`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `products`
