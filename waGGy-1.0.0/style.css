@@ -621,7 +621,7 @@ Single Product section style start
 }
 
 .flip-card-back {
-  background: linear-gradient(rgba(255, 255, 255, 0.521),#6b925de7);
+  background: linear-gradient(rgba(255, 255, 255, 0.521),#DEAD6F);
   align-items: center;
   color: white;
   padding-top: 100px;
@@ -804,12 +804,17 @@ h1{
   background-color: #ffffff;
   color: #DEAD6F; /* Text color on hover */
 }
+.display-4{
+  color: #DEAD6F;
+}
+
 .color-green {
   color: #DEAD6F;
 }
 .carousel-control-prev, .carousel-control-next {
   z-index: 1;
 }
+
 * {
   margin: 0;
   padding: 0;
@@ -1195,13 +1200,53 @@ body {
     opacity: 0;
   }
 } 
-/* #cart-badge {
-  position: absolute;
-  top: -10px;
-  right: -10px;
-  background-color: red;
-  color: white;
-  border-radius: 50%;
-  padding: 5px;
-  font-size: 0.8em;
-} */
+/* Styles for the search form */
+.search-form {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  overflow: hidden;
+  background-color: #fff;
+  max-width: 460px; /* Adjust the maximum width */
+}
+
+/* Styles for the search input */
+.search-input {
+  flex: 1;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 20px 0 0 20px;
+  font-size: 14px;
+  outline: none;
+}
+
+/* Styles for the search button */
+.search-button {
+  background-color: #DEAD6F;
+  color: #fff;
+  border: none;
+  padding: 8px 12px;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 0 20px 20px 0;
+  transition: background-color 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.search-button:hover {
+  background-color: #DEAD6F;
+}
+
+.search-button i {
+  font-size: 16px; /* Adjust the icon size */
+}
+
+/* Optional: Add some responsive design */
+@media (max-width: 768px) {
+  .search-form {
+      max-width: 100%;
+  }
+}

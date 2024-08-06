@@ -1,18 +1,6 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$database = "paaltu";
-
-// Create connection
-$con = mysqli_connect($servername, $username, $password, $database);
-
-// Check connection
-if (!$con) {
-    die("Connection failed: " . mysqli_connect_error());
-}
+include("header.php");
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -55,6 +43,12 @@ if (!$con) {
                         <div class="mb-3">
                             <input type="text" class="form-control form-control-lg" name="category_name" id="category_name" placeholder="Enter Category Name">
                         </div>
+                        <div class="mb-3">
+                         <input type="text" class="form-control form-control-lg" name="file_name" id="file_name" placeholder="Enter File Name">
+                         </div>
+
+                        
+                        
 
                         <div class="d-grid gap-2">
                             <input name="add_category" type="submit" class="btn btn-dark btn-lg rounded-1" value="Add Category">
@@ -76,19 +70,23 @@ if (!$con) {
 if (isset($_POST['add_category'])) {
     $category_name = $_POST['category_name'];
 
-    // Add category to the database
-    $query = mysqli_query($con, "INSERT INTO `categories`(`id`, `name`) VALUES ('', '$category_name')");
-
-    if ($query) {
-        $message = "Category added successfully";
-    } else {
-        $message = "Error in adding category";
+    $query = "INSERT INTO `categories`(`id`, `name`) VALUES ('', '$category_name')";
+    $result = mysqli_query($con, $query);
+    if ($result) {
+        $_SESSION['status'] = "Accessory added successfully!";
+        if(isset($_SESSION['status'])){?>
+          <script>
+            swal({
+            title: "<?php echo $_SESSION['status']; ?>",
+            icon: "success",
+            button: "Okay",
+          });
+          </script>
+            
+            <?php
+            unset($_SESSION['status']);
+            }
+    }
     }
 
-    // Reload the page to display updated categories list
-    echo "<script>location.assign('addcat.php')</script>";
-}
-
-// Close the database connection
-mysqli_close($con);
 ?>

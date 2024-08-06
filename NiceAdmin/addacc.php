@@ -1,6 +1,5 @@
 <?php
 include("header.php");
-include("connection.php");
 ?>
 
 <body>
@@ -80,7 +79,19 @@ if (isset($_POST['add_acc'])) {
         $result = mysqli_query($con, $query);
 
         if ($result) {
-            echo "<script>location.assign('index.php')</script>";
+            $_SESSION['status'] = "Accessory added successfully!";
+      if(isset($_SESSION['status'])){?>
+        <script>
+          swal({
+          title: "<?php echo $_SESSION['status']; ?>",
+          icon: "success",
+          button: "Okay",
+        });
+        </script>
+          
+          <?php
+          unset($_SESSION['status']);
+          }
         } else {
             echo "<script>alert('Error adding accessory.');</script>";
         }

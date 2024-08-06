@@ -1,9 +1,30 @@
 <?php
 include("header.php");
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  // Get form data
+  $name = trim($_POST['name']);
+  $email = trim($_POST['email']);
+  $message = trim($_POST['message']);
+
+  // Server-side validation
+  if (empty($name) || empty($email) || empty($message)) {
+      echo "<script>alert('All fields are required');</script>";
+  } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+      echo "<script>alert('Invalid email format');</script>";
+  } else {
+      // Insert data into the database
+      $query = "INSERT INTO `contact` (`name`, `email`, `message`) VALUES ('$name', '$email', '$message')";
+      if (mysqli_query($con, $query)) {
+          echo "<script>alert('Message submitted Successfully');</script>";
+      } else {
+          echo "<script>alert('Failed to send message');</script>";
+      }
+  }
+}
 ?>
 
 <body>
-  <section class="container" id="Contactus" style="background-image: url('images/background-img.png'); ">
+<section class="container" id="Contactus" style="background-image: url('images/background-img.png'); ">
     <div class="row">
       <div class="col-12">
         <div class="text-center ms-lg-5 ps-lg-5 pe-lg-5 me-lg-5">
@@ -56,15 +77,16 @@ include("header.php");
       </div>
       <div class="col-12 col-lg-6">
         <div class="contact-form text-center pe-lg-5 ps-lg-5 w-100 mt-5 mb-5 pt-5">
-            <div class="d-flex flex-wrap justify-content-center">
-                <input type="text" placeholder="Name*" class="w-45 me-2 mb-2 bgg-gray rounded-0 border-0 text-blacks form-control">
-                <input type="Email" placeholder="Email*" class="w-45 me-2 mb-2 bgg-gray rounded-0 border-0 text-blacks form-control">
-              
-            </div>
-            <div class="d-flex flex-column align-items-center pt-5">
-                <input type="text" placeholder="Message" class="w-100 h-100 form-control p-12 bgg-gray rounded-0 border-0 text-blacks mb-2">
-                <input type="submit" value="Submit" class="fw-bolder btn btn-blue ps-5 pe-5 p-12 mt-5 rounded-0 border-0">
-            </div>
+            <form method="post" action="">
+                <div class="d-flex flex-wrap justify-content-center">
+                    <input type="text" name="name" placeholder="Name*" class="w-45 me-2 mb-2 bgg-gray rounded-0 border-0 text-blacks form-control" required>
+                    <input type="email" name="email" placeholder="Email*" class="w-45 me-2 mb-2 bgg-gray rounded-0 border-0 text-blacks form-control" required>
+                </div>
+                <div class="d-flex flex-column align-items-center pt-5">
+                    <textarea name="message" placeholder="Message" class="w-100 h-100 form-control p-12 bgg-gray rounded-0 border-0 text-blacks mb-2" required></textarea>
+                    <input type="submit" value="Submit" class="fw-bolder btn btn-blue ps-5 pe-5 p-12 mt-5 rounded-0 border-0">
+                </div>
+            </form>
         </div>
     </div>
     </div>

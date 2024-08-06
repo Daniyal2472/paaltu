@@ -1,18 +1,7 @@
 <?php
 include("header.php");
-if(isset($_SESSION['status'])){?>
-<script>
-  swal({
-  title: "<?php echo $_SESSION['status']; ?>!",
-  icon: "success",
-  button: "Okay",
-});
-</script>
-  
-  <?php
-  unset($_SESSION['status']);
-  }
 ?>
+
 
   <section id="banner" style="background: #F9F3EC;">
     <div class="container">
@@ -29,7 +18,7 @@ if(isset($_SESSION['status'])){?>
                 <h2 class="banner-title display-1 fw-normal">Best destination for <span class="text-primary">your
                     pets</span>
                 </h2>
-                <a href="#" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">
+                <a href="shopnow.php" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">
                   shop now
                   <svg width="24" height="24" viewBox="0 0 24 24" class="mb-1">
                     <use xlink:href="#arrow-right"></use>
@@ -48,7 +37,7 @@ if(isset($_SESSION['status'])){?>
                 <h2 class="banner-title display-1 fw-normal">Best destination for <span class="text-primary">your
                     pets</span>
                 </h2>
-                <a href="#" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">
+                <a href="cat.php" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">
                   shop now
                   <svg width="24" height="24" viewBox="0 0 24 24" class="mb-1">
                     <use xlink:href="#arrow-right"></use>
@@ -67,7 +56,7 @@ if(isset($_SESSION['status'])){?>
                 <h2 class="banner-title display-1 fw-normal">Best destination for <span class="text-primary">your
                     pets</span>
                 </h2>
-                <a href="#" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">
+                <a href="dogctg.php" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">
                   shop now
                   <svg width="24" height="24" viewBox="0 0 24 24" class="mb-1">
                     <use xlink:href="#arrow-right"></use>
@@ -123,587 +112,64 @@ if(isset($_SESSION['status'])){?>
     </div>
   </section>
 
-  <section id="clothing" class="my-5 overflow-hidden">
-    <div class="container pb-5">
 
-      <div class="section-header d-md-flex justify-content-between align-items-center mb-3">
-        <h2 class="display-3 fw-normal">Pet Clothing</h2>
-        <div>
-          <a href="#" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">
-            shop now
-            <svg width="24" height="24" viewBox="0 0 24 24" class="mb-1">
-              <use xlink:href="#arrow-right"></use>
-            </svg></a>
-        </div>
+  <section id="cat-food" class="my-5">
+  <div class="container my-5 py-5">
+    <div class="section-header d-md-flex justify-content-between align-items-center">
+      <h2 class="display-3 fw-normal">Pets Food</h2>
+      <div>
+        <a href="foodctg.php" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">
+          Shop Now
+          <svg width="24" height="24" viewBox="0 0 24 24" class="mb-1">
+            <use xlink:href="#arrow-right"></use>
+          </svg>
+        </a>
       </div>
-
-      <div class="products-carousel swiper">
-        <div class="swiper-wrapper">
-
-          <div class="swiper-slide">
-            <div class="z-1 position-absolute rounded-3 m-3 px-3 border border-dark-subtle">
-              New
-            </div>
-            <div class="card position-relative">
-              <a href="filter1.php"><img src="images/item1.jpg" class="img-fluid rounded-4" alt="image"></a>
-              <div class="card-body p-0">
-                <a href="filter1.php">
-                  <h3 class="card-title pt-4 m-0">Grey hoodie</h3>
-                </a>
-
-                <div class="card-text">
-                  <span class="rating secondary-font">
-                    <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                    <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                    <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                    <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                    <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                    5.0</span>
-
-                  <h3 class="secondary-font text-primary">$18.00</h3>
-
-                  <div class="d-flex flex-wrap mt-3">
-                    <a href="#" class="btn-cart me-3 px-4 pt-3 pb-3">
-                      <h5 class="text-uppercase m-0">Add to Cart</h5>
-                    </a>
-                    <a href="#" class="btn-wishlist px-4 pt-3 ">
-                      <iconify-icon icon="fluent:heart-28-filled" class="fs-5"></iconify-icon>
-                    </a>
-                  </div>
-
-
-                </div>
-
-              </div>
-            </div>
-          </div>
-          <div class="swiper-slide">
-            <!-- <div class="z-1 position-absolute rounded-3 m-3 px-3 border border-dark-subtle">
-              New
-            </div> -->
-            <div class="card position-relative">
-              <a href="single-product.html"><img src="images/item2.jpg" class="img-fluid rounded-4" alt="image"></a>
-              <div class="card-body p-0">
-                <a href="single-product.html">
-                  <h3 class="card-title pt-4 m-0">Grey hoodie</h3>
-                </a>
-
-                <div class="card-text">
-                  <span class="rating secondary-font">
-                    <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                    <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                    <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                    <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                    <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                    5.0</span>
-
-                  <h3 class="secondary-font text-primary">$18.00</h3>
-
-                  <div class="d-flex flex-wrap mt-3">
-                    <a href="#" class="btn-cart me-3 px-4 pt-3 pb-3">
-                      <h5 class="text-uppercase m-0">Add to Cart</h5>
-                    </a>
-                    <a href="#" class="btn-wishlist px-4 pt-3 ">
-                      <iconify-icon icon="fluent:heart-28-filled" class="fs-5"></iconify-icon>
-                    </a>
-                  </div>
-
-                </div>
-
-              </div>
-            </div>
-          </div>
-          <div class="swiper-slide">
-            <div class="z-1 position-absolute rounded-3 m-3 px-3 border border-dark-subtle">
-              -10%
-            </div>
-            <div class="card position-relative">
-              <a href="single-product.html"><img src="images/item3.jpg" class="img-fluid rounded-4" alt="image"></a>
-              <div class="card-body p-0">
-                <a href="single-product.html">
-                  <h3 class="card-title pt-4 m-0">Grey hoodie</h3>
-                </a>
-
-                <div class="card-text">
-                  <span class="rating secondary-font">
-                    <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                    <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                    <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                    <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                    <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                    5.0</span>
-
-                  <h3 class="secondary-font text-primary">$18.00</h3>
-
-                  <div class="d-flex flex-wrap mt-3">
-                    <a href="#" class="btn-cart me-3 px-4 pt-3 pb-3">
-                      <h5 class="text-uppercase m-0">Add to Cart</h5>
-                    </a>
-                    <a href="#" class="btn-wishlist px-4 pt-3 ">
-                      <iconify-icon icon="fluent:heart-28-filled" class="fs-5"></iconify-icon>
-                    </a>
-                  </div>
-
-
-                </div>
-
-              </div>
-            </div>
-          </div>
-          <div class="swiper-slide">
-            <!-- <div class="z-1 position-absolute rounded-3 m-3 px-3 border border-dark-subtle">
-              New
-            </div> -->
-            <div class="card position-relative">
-              <a href="single-product.html"><img src="images/item4.jpg" class="img-fluid rounded-4" alt="image"></a>
-              <div class="card-body p-0">
-                <a href="single-product.html">
-                  <h3 class="card-title pt-4 m-0">Grey hoodie</h3>
-                </a>
-
-                <div class="card-text">
-                  <span class="rating secondary-font">
-                    <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                    <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                    <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                    <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                    <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                    5.0</span>
-
-                  <h3 class="secondary-font text-primary">$18.00</h3>
-
-                  <div class="d-flex flex-wrap mt-3">
-                    <a href="#" class="btn-cart me-3 px-4 pt-3 pb-3">
-                      <h5 class="text-uppercase m-0">Add to Cart</h5>
-                    </a>
-                    <a href="#" class="btn-wishlist px-4 pt-3 ">
-                      <iconify-icon icon="fluent:heart-28-filled" class="fs-5"></iconify-icon>
-                    </a>
-                  </div>
-
-
-                </div>
-
-              </div>
-            </div>
-          </div>
-          <div class="swiper-slide">
-            <!-- <div class="z-1 position-absolute rounded-3 m-3 px-3 border border-dark-subtle">
-              New
-            </div> -->
-            <div class="card position-relative">
-              <a href="single-product.html"><img src="images/item7.jpg" class="img-fluid rounded-4" alt="image"></a>
-              <div class="card-body p-0">
-                <a href="single-product.html">
-                  <h3 class="card-title pt-4 m-0">Grey hoodie</h3>
-                </a>
-
-                <div class="card-text">
-                  <span class="rating secondary-font">
-                    <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                    <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                    <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                    <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                    <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                    5.0</span>
-
-                  <h3 class="secondary-font text-primary">$18.00</h3>
-
-                  <div class="d-flex flex-wrap mt-3">
-                    <a href="#" class="btn-cart me-3 px-4 pt-3 pb-3">
-                      <h5 class="text-uppercase m-0">Add to Cart</h5>
-                    </a>
-                    <a href="#" class="btn-wishlist px-4 pt-3 ">
-                      <iconify-icon icon="fluent:heart-28-filled" class="fs-5"></iconify-icon>
-                    </a>
-                  </div>
-
-
-                </div>
-
-              </div>
-            </div>
-          </div>
-          <div class="swiper-slide">
-            <!-- <div class="z-1 position-absolute rounded-3 m-3 px-3 border border-dark-subtle">
-              New
-            </div> -->
-            <div class="card position-relative">
-              <a href="single-product.html"><img src="images/item8.jpg" class="img-fluid rounded-4" alt="image"></a>
-              <div class="card-body p-0">
-                <a href="single-product.html">
-                  <h3 class="card-title pt-4 m-0">Grey hoodie</h3>
-                </a>
-
-                <div class="card-text">
-                  <span class="rating secondary-font">
-                    <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                    <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                    <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                    <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                    <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                    5.0</span>
-
-                  <h3 class="secondary-font text-primary">$18.00</h3>
-
-                  <div class="d-flex flex-wrap mt-3">
-                    <a href="#" class="btn-cart me-3 px-4 pt-3 pb-3">
-                      <h5 class="text-uppercase m-0">Add to Cart</h5>
-                    </a>
-                    <a href="#" class="btn-wishlist px-4 pt-3 ">
-                      <iconify-icon icon="fluent:heart-28-filled" class="fs-5"></iconify-icon>
-                    </a>
-                  </div>
-
-
-                </div>
-
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-      <!-- / products-carousel -->
-
-
     </div>
-  </section>
-
-  <section id="foodies" class="my-5">
-    <div class="container my-5 py-5">
-
-      <div class="section-header d-md-flex justify-content-between align-items-center">
-        <h2 class="display-3 fw-normal">Pet Foodies</h2>
-        <div class="mb-4 mb-md-0">
-          <p class="m-0">
-            <button class="filter-button me-4  active" data-filter="*">ALL</button>
-            <button class="filter-button me-4 " data-filter=".cat">CAT</button>
-            <button class="filter-button me-4 " data-filter=".dog">DOG</button>
-            <button class="filter-button me-4 " data-filter=".bird">BIRD</button>
-          </p>
-        </div>
-        <div>
-          <a href="#" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">
-            shop now
-            <svg width="24" height="24" viewBox="0 0 24 24" class="mb-1">
-              <use xlink:href="#arrow-right"></use>
-            </svg></a>
+    
+    <div class="isotope-container row">
+      <?php
+        $query = "SELECT * FROM `foods` WHERE category_id=1 LIMIT 4";
+        $result = mysqli_query($con, $query);
+        if ($result) {
+          while ($row = mysqli_fetch_assoc($result)) {
+      ?>
+      <div class="item cat col-md-4 col-lg-3 my-4">
+        <div class="card position-relative">
+          <a href="single-product.html"><img src="<?php echo $row['image']; ?>" class="img-fluid rounded-4" alt="<?php echo $row['name']; ?>"></a>
+          <div class="card-body p-0">
+            <a href="single-product.html">
+              <h3 class="card-title pt-4 m-0"><?php echo $row['name']; ?></h3>
+            </a>
+            <div class="card-text">
+              <span class="rating secondary-font">
+                <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
+                <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
+                <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
+                <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
+                <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
+                5.0
+              </span>
+              <h3 class="secondary-font text-primary">PKR <?php echo $row['price']; ?></h3>
+              <div class="d-flex flex-wrap mt-3">
+                <a href="#" class="btn-cart me-3 px-4 pt-3 pb-3">
+                  <h5 class="text-uppercase m-0">Add to Cart</h5>
+                </a>
+                <a href="#" class="btn-wishlist px-4 pt-3">
+                  <iconify-icon icon="fluent:heart-28-filled" class="fs-5"></iconify-icon>
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-
-      <div class="isotope-container row">
-
-        <div class="item cat col-md-4 col-lg-3 my-4">
-          <!-- <div class="z-1 position-absolute rounded-3 m-3 px-3 border border-dark-subtle">
-            New
-          </div> -->
-          <div class="card position-relative">
-            <a href="single-product.html"><img src="images/item9.jpg" class="img-fluid rounded-4" alt="image"></a>
-            <div class="card-body p-0">
-              <a href="single-product.html">
-                <h3 class="card-title pt-4 m-0">Grey hoodie</h3>
-              </a>
-
-              <div class="card-text">
-                <span class="rating secondary-font">
-                  <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                  <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                  <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                  <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                  <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                  5.0</span>
-
-                <h3 class="secondary-font text-primary">$18.00</h3>
-
-                <div class="d-flex flex-wrap mt-3">
-                  <a href="#" class="btn-cart me-3 px-4 pt-3 pb-3">
-                    <h5 class="text-uppercase m-0">Add to Cart</h5>
-                  </a>
-                  <a href="#" class="btn-wishlist px-4 pt-3 ">
-                    <iconify-icon icon="fluent:heart-28-filled" class="fs-5"></iconify-icon>
-                  </a>
-                </div>
-
-
-              </div>
-
-            </div>
-          </div>
-        </div>
-
-        <div class="item dog col-md-4 col-lg-3 my-4">
-          <div class="z-1 position-absolute rounded-3 m-3 px-3 border border-dark-subtle">
-            New
-          </div>
-          <div class="card position-relative">
-            <a href="single-product.html"><img src="images/item10.jpg" class="img-fluid rounded-4" alt="image"></a>
-            <div class="card-body p-0">
-              <a href="single-product.html">
-                <h3 class="card-title pt-4 m-0">Grey hoodie</h3>
-              </a>
-
-              <div class="card-text">
-                <span class="rating secondary-font">
-                  <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                  <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                  <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                  <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                  <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                  5.0</span>
-
-                <h3 class="secondary-font text-primary">$18.00</h3>
-
-                <div class="d-flex flex-wrap mt-3">
-                  <a href="#" class="btn-cart me-3 px-4 pt-3 pb-3">
-                    <h5 class="text-uppercase m-0">Add to Cart</h5>
-                  </a>
-                  <a href="#" class="btn-wishlist px-4 pt-3 ">
-                    <iconify-icon icon="fluent:heart-28-filled" class="fs-5"></iconify-icon>
-                  </a>
-                </div>
-
-
-              </div>
-
-            </div>
-          </div>
-        </div>
-
-        <div class="item dog col-md-4 col-lg-3 my-4">
-          <!-- <div class="z-1 position-absolute rounded-3 m-3 px-3 border border-dark-subtle">
-            New
-          </div> -->
-          <div class="card position-relative">
-            <a href="single-product.html"><img src="images/item11.jpg" class="img-fluid rounded-4" alt="image"></a>
-            <div class="card-body p-0">
-              <a href="single-product.html">
-                <h3 class="card-title pt-4 m-0">Grey hoodie</h3>
-              </a>
-
-              <div class="card-text">
-                <span class="rating secondary-font">
-                  <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                  <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                  <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                  <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                  <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                  5.0</span>
-
-                <h3 class="secondary-font text-primary">$18.00</h3>
-
-                <div class="d-flex flex-wrap mt-3">
-                  <a href="#" class="btn-cart me-3 px-4 pt-3 pb-3">
-                    <h5 class="text-uppercase m-0">Add to Cart</h5>
-                  </a>
-                  <a href="#" class="btn-wishlist px-4 pt-3 ">
-                    <iconify-icon icon="fluent:heart-28-filled" class="fs-5"></iconify-icon>
-                  </a>
-                </div>
-
-
-              </div>
-
-            </div>
-          </div>
-        </div>
-
-        <div class="item cat col-md-4 col-lg-3 my-4">
-          <div class="z-1 position-absolute rounded-3 m-3 px-3 border border-dark-subtle">
-            Sold
-          </div>
-          <div class="card position-relative">
-            <a href="single-product.html"><img src="images/item12.jpg" class="img-fluid rounded-4" alt="image"></a>
-            <div class="card-body p-0">
-              <a href="single-product.html">
-                <h3 class="card-title pt-4 m-0">Grey hoodie</h3>
-              </a>
-
-              <div class="card-text">
-                <span class="rating secondary-font">
-                  <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                  <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                  <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                  <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                  <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                  5.0</span>
-
-                <h3 class="secondary-font text-primary">$18.00</h3>
-
-                <div class="d-flex flex-wrap mt-3">
-                  <a href="#" class="btn-cart me-3 px-4 pt-3 pb-3">
-                    <h5 class="text-uppercase m-0">Add to Cart</h5>
-                  </a>
-                  <a href="#" class="btn-wishlist px-4 pt-3 ">
-                    <iconify-icon icon="fluent:heart-28-filled" class="fs-5"></iconify-icon>
-                  </a>
-                </div>
-
-
-              </div>
-
-            </div>
-          </div>
-        </div>
-
-        <div class="item bird col-md-4 col-lg-3 my-4">
-          <!-- <div class="z-1 position-absolute rounded-3 m-3 px-3 border border-dark-subtle">
-            New
-          </div> -->
-          <div class="card position-relative">
-            <a href="single-product.html"><img src="images/item13.jpg" class="img-fluid rounded-4" alt="image"></a>
-            <div class="card-body p-0">
-              <a href="single-product.html">
-                <h3 class="card-title pt-4 m-0">Grey hoodie</h3>
-              </a>
-
-              <div class="card-text">
-                <span class="rating secondary-font">
-                  <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                  <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                  <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                  <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                  <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                  5.0</span>
-
-                <h3 class="secondary-font text-primary">$18.00</h3>
-
-                <div class="d-flex flex-wrap mt-3">
-                  <a href="#" class="btn-cart me-3 px-4 pt-3 pb-3">
-                    <h5 class="text-uppercase m-0">Add to Cart</h5>
-                  </a>
-                  <a href="#" class="btn-wishlist px-4 pt-3 ">
-                    <iconify-icon icon="fluent:heart-28-filled" class="fs-5"></iconify-icon>
-                  </a>
-                </div>
-
-
-              </div>
-
-            </div>
-          </div>
-        </div>
-
-        <div class="item bird col-md-4 col-lg-3 my-4">
-          <!-- <div class="z-1 position-absolute rounded-3 m-3 px-3 border border-dark-subtle">
-            New
-          </div> -->
-          <div class="card position-relative">
-            <a href="single-product.html"><img src="images/item14.jpg" class="img-fluid rounded-4" alt="image"></a>
-            <div class="card-body p-0">
-              <a href="single-product.html">
-                <h3 class="card-title pt-4 m-0">Grey hoodie</h3>
-              </a>
-
-              <div class="card-text">
-                <span class="rating secondary-font">
-                  <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                  <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                  <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                  <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                  <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                  5.0</span>
-
-                <h3 class="secondary-font text-primary">$18.00</h3>
-
-                <div class="d-flex flex-wrap mt-3">
-                  <a href="#" class="btn-cart me-3 px-4 pt-3 pb-3">
-                    <h5 class="text-uppercase m-0">Add to Cart</h5>
-                  </a>
-                  <a href="#" class="btn-wishlist px-4 pt-3 ">
-                    <iconify-icon icon="fluent:heart-28-filled" class="fs-5"></iconify-icon>
-                  </a>
-                </div>
-
-
-              </div>
-
-            </div>
-          </div>
-        </div>
-
-        <div class="item dog col-md-4 col-lg-3 my-4">
-          <div class="z-1 position-absolute rounded-3 m-3 px-3 border border-dark-subtle">
-            Sale
-          </div>
-          <div class="card position-relative">
-            <a href="single-product.html"><img src="images/item15.jpg" class="img-fluid rounded-4" alt="image"></a>
-            <div class="card-body p-0">
-              <a href="single-product.html">
-                <h3 class="card-title pt-4 m-0">Grey hoodie</h3>
-              </a>
-
-              <div class="card-text">
-                <span class="rating secondary-font">
-                  <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                  <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                  <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                  <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                  <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                  5.0</span>
-
-                <h3 class="secondary-font text-primary">$18.00</h3>
-
-                <div class="d-flex flex-wrap mt-3">
-                  <a href="#" class="btn-cart me-3 px-4 pt-3 pb-3">
-                    <h5 class="text-uppercase m-0">Add to Cart</h5>
-                  </a>
-                  <a href="#" class="btn-wishlist px-4 pt-3 ">
-                    <iconify-icon icon="fluent:heart-28-filled" class="fs-5"></iconify-icon>
-                  </a>
-                </div>
-
-
-              </div>
-
-            </div>
-          </div>
-        </div>
-
-        <div class="item cat col-md-4 col-lg-3 my-4">
-          <!-- <div class="z-1 position-absolute rounded-3 m-3 px-3 border border-dark-subtle">
-            New
-          </div> -->
-          <div class="card position-relative">
-            <a href="single-product.html"><img src="images/item16.jpg" class="img-fluid rounded-4" alt="image"></a>
-            <div class="card-body p-0">
-              <a href="single-product.html">
-                <h3 class="card-title pt-4 m-0">Grey hoodie</h3>
-              </a>
-
-              <div class="card-text">
-                <span class="rating secondary-font">
-                  <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                  <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                  <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                  <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                  <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
-                  5.0</span>
-
-                <h3 class="secondary-font text-primary">$18.00</h3>
-
-                <div class="d-flex flex-wrap mt-3">
-                  <a href="#" class="btn-cart me-3 px-4 pt-3 pb-3">
-                    <h5 class="text-uppercase m-0">Add to Cart</h5>
-                  </a>
-                  <a href="#" class="btn-wishlist px-4 pt-3 ">
-                    <iconify-icon icon="fluent:heart-28-filled" class="fs-5"></iconify-icon>
-                  </a>
-                </div>
-
-
-              </div>
-
-            </div>
-          </div>
-        </div>
-
-
-      </div>
-
-
+      <?php
+          }
+        }
+      ?>
     </div>
-  </section>
+  </div>
+</section>
 
   <section id="banner-2" class="my-3" style="background: #F9F3EC;">
     <div class="container">
@@ -715,7 +181,7 @@ if(isset($_SESSION['status'])){?>
           <div class="secondary-font text-primary text-uppercase mb-3 fs-4">Upto 40% off</div>
           <h2 class="banner-title display-1 fw-normal">Clearance sale !!!
           </h2>
-          <a href="#" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">
+          <a href="dogctg.php" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">
             shop now
             <svg width="24" height="24" viewBox="0 0 24 24" class="mb-1">
               <use xlink:href="#arrow-right"></use>
@@ -794,44 +260,44 @@ if(isset($_SESSION['status'])){?>
                   <div class="row pt-5">
                     <div class="col-md-4">
                       <div class="card pe-lg-5 ps-lg-5 bg-transparent border-0">
-                        <p class="card-title text-end fw-bold pe-lg-5 pb-5">07/10/23</p>
-                        <h4 class="card-title mb-1">
-                          <i class="fa-solid fa-star"></i>
-                          <i class="fa-solid fa-star"></i>
-                          <i class="fa-solid fa-star"></i>
-                          <i class="fa-solid fa-star"></i>
-                          <i class="fa-solid fa-star"></i>
-                        </h4>
-                        <p class="card-title h5 mb-2 fw-bold">Bloomscape did a wonderful job</p>
-                        <p class="card-text pe-lg-5">Bloomscape did a wonderful job in packaging this snake plant and shipping it safely to my niece and nephew as a housewarming gift....</p>
+                        <p class="card-title text-end fw-bold pe-lg-5 pb-5">Date : 07/10/23</p>
+                        <span class="rating secondary-font">
+                          <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
+                          <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
+                          <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
+                          <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
+                          <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
+                        </span>
+                        <p class="card-title h5 mb-2 fw-bold">Amazing Pet Adoption Service!</p>
+                        <p class="card-text pe-lg-5">The process was seamless, and my new puppy arrived in perfect health and full of energy. Thank you for the wonderful service!</p>
                       </div>
                     </div>
                     <div class="col-md-4">
                       <div class="card pe-lg-5 ps-lg-5 bg-transparent border-0">
-                        <p class="card-title text-end fw-bold pe-lg-5 pb-5">06/19/23</p>
-                        <h4 class="card-title mb-1">
-                          <i class="fa-solid fa-star"></i>
-                          <i class="fa-solid fa-star"></i>
-                          <i class="fa-solid fa-star"></i>
-                          <i class="fa-solid fa-star"></i>
-                          <i class="fa-solid fa-star"></i>
-                        </h4>
-                        <p class="card-title h5 mb-2 fw-bold">High quality plants. Well packaged.</p>
-                        <p class="card-text pe-lg-5">High quality plants. Well packaged. Fast shipping. Great price value</p>
+                        <p class="card-title text-end fw-bold pe-lg-5 pb-5">Date : 06/19/23</p>
+                        <span class="rating secondary-font">
+                          <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
+                          <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
+                          <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
+                          <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
+                          <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
+                        </span>
+                        <p class="card-title h5 mb-2 fw-bold">Top-Notch Pet Supplies!</p>
+                        <p class="card-text pe-lg-5">The quality of pet supplies is excellent. Fast shipping and well-packaged products. Highly recommend for all pet owners!</p>
                       </div>
                     </div>
                     <div class="col-md-4">
                       <div class="card pe-lg-5 ps-lg-5 bg-transparent border-0">
-                        <p class="card-title text-end fw-bold pe-lg-5 pb-5">06/16/23</p>
-                        <h4 class="card-title mb-1">
-                          <i class="fa-solid fa-star"></i>
-                          <i class="fa-solid fa-star"></i>
-                          <i class="fa-solid fa-star"></i>
-                          <i class="fa-solid fa-star"></i>
-                          <i class="fa-solid fa-star"></i>
-                        </h4>
-                        <p class="card-title h5 mb-2 fw-bold">Every single thing about this</p>
-                        <p class="card-text pe-lg-5">Every single thing about this plant was perfect. Plan on ordering more.</p>
+                        <p class="card-title text-end fw-bold pe-lg-5 pb-5">Date : 06/16/23</p>
+                        <span class="rating secondary-font">
+                          <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
+                          <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
+                          <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
+                          <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
+                          <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
+                        </span>
+                        <p class="card-title h5 mb-2 fw-bold">Perfect Pets and Products</p>
+                        <p class="card-text pe-lg-5">Everything about my experience was perfect. The pet care guides were very helpful, and my new kitten is thriving!</p>
                       </div>
                     </div>
                   </div>
@@ -842,44 +308,44 @@ if(isset($_SESSION['status'])){?>
                   <div class="row pt-5">
                     <div class="col-md-4">
                       <div class="card pe-lg-5 ps-lg-5 bg-transparent border-0">
-                        <p class="card-title text-end fw-bold pe-lg-5 pb-5">07/03/23</p>
-                        <h4 class="card-title mb-1">
-                          <i class="fa-solid fa-star"></i>
-                          <i class="fa-solid fa-star"></i>
-                          <i class="fa-solid fa-star"></i>
-                          <i class="fa-solid fa-star"></i>
-                          <i class="fa-solid fa-star"></i>
-                        </h4>
-                        <p class="card-title h5 mb-2 fw-bold">Great plants, fantastic customer service!</p>
-                        <p class="card-text pe-lg-5">Patch plants are well priced while also being of good quality. Plant pots are fa...</p>
+                        <p class="card-title text-end fw-bold pe-lg-5 pb-5">Date : 07/03/23</p>
+                        <span class="rating secondary-font">
+                          <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
+                          <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
+                          <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
+                          <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
+                          <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
+                        </span>
+                        <p class="card-title h5 mb-2 fw-bold">Fantastic Pet Care!</p>
+                        <p class="card-text pe-lg-5">The care and attention given to pets are outstanding. My new dog is happy and healthy thanks to this amazing service!</p>
                       </div>
                     </div>
                     <div class="col-md-4">
                       <div class="card pe-lg-5 ps-lg-5 bg-transparent border-0">
-                        <p class="card-title text-end fw-bold pe-lg-5 pb-5">06/29/23</p>
-                        <h4 class="card-title mb-1">
-                          <i class="fa-solid fa-star"></i>
-                          <i class="fa-solid fa-star"></i>
-                          <i class="fa-solid fa-star"></i>
-                          <i class="fa-solid fa-star"></i>
-                          <i class="fa-solid fa-star"></i>
-                        </h4>
-                        <p class="card-title h5 mb-2 fw-bold">Not sure what plant to buy?</p>
-                        <p class="card-text pe-lg-5">This site is very informative and easy to use.  Prompt delivery and well package...</p>
+                        <p class="card-title text-end fw-bold pe-lg-5 pb-5">Date : 06/29/23</p>
+                        <span class="rating secondary-font">
+                          <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
+                          <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
+                          <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
+                          <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
+                          <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
+                        </span>
+                        <p class="card-title h5 mb-2 fw-bold">Great Selection for Pets!</p>
+                        <p class="card-text pe-lg-5">This site has a great selection of pet products. The delivery was prompt, and the items were well-packaged. Very satisfied!</p>
                       </div>
                     </div>
                     <div class="col-md-4">
                       <div class="card pe-lg-5 ps-lg-5 bg-transparent border-0">
-                        <p class="card-title text-end fw-bold pe-lg-5 pb-5">06/23/23</p>
-                        <h4 class="card-title mb-1">
-                          <i class="fa-solid fa-star"></i>
-                          <i class="fa-solid fa-star"></i>
-                          <i class="fa-solid fa-star"></i>
-                          <i class="fa-solid fa-star"></i>
-                          <i class="fa-solid fa-star"></i>
-                        </h4>
-                        <p class="card-title h5 mb-2 fw-bold">Nice healthy plants</p>
-                        <p class="card-text pe-lg-5">Nice healthy plants</p>
+                        <p class="card-title text-end fw-bold pe-lg-5 pb-5">Date : 06/23/23</p>
+                        <span class="rating secondary-font">
+                          <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
+                          <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
+                          <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
+                          <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
+                          <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
+                        </span>
+                        <p class="card-title h5 mb-2 fw-bold">Happy with My New Pet!</p>
+                        <p class="card-text pe-lg-5">My new pet is healthy and happy, thanks to the great care provided. Highly recommend this service for anyone looking for a new furry friend!</p>
                       </div>
                     </div>
                   </div>
@@ -890,44 +356,44 @@ if(isset($_SESSION['status'])){?>
                   <div class="row pt-5">
                     <div class="col-md-4">
                       <div class="card pe-lg-5 ps-lg-5 bg-transparent border-0">
-                        <p class="card-title text-end fw-bold pe-lg-5 pb-5">05/03/23</p>
-                        <h4 class="card-title mb-1">
-                          <i class="fa-solid fa-star"></i>
-                          <i class="fa-solid fa-star"></i>
-                          <i class="fa-solid fa-star"></i>
-                          <i class="fa-solid fa-star"></i>
-                          <i class="fa-solid fa-star"></i>
-                        </h4>
-                        <p class="card-title h5 mb-2 fw-bold">Lovely plants with detailed…</p>
-                        <p class="card-text pe-lg-5">Lovely plants with detailed instructions on how to look after them!</p>
+                        <p class="card-title text-end fw-bold pe-lg-5 pb-5">Date : 05/03/23</p>
+                        <span class="rating secondary-font">
+                          <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
+                          <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
+                          <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
+                          <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
+                          <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
+                        </span>
+                        <p class="card-title h5 mb-2 fw-bold">Perfect for Pet Lovers!</p>
+                        <p class="card-text pe-lg-5">This store offers everything a pet lover could need. From food to toys, all items are of high quality and reasonably priced!</p>
                       </div>
                     </div>
                     <div class="col-md-4">
                       <div class="card pe-lg-5 ps-lg-5 bg-transparent border-0">
-                        <p class="card-title text-end fw-bold pe-lg-5 pb-5">05/08/23</p>
-                        <h4 class="card-title mb-1">
-                          <i class="fa-solid fa-star"></i>
-                          <i class="fa-solid fa-star"></i>
-                          <i class="fa-solid fa-star"></i>
-                          <i class="fa-solid fa-star"></i>
-                          <i class="fa-solid fa-star"></i>
-                        </h4>
-                        <p class="card-title h5 mb-2 fw-bold">I bought a plant for a birthday gift</p>
-                        <p class="card-text pe-lg-5">I bought a plant for a birthday gift. The plant arrived safely that in excellent...</p>
+                        <p class="card-title text-end fw-bold pe-lg-5 pb-5">Date : 05/08/23</p>
+                        <span class="rating secondary-font">
+                          <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
+                          <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
+                          <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
+                          <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
+                          <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
+                        </span>
+                        <p class="card-title h5 mb-2 fw-bold">Great Experience for Pet Shopping</p>
+                        <p class="card-text pe-lg-5">Shopping for my pets was a breeze. The customer service was excellent, and the delivery was prompt and reliable.</p>
                       </div>
                     </div>
                     <div class="col-md-4">
                       <div class="card pe-lg-5 ps-lg-5 bg-transparent border-0">
-                        <p class="card-title text-end fw-bold pe-lg-5 pb-5">05/04/23</p>
-                        <h4 class="card-title mb-1">
-                          <i class="fa-solid fa-star"></i>
-                          <i class="fa-solid fa-star"></i>
-                          <i class="fa-solid fa-star"></i>
-                          <i class="fa-solid fa-star"></i>
-                          <i class="fa-solid fa-star"></i>
-                        </h4>
-                        <p class="card-title h5 mb-2 fw-bold">The plant looks great</p>
-                        <p class="card-text pe-lg-5">The plant looks great, is as big as expected ( a bit bushier) and in a perfect c...</p>
+                        <p class="card-title text-end fw-bold pe-lg-5 pb-5">Date :05/04/23</p>
+                        <span class="rating secondary-font">
+                          <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
+                          <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
+                          <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
+                          <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
+                          <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
+                        </span>
+                        <p class="card-title h5 mb-2 fw-bold">Wonderful Service for Pets</p>
+                        <p class="card-text pe-lg-5">The service provided was fantastic. The pets are well cared for, and the products are top-notch. Will definitely return!</p>
                       </div>
                     </div>
                   </div>
@@ -946,7 +412,7 @@ if(isset($_SESSION['status'])){?>
         </div>
       </div>
     </section>
-  </section>
+</section>
 
     <div class="bg-gray-light mt-5"style="background: url('images/background-img.png') no-repeat;">
       <div class="container">
@@ -958,12 +424,29 @@ if(isset($_SESSION['status'])){?>
           data-aos-easing="ease-in-sine" class="fw-bold text-bg font-f">We're Here to Help! With 24/7 <br> Customer Support</h3>
              <div
               class="ms-auto pt-4 d-flex color-green">
-               <p  class=" ps-5"><i class="fa-solid fa-phone"></i> 03194085676</p>
-             <p  class="ps-5"><i class="fa-solid fa-envelope"></i> PALTOO@gmail.com</p>
+              <a href="tel:+1234567890" class="d-flex align-items-center">
+               <iconify-icon class="social-icon me-2" icon="ri:phone-fill"></iconify-icon>
+             <span>Call Us: 123-456-7890</span>
+              </a>
+              <p  class="ps-5"></p>
+
+              <a href="mailto:PALTOO@gmail.com" class="d-flex align-items-center">
+  <iconify-icon class="social-icon me-2" icon="mdi:email"></iconify-icon>
+  <span>Email: PALTOO@gmail.com</span>
+</a>
+
+
+             
              <p  class="ps-5">
-             <a href="https://www.facebook.com/" class="color-green"><i class="fa-brands fa-facebook ps-3"></i></a>
-             <a href="https://www.instagram.com/" class="color-green"><i class="fa-brands fa-instagram ps-3"></i></a>
-             <a href="https://twitter.com/?lang=en" class="color-green"><i class="fa-brands fa-twitter ps-3"></i></a>
+             <a href="#">
+                    <iconify-icon class="social-icon" icon="ri:facebook-fill"></iconify-icon>
+                  </a>
+                  <a href="#">
+                    <iconify-icon class="social-icon" icon="ri:twitter-fill"></iconify-icon>
+                  </a>
+                  <a href="#">
+                    <iconify-icon class="social-icon" icon="ri:instagram-fill"></iconify-icon>
+                  </a>
            </p>
              </div>
             </div>
@@ -1222,36 +705,28 @@ if(isset($_SESSION['status'])){?>
   </section>
 
   <section class="image-fixed mb-lg-5">
-    <div class="bg-blackdark">
-      <div class="container">
-        <div class="row">
-          <div class="col-12">
-            <div class="text-center ms-lg-5 me-lg-5 text-white pt-lg-5 animated">
-              <p>Welcome to a big <br> pet family</p>
-              <p>Bigger, better pet. Delivered straight to you. <br> Backed by five generations of grow-how.</p>
-            </div>
+  <div class="bg-blackdark">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <div class="text-center ms-lg-5 me-lg-5 text-white pt-lg-5 animated-slide">
+            <p class="display-4">Welcome to Your Pet's New Favorite Place</p>
+            <p class="lead">Explore our vast selection of premium pet products. From toys to treats, we have everything your furry friend needs to live their best life. Enjoy five generations of expertise in pet care, all delivered right to your doorstep.</p>
           </div>
-          <div class="col-12">
-            <div class="text-center justify-content-center ">
-              <a href="#product" class="btn-shop" role="button">SHOP NOW</a>
-            </div>
+        </div>
+        <div class="col-12">
+          <div class="text-center justify-content-center pt-5">
+            <a href="shopnow.php" class="btn-shop btn-animated" role="button">SHOP NOW</a>
           </div>
         </div>
       </div>
     </div>
-  </section>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      var section = document.querySelector('.image-fixed');
-      section.classList.add('animated');
-    });
-  </script>  
+  </div>
+</section>
 
 
 
-
-
+  
 <section class="container" id="planter">
   <!-- Heading Section -->
   <div class="row mb-5">
@@ -1262,63 +737,68 @@ if(isset($_SESSION['status'])){?>
 
   <!-- Product Cards Section -->
   <div class="row">
+    <!-- Dog Card -->
     <div class="col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3 col-xxl-3">
       <div class="flip-card w-100 bg-transparent mt-5 products">
         <div class="product flip-card-inner position-relative text-center shadow-lg w-100 h-100">
           <div class="flip-card-front">
-            <img src="images/Pet-Friendly.jpg" alt="image not found" class="w-100">
+            <img src="images/dog1.jpg" alt="Golden Retriever" class="w-100">
           </div>
           <div class="flip-card-back">
-            <h3 class="fw-bold text-bg">Cacti &amp; Succulents</h3>
-            <p class="text-dark h5 ps-3 pe-3 fw-bold mb-4">Delightful succulent with spiked blue-green leaves Easy and graceful, with lush dark green fronds</p>
+            <h3 class="fw-bold text-bg">Golden Retriever</h3>
+            <p class="text-dark h5 ps-3 pe-3 fw-bold mb-4">Friendly and energetic, Golden Retrievers are known for their loving nature and intelligence. They make great family pets.</p>
           </div>
         </div>
       </div>
     </div>
 
+    <!-- Cat Card -->
     <div class="col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3 col-xxl-3">
       <div class="flip-card w-100 bg-transparent mt-5 products">
         <div class="product flip-card-inner position-relative text-center shadow-lg w-100 h-100">
           <div class="flip-card-front">
-            <img src="images/Pet-Friendly.jpg" alt="image not found" class="w-100">
+            <img src="images/cat1.jpg" alt="Siamese Cat" class="w-100">
           </div>
           <div class="flip-card-back">
-            <h3 class="fw-bold text-bg">Cacti &amp; Succulents</h3>
-            <p class="text-dark h5 ps-3 pe-3 fw-bold mb-4">Delightful succulent with spiked blue-green leaves Easy and graceful, with lush dark green fronds</p>
-          </div>
-        </div>
-      </div>
-    </div>
-    
-    <div class="col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3 col-xxl-3">
-      <div class="flip-card w-100 bg-transparent mt-5 products">
-        <div class="product flip-card-inner position-relative text-center shadow-lg w-100 h-100">
-          <div class="flip-card-front">
-            <img src="images/Pet-Friendly.jpg" alt="image not found" class="w-100">
-          </div>
-          <div class="flip-card-back">
-            <h3 class="fw-bold text-bg">Cacti &amp; Succulents</h3>
-            <p class="text-dark h5 ps-3 pe-3 fw-bold mb-4">Delightful succulent with spiked blue-green leaves Easy and graceful, with lush dark green fronds</p>
+            <h3 class="fw-bold text-bg">Siamese Cat</h3>
+            <p class="text-dark h5 ps-3 pe-3 fw-bold mb-4">Siamese cats are known for their striking blue eyes and sleek fur. They are vocal and affectionate, making them a favorite among cat lovers.</p>
           </div>
         </div>
       </div>
     </div>
 
+    <!-- Bird Card -->
     <div class="col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3 col-xxl-3">
       <div class="flip-card w-100 bg-transparent mt-5 products">
         <div class="product flip-card-inner position-relative text-center shadow-lg w-100 h-100">
           <div class="flip-card-front">
-            <img src="images/Pet-Friendly.jpg" alt="image not found" class="w-100">
+            <img src="images/bird1.jpg" alt="African Grey Parrot" class="w-100">
           </div>
           <div class="flip-card-back">
-            <h3 class="fw-bold text-bg">Cacti &amp; Succulents</h3>
-            <p class="text-dark h5 ps-3 pe-3 fw-bold mb-4">Delightful succulent with spiked blue-green leaves Easy and graceful, with lush dark green fronds</p>
+            <h3 class="fw-bold text-bg">African Grey Parrot</h3>
+            <p class="text-dark h5 ps-3 pe-3 fw-bold mb-4">African Grey Parrots are known for their incredible intelligence and ability to mimic human speech. They are playful and require a lot of social interaction.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Fish Card -->
+    <div class="col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3 col-xxl-3">
+      <div class="flip-card w-100 bg-transparent mt-5 products">
+        <div class="product flip-card-inner position-relative text-center shadow-lg w-100 h-100">
+          <div class="flip-card-front">
+            <img src="images/fish 1.jpg" alt="Angelfish" class="w-100">
+          </div>
+          <div class="flip-card-back">
+            <h3 class="fw-bold text-bg">Angelfish</h3>
+            <p class="text-dark h5 ps-3 pe-3 fw-bold mb-4">Angelfish are known for their striking colors and elegant fins. They make a beautiful addition to any aquarium and are relatively easy to care for.</p>
           </div>
         </div>
       </div>
     </div>
   </div>
 </section>
+
 
 
   <section id="latest-blog" class="my-5">
@@ -1415,6 +895,3 @@ if(isset($_SESSION['status'])){?>
 <?php
 include("footer.php");
 ?>
-</body>
-
-</html>

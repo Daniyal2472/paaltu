@@ -386,6 +386,16 @@ h6 {
   /* Toggle Sidebar Button */
   /* Search Bar */
 }
+/* Sidebar Heading Styles */
+.sidebar-heading {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #333;
+  margin: 1rem 0 0.5rem 1rem;
+  position: relative;
+}
+
+
 
 .header .toggle-sidebar-btn {
   font-size: 32px;

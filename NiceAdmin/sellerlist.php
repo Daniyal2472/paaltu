@@ -38,6 +38,7 @@ include("connection.php");
                                     <th scope="col">Description</th>
                                     <th scope="col">Image</th>
                                     <th scope="col">Role</th>
+                                    <th scope="col">Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -45,6 +46,7 @@ include("connection.php");
                                 $query = mysqli_query($con, "SELECT * FROM pets");
                                 if (mysqli_num_rows($query) > 0) {
                                     while ($row = mysqli_fetch_assoc($query)) {
+                                        $imagePath = '../accessories/' . (isset($row['image']) ? $row['image'] : '');
                                         echo "<tr>";
                                         echo "<th scope='row'>" . $row['id'] . "</th>";
                                         echo "<td>" . (isset($row['user_id']) ? $row['user_id'] : '') . "</td>";
@@ -54,14 +56,16 @@ include("connection.php");
                                         echo "<td>" . (isset($row['price']) ? $row['price'] : '') . "</td>";
                                         echo "<td>" . (isset($row['age']) ? $row['age'] : '') . "</td>";
                                         echo "<td>" . (isset($row['description']) ? $row['description'] : '') . "</td>";
-                                        // Correct the path concatenation for the image
-                                        $imagePath = '/../accessories' . (isset($row['image']) ? $row['image'] : '');
                                         echo "<td><img src='" . $imagePath . "' alt='Pet Image' style='width: 100px; height: auto;'></td>";
                                         echo "<td>" . (isset($row['role']) ? $row['role'] : '') . "</td>";
+                                        echo "<td>";
+                                        echo "<a href='seller_update.php?id=" . $row['id'] . "' class='btn btn-primary btn-sm'>Update</a> ";
+                                        echo "<a href='seller_delete.php?id=" . $row['id'] . "' class='btn btn-danger btn-sm'>Delete</a>";
+                                        echo "</td>";
                                         echo "</tr>";
                                     }
                                 } else {
-                                    echo "<tr><td colspan='10'>No pets found</td></tr>";
+                                    echo "<tr><td colspan='11'>No pets found</td></tr>";
                                 }
                                 ?>
                             </tbody>

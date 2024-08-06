@@ -32,6 +32,7 @@ include("connection.php");
                                     <th scope="col">Name</th>
                                     <th scope="col">Email</th>
                                     <th scope="col">Qualification</th>
+                                    <th scope="col">Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -44,10 +45,14 @@ include("connection.php");
                                         echo "<td>" . (isset($row['name']) ? $row['name'] : '') . "</td>";
                                         echo "<td>" . (isset($row['email']) ? $row['email'] : '') . "</td>";
                                         echo "<td>" . (isset($row['qualification']) ? $row['qualification'] : '') . "</td>";
+                                        echo "<td>";
+                                        echo "<a href='doc_update.php?id=" . $row['id'] . "' class='btn btn-primary btn-sm'>Update</a> ";
+                                        echo "<a href='doc_delete.php?id=" . $row['id'] . "' class='btn btn-danger btn-sm'>Delete</a>";
+                                        echo "</td>";
                                         echo "</tr>";
                                     }
                                 } else {
-                                    echo "<tr><td colspan='4'>No doctors found</td></tr>";
+                                    echo "<tr><td colspan='5'>No doctors found</td></tr>";
                                 }
                                 ?>
                             </tbody>

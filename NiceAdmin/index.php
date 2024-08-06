@@ -1,5 +1,6 @@
 <?php
 include("header.php");
+
 ?>
 
 
@@ -679,7 +680,3 @@ include("header.php");
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
-
-</body>
-
-      </html>

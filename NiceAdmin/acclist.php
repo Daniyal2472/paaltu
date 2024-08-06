@@ -34,6 +34,7 @@ include("connection.php");
                                     <th scope="col">Category ID</th>
                                     <th scope="col">Image</th>
                                     <th scope="col">Description</th>
+                                    <th scope="col">Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -49,10 +50,14 @@ include("connection.php");
                                         echo "<td>" . (isset($row['category_id']) ? $row['category_id'] : '') . "</td>";
                                         echo "<td>" . (isset($row['image']) ? '<img src="' . $imagePath . '" alt="' . $row['name'] . '" width="50">' : '') . "</td>";
                                         echo "<td>" . (isset($row['description']) ? $row['description'] : '') . "</td>";
+                                        echo "<td>";
+                                        echo "<a href='updateacc.php?id=" . $row['id'] . "' class='btn btn-primary btn-sm'>Update</a> ";
+                                        echo "<a href='deleteacc.php?id=" . $row['id'] . "' class='btn btn-danger btn-sm'>Delete</a>";
+                                        echo "</td>";
                                         echo "</tr>";
                                     }
                                 } else {
-                                    echo "<tr><td colspan='6'>No accessories found</td></tr>";
+                                    echo "<tr><td colspan='7'>No accessories found</td></tr>";
                                 }
                                 ?>
                             </tbody>

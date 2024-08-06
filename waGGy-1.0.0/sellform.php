@@ -41,7 +41,7 @@ include("header.php");
 
 <div class="formbold-mainn-wrapper pt-5 pb-5 ">
   <div class="formbold-form-wrapper">
-  <form method="post" action="" enctype="multipart/form-data">
+  <form method="post" action="" enctype="multipart/form-data" onsubmit="return validateForm()">
       <div class="formbold-mb-5">
         <h1>Pet Information</h1>
         <label for="seller_name" class="formbold-form-label">Seller's Name</label>
@@ -86,9 +86,60 @@ include("header.php");
   </div>
 </div>
 
+<script>
+function validateForm() {
+    var seller_name = document.getElementById("seller_name").value;
+    var phone = document.getElementById("phone").value;
+    var email = document.getElementById("email").value;
+    var pet_type = document.getElementById("pet_type").value;
+    var pet_breed = document.getElementById("pet_breed").value;
+    var pet_age = document.getElementById("pet_age").value;
+    var pet_price = document.getElementById("pet_price").value;
+    var pet_description = document.getElementById("pet_description").value;
+    var pet_image = document.getElementById("pet_image").value;
+
+    if (seller_name == "" || phone == "" || email == "" || pet_type == "" || pet_breed == "" || pet_age == "" || pet_price == "" || pet_description == "" || pet_image == "") {
+        alert("All fields must be filled out");
+        return false;
+    }
+
+    var namePattern = /^[a-zA-Z\s]+$/;
+    if (!namePattern.test(seller_name)) {
+        alert("Seller's name must contain only letters and spaces");
+        return false;
+    }
+
+    if (!namePattern.test(pet_breed)) {
+        alert("Pet's breed must contain only letters and spaces");
+        return false;
+
+    if (isNaN(phone)) {
+        alert("Phone number must be numeric");
+        return false;
+    }
+
+    if (isNaN(pet_age) || pet_age <= 0) {
+        alert("Pet's age must be a positive number");
+        return false;
+    }
+
+    if (isNaN(pet_price) || pet_price <= 0) {
+        alert("Pet's price must be a positive number");
+        return false;
+    }
+
+    var allowedExtensions = /(\.jpg|\.jpeg|\.png)$/i;
+    if (!allowedExtensions.exec(pet_image)) {
+        alert("Please upload a file with a valid image extension (jpg, jpeg, png)");
+        return false;
+    }
+    return true;
+}
+</script>
+
 <?php
 include("footer.php");
-$update = mysqli_query($con, "SELECT `role` FROM `users` WHERE id = '$user_id'");
+$update = mysqli_query($con, "SELECT role FROM users WHERE id = '$user_id'");
 $u_role = mysqli_fetch_assoc($update);
 $role = $u_role['role'];
 
@@ -101,7 +152,6 @@ if (isset($_POST['sell'])) {
   $pet_age = $_POST['pet_age'];
   $pet_price = $_POST['pet_price'];
   $pet_description = $_POST['pet_description'];
-     
 
   // Handle file uploads
   $pictureFileName = $_FILES['picture']['name'];
@@ -113,26 +163,35 @@ if (isset($_POST['sell'])) {
   // Check file extensions
   $pictureExtension = strtolower(pathinfo($pictureFileName, PATHINFO_EXTENSION));
 
-  
-
   if (in_array($pictureExtension, ['jpg', 'jpeg', 'png'])) {
       // Move uploaded files to specific directories
       move_uploaded_file($pictureTmpName, $pictureDestination);
-      // move_uploaded_file($trailerTmpName, $trailerDestination);
 
       // Insert data into the database
-      $query = "INSERT INTO `pets`(`id`, `user_id`, `name`, `category_id`, `breed`, `price`, `age`, `description`, `image`, `role`) VALUES ('','2','$seller_name','1','$pet_breed','$pet_price','$pet_age','$pet_description','$pictureDestination','$role')";
+      $query = "INSERT INTO pets(id, user_id, name, category_id, breed, price, age, description, image, role) VALUES ('','2','$seller_name','1','$pet_breed','$pet_price','$pet_age','$pet_description','$pictureDestination','$role')";
       $result = mysqli_query($con, $query);
 
       if ($result) {
         session_start();
         $_SESSION['status'] = "Data inserted successfully";
-          echo "<script>location.assign('index.php')</script>";
+        if(isset($_SESSION['status'])){?>
+          <script>
+            swal({
+            title: "<?php echo $_SESSION['status']; ?>!",
+            icon: "success",
+            button: "Okay",
+          });
+          </script>
+            
+            <?php
+            unset($_SESSION['status']);
+            }
+        // echo "<script>location.assign('index.php')</script>";
       } else {
-          echo "<script>alert('Error adding pet.');</script>";
+        echo "<script>alert('Error adding pet.');</script>";
       }
   } else {
-      echo "<script>alert('Error: Unsupported file extension. Please use jpg, jpeg, png for pictures and mp4, avi, mkv for trailers.')</script>";
+      echo "<script>alert('Error: Unsupported file extension. Please use jpg, jpeg, png for pictures.')</script>";
   }
 }
 ?>

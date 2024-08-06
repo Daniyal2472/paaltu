@@ -18,10 +18,7 @@ include("connection.php");
 
     <section class="section">
         <div class="row">
-           
-
             <div class="col-lg-6">
-
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Categories Table</h5>
@@ -32,6 +29,7 @@ include("connection.php");
                                 <tr>
                                     <th scope="col">#</th>
                                     <th scope="col">Name</th>
+                                    <th scope="col">Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -42,10 +40,14 @@ include("connection.php");
                                         echo "<tr>";
                                         echo "<th scope='row'>" . $row['id'] . "</th>";
                                         echo "<td>" . $row['name'] . "</td>";
+                                        echo "<td>";
+                                        echo "<a href='updatecat.php?id=" . $row['id'] . "' class='btn btn-primary btn-sm'>Update</a> ";
+                                        echo "<a href='deletecat.php?id=" . $row['id'] . "' class='btn btn-danger btn-sm'>Delete</a>";
+                                        echo "</td>";
                                         echo "</tr>";
                                     }
                                 } else {
-                                    echo "<tr><td colspan='2'>No categories found</td></tr>";
+                                    echo "<tr><td colspan='3'>No categories found</td></tr>";
                                 }
                                 ?>
                             </tbody>
@@ -53,41 +55,11 @@ include("connection.php");
                         <!-- End Categories Table -->
                     </div>
                 </div>
-
             </div>
-
         </div>
     </section>
-
 </main><!-- End #main -->
 
 <?php
 include("footer.php");
-?>
-
-<?php
-if (isset($_POST['signup'])) {
-    $name = $_POST['username'];
-    $email = $_POST['email'];
-    $password = $_POST['password'];
-
-    $query = mysqli_query($con, "INSERT INTO `users`(`id`, `name`, `email`, `password`, `role`) VALUES ('', '$name', '$email', '$password', 'User')");
-
-    if ($query) {
-        echo "<script>Swal.fire({
-            position: 'top-end',
-            icon: 'success',
-            title: 'User registered successfully',
-            showConfirmButton: false,
-            timer: 1500
-        })</script>";
-
-        echo "<script>location.assign('login.php')</script>";
-    }
-}
-?>
-
-<?php
-// Close the database connection
-mysqli_close($con);
 ?>

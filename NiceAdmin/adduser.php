@@ -1,10 +1,6 @@
 <?php
 include("header.php");
-include("connection.php");
 ?>
-
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -52,7 +48,7 @@ include("connection.php");
       <div class="row my-5 py-5 mt-0 mb-0">
         <div class="offset-md-3 col-md-6 my-5">
           <h2 class="display-3 fw-normal text-center">PALTO <br> <span class="text-primary">Add user</span></h2>
-          <form method="post" action="">
+          <form method="post" action="" onsubmit="return validateForm()">
             <div class="mb-3">
               <input type="text" class="form-control form-control-lg" name="username" id="username" placeholder="Enter Your Full Name">
             </div>
@@ -80,6 +76,39 @@ include("connection.php");
       </div>
     </div>
   </section>
+
+  <script>
+    function validateForm() {
+        var username = document.getElementById("username").value;
+        var email = document.getElementById("email").value;
+        var password1 = document.getElementById("password1").value;
+        var password2 = document.getElementById("password2").value;
+
+        if (username == "" || email == "" || password1 == "" || password2 == "") {
+            alert("All fields must be filled out");
+            return false;
+        }
+
+        var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+        if (!emailPattern.test(email)) {
+            alert("Please enter a valid email address");
+            return false;
+        }
+
+        if (password1 !== password2) {
+            alert("Passwords do not match");
+            return false;
+        }
+
+        if (password1.length < 6) {
+            alert("Password must be at least 6 characters long");
+            return false;
+        }
+
+        return true;
+    }
+  </script>
+
 </body>
 
 </html>
@@ -92,15 +121,25 @@ if (isset($_POST['signup'])) {
     $password = $_POST['password'];
 
     // Add user to the database
-    $query = mysqli_query($con, "INSERT INTO `users`(`id`, `name`, `email`, `password`, `role`) VALUES ('', '$name', '$email', '$password', 'User')");
+    $query = mysqli_query($con, "INSERT INTO users(id, name, email, password, role) VALUES ('', '$name', '$email', '$password', 'User')");
 
     if ($query == 1) {
-        $message = "User registered successfully";
+      session_start();
+      $_SESSION['status'] = "User registered successfully!";
+      if(isset($_SESSION['status'])){?>
+        <script>
+          swal({
+          title: "<?php echo $_SESSION['status']; ?>",
+          icon: "success",
+          button: "Okay",
+        });
+        </script>
+          
+          <?php
+          unset($_SESSION['status']);
+          }
     } else {
         $message = "Error in registration";
     }
-
-    // Reload the page to display updated users list
-    echo "<script>location.assign('adduser.php')</script>";
 }
 ?>
