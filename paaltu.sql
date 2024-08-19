@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 05, 2024 at 05:45 PM
+-- Generation Time: Aug 10, 2024 at 07:50 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -33,16 +33,37 @@ CREATE TABLE `accessories` (
   `price` decimal(10,2) DEFAULT NULL,
   `category_id` int(11) DEFAULT NULL,
   `image` varchar(255) DEFAULT NULL,
-  `description` text DEFAULT NULL
+  `description` text DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `role` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `accessories`
 --
 
-INSERT INTO `accessories` (`id`, `name`, `price`, `category_id`, `image`, `description`) VALUES
-(19, 'Abeer Hussain', 1.00, 3, '../accessories/Screenshot 2024-07-21 211410.png', 'fdhf'),
-(20, 'perfume', 457.00, 1, '../accessories/Screenshot 2024-07-28 182612.png', 'beard oil');
+INSERT INTO `accessories` (`id`, `name`, `price`, `category_id`, `image`, `description`, `user_id`, `role`) VALUES
+(27, 'Dog pata', 1000.00, 2, '../accessories/close-up-adorable-kitten-couch.jpg', 'asdwqdqwfqwdacsaewffqfq', NULL, '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `accessory_orders`
+--
+
+CREATE TABLE `accessory_orders` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `product_id` int(11) DEFAULT NULL,
+  `time` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `accessory_orders`
+--
+
+INSERT INTO `accessory_orders` (`id`, `user_id`, `product_id`, `time`) VALUES
+(1, 1, 27, '2024-08-10 11:35:43');
 
 -- --------------------------------------------------------
 
@@ -93,14 +114,6 @@ CREATE TABLE `cart` (
   `total` decimal(10,2) GENERATED ALWAYS AS (`quantity` * `price`) STORED
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `cart`
---
-
-INSERT INTO `cart` (`id`, `user_id`, `pet_id`, `quantity`, `price`) VALUES
-(12, 1, 3, 3, 651.00),
-(13, 2, 3, 2, 651.00);
-
 -- --------------------------------------------------------
 
 --
@@ -133,15 +146,8 @@ CREATE TABLE `contact` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
-  `message` varchar(255) NOT NULL
+  `message` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `contact`
---
-
-INSERT INTO `contact` (`id`, `name`, `email`, `message`) VALUES
-(1, 'Abeer Hussain', 'abeerhussain922@gmail.com', 'sgddsgdfgd');
 
 -- --------------------------------------------------------
 
@@ -164,7 +170,8 @@ CREATE TABLE `doctors` (
 INSERT INTO `doctors` (`id`, `name`, `email`, `qualification`, `image`) VALUES
 (8, 'Abeer Hussain', 'abeerhussain922@gmail.com', 'mbbs', 'Screenshot 2024-07-21 211410.png'),
 (9, 'Abeer Hussain', 'abeerhussain922@gmail.com', 'mbbs', 'Screenshot 2024-07-27 153728.png'),
-(10, 'Abeer Hussain', 'abeerhussain922@gmail.com', 'mbbs', 'Screenshot 2024-07-28 182612.png');
+(10, 'Abeer Hussain', 'abeerhussain922@gmail.com', 'mbbs', 'Screenshot 2024-07-28 182612.png'),
+(11, 'mahad', 'mahad@abc.com', 'mbbs', '../doctors/rabbit.jpeg');
 
 -- --------------------------------------------------------
 
@@ -175,20 +182,43 @@ INSERT INTO `doctors` (`id`, `name`, `email`, `qualification`, `image`) VALUES
 CREATE TABLE `foods` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
+  `description` varchar(255) NOT NULL,
   `category_id` int(11) NOT NULL,
   `image` varchar(255) DEFAULT NULL,
   `weight` float DEFAULT NULL,
-  `quantity` int(11) DEFAULT NULL,
-  `price` int(50) NOT NULL
+  `price` int(50) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `role` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `foods`
 --
 
-INSERT INTO `foods` (`id`, `name`, `category_id`, `image`, `weight`, `quantity`, `price`) VALUES
-(6, 'Abeer Hussaincsac a', 1, '../accessories/Screenshot 2024-07-27 153728.png', 12, 0, 1),
-(7, 'Abeer Hussain', 7, '../accessories/Screenshot 2024-07-21 211410.png', 12, 757, 45674);
+INSERT INTO `foods` (`id`, `name`, `description`, `category_id`, `image`, `weight`, `price`, `user_id`, `role`) VALUES
+(15, 'cat food', 'adaffwsfsfsfwefsaffew2ff', 1, '../accessories/close-up-adorable-kitten-couch.jpg', 12, 10000, 1, ''),
+(16, 'cat food', 'adaffwsfsfsfwefsaffew2ff', 1, '../accessories/close-up-adorable-kitten-couch.jpg', 12, 10000, 1, '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `food_orders`
+--
+
+CREATE TABLE `food_orders` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `product_id` int(11) DEFAULT NULL,
+  `time` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `food_orders`
+--
+
+INSERT INTO `food_orders` (`id`, `user_id`, `product_id`, `time`) VALUES
+(1, 1, 16, '2024-08-10 11:33:24'),
+(2, 1, 16, '2024-08-10 11:35:19');
 
 -- --------------------------------------------------------
 
@@ -206,16 +236,44 @@ CREATE TABLE `pets` (
   `age` int(11) DEFAULT NULL,
   `description` text DEFAULT NULL,
   `image` varchar(255) DEFAULT NULL,
-  `role` varchar(5) NOT NULL
+  `role` varchar(5) NOT NULL,
+  `colour` varchar(50) DEFAULT NULL,
+  `weight` decimal(5,2) DEFAULT NULL,
+  `height` decimal(5,2) DEFAULT NULL,
+  `gender` enum('Male','Female') DEFAULT NULL,
+  `vaccination_status` enum('Vaccinated','Not Vaccinated') DEFAULT 'Not Vaccinated'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `pets`
 --
 
-INSERT INTO `pets` (`id`, `user_id`, `name`, `category_id`, `breed`, `price`, `age`, `description`, `image`, `role`) VALUES
-(3, 1, 'perfume', 1, 'sffdsaf', '651', 216, '', '../accessories/Screenshot 2024-07-21 211410.png', 'Admin'),
-(5, 1, 'perfume', 1, 'sffdsaf', '12', 12, '', '../accessories/Screenshot 2024-07-21 211410.png', 'Admin');
+INSERT INTO `pets` (`id`, `user_id`, `name`, `category_id`, `breed`, `price`, `age`, `description`, `image`, `role`, `colour`, `weight`, `height`, `gender`, `vaccination_status`) VALUES
+(16, 1, 'Cat a', 1, 'persian', '10000', 12, 'ghghg', '../accessories/close-up-adorable-kitten-couch.jpg', 'Admin', '', 12.00, 2.00, '', ''),
+(17, 1, 'Cat', 1, 'persian', '1', 3, '', '../accessories/close-up-adorable-kitten-couch.jpg', 'Admin', 'brown', 12.00, 2.00, '', ''),
+(18, 1, 'Cat', 1, 'persian', '100000', 2, '', '../accessories/close-up-adorable-kitten-couch.jpg', 'Admin', 'brown', 12.00, 2.00, 'Male', ''),
+(19, 1, 'Cat', 1, 'persian', '100000', 3, 'qdadsascewd2qdaascqweqdwAXSQEQ', '../accessories/close-up-adorable-kitten-couch.jpg', 'Admin', 'brown', 12.00, 2.00, 'Male', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pet_orders`
+--
+
+CREATE TABLE `pet_orders` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `product_id` int(11) DEFAULT NULL,
+  `time` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `pet_orders`
+--
+
+INSERT INTO `pet_orders` (`id`, `user_id`, `product_id`, `time`) VALUES
+(1, 1, 19, '2024-08-10 11:32:15'),
+(2, 30, 16, '2024-08-10 11:53:01');
 
 -- --------------------------------------------------------
 
@@ -260,7 +318,10 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `role`) VALUES
 (1, 'abeer', 'abeer@gamil.com', '123', 'Admin'),
-(2, 'mahad', 'mahad@abc.com', '123', 'User');
+(2, 'mahad', 'mahad@abc.com', '123', 'User'),
+(27, 'Ayaz', 'ayaz@gmail.com', '12345678', 'User'),
+(28, 'Saad', 'saad@gmail.com', '12345678', 'User'),
+(30, 'tALIB HUSSAIN', 'TALIB@GMAIL.COM', '12345678', 'User');
 
 --
 -- Indexes for dumped tables
@@ -271,7 +332,16 @@ INSERT INTO `users` (`id`, `name`, `email`, `password`, `role`) VALUES
 --
 ALTER TABLE `accessories`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `category_id` (`category_id`);
+  ADD KEY `category_id` (`category_id`),
+  ADD KEY `ak_user` (`user_id`);
+
+--
+-- Indexes for table `accessory_orders`
+--
+ALTER TABLE `accessory_orders`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `product_id` (`product_id`);
 
 --
 -- Indexes for table `appointments`
@@ -306,8 +376,7 @@ ALTER TABLE `categories`
 -- Indexes for table `contact`
 --
 ALTER TABLE `contact`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `email` (`email`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `doctors`
@@ -320,7 +389,16 @@ ALTER TABLE `doctors`
 --
 ALTER TABLE `foods`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `category_id` (`category_id`);
+  ADD KEY `category_id` (`category_id`),
+  ADD KEY `fk_user` (`user_id`);
+
+--
+-- Indexes for table `food_orders`
+--
+ALTER TABLE `food_orders`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `product_id` (`product_id`);
 
 --
 -- Indexes for table `pets`
@@ -329,6 +407,14 @@ ALTER TABLE `pets`
   ADD PRIMARY KEY (`id`),
   ADD KEY `user_id` (`user_id`),
   ADD KEY `category_id` (`category_id`);
+
+--
+-- Indexes for table `pet_orders`
+--
+ALTER TABLE `pet_orders`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `product_id` (`product_id`);
 
 --
 -- Indexes for table `products`
@@ -350,7 +436,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `accessories`
 --
 ALTER TABLE `accessories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+
+--
+-- AUTO_INCREMENT for table `accessory_orders`
+--
+ALTER TABLE `accessory_orders`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `appointments`
@@ -374,31 +466,43 @@ ALTER TABLE `cart`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `contact`
 --
 ALTER TABLE `contact`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `doctors`
 --
 ALTER TABLE `doctors`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `foods`
 --
 ALTER TABLE `foods`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
+-- AUTO_INCREMENT for table `food_orders`
+--
+ALTER TABLE `food_orders`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `pets`
 --
 ALTER TABLE `pets`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+
+--
+-- AUTO_INCREMENT for table `pet_orders`
+--
+ALTER TABLE `pet_orders`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `products`
@@ -410,7 +514,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- Constraints for dumped tables
@@ -420,7 +524,15 @@ ALTER TABLE `users`
 -- Constraints for table `accessories`
 --
 ALTER TABLE `accessories`
-  ADD CONSTRAINT `accessories_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`);
+  ADD CONSTRAINT `accessories_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`),
+  ADD CONSTRAINT `ak_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+
+--
+-- Constraints for table `accessory_orders`
+--
+ALTER TABLE `accessory_orders`
+  ADD CONSTRAINT `accessory_orders_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `accessory_orders_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `accessories` (`id`);
 
 --
 -- Constraints for table `appointments`
@@ -446,7 +558,15 @@ ALTER TABLE `cart`
 -- Constraints for table `foods`
 --
 ALTER TABLE `foods`
+  ADD CONSTRAINT `fk_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
   ADD CONSTRAINT `foods_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `food_orders`
+--
+ALTER TABLE `food_orders`
+  ADD CONSTRAINT `food_orders_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `food_orders_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `foods` (`id`);
 
 --
 -- Constraints for table `pets`
@@ -454,6 +574,13 @@ ALTER TABLE `foods`
 ALTER TABLE `pets`
   ADD CONSTRAINT `pets_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
   ADD CONSTRAINT `pets_ibfk_2` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`);
+
+--
+-- Constraints for table `pet_orders`
+--
+ALTER TABLE `pet_orders`
+  ADD CONSTRAINT `pet_orders_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `pet_orders_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `pets` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -1,14 +1,25 @@
 <?php
 include("header.php");
-include("connection.php");
+$user = ['role' => $_SESSION['role']]; // Example user data
+
+// Check if the user is allowed to update the accessory (only admins can update accessories)
+if (!authorize('update_accessory', $user)) {
+    echo '<div class="d-flex justify-content-center"><div class="alert alert-danger text-center col-6" role="alert">You are not authorized to update this accessory. Only admins can perform this action.</div></div>';
+    exit;
+}
 
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
 
-    // Fetch accessory details from the database
-    $query = "SELECT * FROM accessories WHERE id='$id'";
-    $result = mysqli_query($con, $query);
-    $accessory = mysqli_fetch_assoc($result);
+    // Prepare and execute the SQL statement to fetch accessory details
+    $stmt = $con->prepare("SELECT * FROM accessories WHERE id = ?");
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $accessory = $result->fetch_assoc();
+
+    // Close the statement
+    $stmt->close();
 }
 
 if (isset($_POST['update_accessory'])) {
@@ -25,10 +36,11 @@ if (isset($_POST['update_accessory'])) {
         $imagePath = $accessory['image'];
     }
 
-    $query = "UPDATE accessories SET name='$name', price='$price', category_id='$category_id', image='$imagePath', description='$description' WHERE id='$id'";
-    $result = mysqli_query($con, $query);
+    // Prepare and execute the SQL statement to update the accessory
+    $stmt = $con->prepare("UPDATE accessories SET name = ?, price = ?, category_id = ?, image = ?, description = ? WHERE id = ?");
+    $stmt->bind_param("siissi", $name, $price, $category_id, $imagePath, $description, $id);
 
-    if ($result) {
+    if ($stmt->execute()) {
         echo "<script>
                 Swal.fire({
                     position: 'top-end',
@@ -37,7 +49,7 @@ if (isset($_POST['update_accessory'])) {
                     showConfirmButton: false,
                     timer: 1500
                 }).then(function() {
-                    window.location.href = 'accessories_table.php';
+                    window.location.href = 'acclist.php';
                 });
               </script>";
     } else {
@@ -53,6 +65,9 @@ if (isset($_POST['update_accessory'])) {
                 });
               </script>";
     }
+
+    // Close the statement
+    $stmt->close();
 }
 ?>
 
@@ -65,24 +80,24 @@ if (isset($_POST['update_accessory'])) {
                     <form method="post" action="" enctype="multipart/form-data">
                         <div class="mb-3">
                             <label for="name" class="form-label">Name</label>
-                            <input type="text" class="form-control form-control-lg" name="name" id="name" value="<?php echo $accessory['name']; ?>" required>
+                            <input type="text" class="form-control form-control-lg" name="name" id="name" value="<?php echo htmlspecialchars($accessory['name']); ?>" required>
                         </div>
                         <div class="mb-3">
                             <label for="price" class="form-label">Price</label>
-                            <input type="number" class="form-control form-control-lg" name="price" id="price" value="<?php echo $accessory['price']; ?>" required>
+                            <input type="number" class="form-control form-control-lg" name="price" id="price" value="<?php echo htmlspecialchars($accessory['price']); ?>" required>
                         </div>
                         <div class="mb-3">
                             <label for="category_id" class="form-label">Category ID</label>
-                            <input type="number" class="form-control form-control-lg" name="category_id" id="category_id" value="<?php echo $accessory['category_id']; ?>" required>
+                            <input type="number" class="form-control form-control-lg" name="category_id" id="category_id" value="<?php echo htmlspecialchars($accessory['category_id']); ?>" required>
                         </div>
                         <div class="mb-3">
                             <label for="image" class="form-label">Image</label>
                             <input type="file" class="form-control form-control-lg" name="image" id="image">
-                            <img src="<?php echo $accessory['image']; ?>" alt="<?php echo $accessory['name']; ?>" width="100">
+                            <img src="<?php echo htmlspecialchars($accessory['image']); ?>" alt="<?php echo htmlspecialchars($accessory['name']); ?>" width="100">
                         </div>
                         <div class="mb-3">
                             <label for="description" class="form-label">Description</label>
-                            <textarea class="form-control form-control-lg" name="description" id="description" required><?php echo $accessory['description']; ?></textarea>
+                            <textarea class="form-control form-control-lg" name="description" id="description" required><?php echo htmlspecialchars($accessory['description']); ?></textarea>
                         </div>
                         <div class="d-grid gap-2">
                             <input name="update_accessory" type="submit" class="btn btn-dark btn-lg rounded-1" value="Update Accessory">

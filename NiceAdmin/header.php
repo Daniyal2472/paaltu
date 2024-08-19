@@ -1,5 +1,5 @@
 <?php
-// session_start();
+
 include("../connection.php");
 
 if (isset($_SESSION['user_id'])) {
@@ -22,8 +22,8 @@ if (isset($_SESSION['user_id'])) {
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="assets/img/favicon.png" rel="icon">
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <link href="assets/img/paltoo.png" rel="icon">
+  <link href="assets/img/paltoo.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
   <link href="https://fonts.gstatic.com" rel="preconnect">
@@ -41,6 +41,9 @@ if (isset($_SESSION['user_id'])) {
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
 
+  <!-- DataTables -->
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/2.1.3/css/dataTables.dataTables.min.css">
+
   
 </head>
 
@@ -50,14 +53,13 @@ if ($role=="Admin") {
 ?>
   <!-- ======= Header ======= -->
   <header id="header" class="header fixed-top d-flex align-items-center">
-
-    <div class="d-flex align-items-center justify-content-between">
-      <a href="index.php" class="logo d-flex align-items-center">
-        <img src="assets/img/logo.png" alt="">
-        <span class="d-none d-lg-block">Paaltuu</span>
-      </a>
-   
-    </div><!-- End Logo -->
+  <div class="text-center">
+    <div class="main-logo">
+        <a href="index.php">
+            <img src="../NiceAdmin/assets/img/paltoo.png" alt="logo" class="img-fluid logo-img" style="height: 80px; width: auto;">
+        </a>
+    </div>
+</div>
 
 
     <nav class="header-nav ms-auto">
@@ -66,71 +68,11 @@ if ($role=="Admin") {
        
 
 
-      <div class="dropdown">
-    <a class="dropdown-toggle" href="#" role="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-        <span class="iconify w-50" data-icon="healthicons:person"></span>
-    </a>
-    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile" aria-labelledby="userDropdown">
-        
-          <?php
-        if (isset($_SESSION['user_id'])) {
-          ?>
-          <li class="dropdown-header"></li>
-            <h6><?php echo $name;?></h6></li>
-            <span><?php echo $role;?></span> <!-- You can replace this with another role or description if needed -->
-            <?php
-} ?>
-            
-        
-        <li>
-            <hr class="dropdown-divider">
-        </li>
-
-        <li>
-            <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
-                <i class="bi bi-person"></i>
-                <span>My Profile</span>
-            </a>
-        </li>
-        <li>
-            <hr class="dropdown-divider">
-        </li>
-
-        <li>
-            <hr class="dropdown-divider">
-        </li>
-
-        <li>
-            <a class="dropdown-item d-flex align-items-center" href="pages-faq.html">
-                <i class="bi bi-question-circle"></i>
-                <span>Need Help?</span>
-            </a>
-        </li>
-        <li>
-            <hr class="dropdown-divider">
-        </li>
-
-        <?php
-if (isset($_SESSION['user_id'])) {
-?>
-    <li>
-        <a class="dropdown-item d-flex align-items-center" href="logout.php">
-            <i class="bi bi-box-arrow-right"></i>
-            <span>Sign Out</span>
-        </a>
-    </li>
-<?php
-} else {
-?>
-    <li>
-        <a class="dropdown-item d-flex align-items-center" href="../login.php">
-            <i class="bi bi-box-arrow-right"></i>
-            <span>Login</span>
-        </a>
-    </li>
-<?php
-}
-?>
+              <a href="../waGGy-1.0.0/index.php" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1 ">
+              <i class="bi bi-house-door "></i>   
+              BACK TO HOME
+              
+              </a>
 
 
       </ul>
@@ -162,8 +104,8 @@ if (isset($_SESSION['user_id'])) {
     </li>
     <li class="nav-item">
       <a class="nav-link" href="currentuser.php">
-        <i class="bi bi-file-earmark"></i>
-        <span>User List</span>
+        <i class="bi bi-eye"></i>
+        <span>View User List</span>
       </a>
     </li>
 
@@ -179,8 +121,8 @@ if (isset($_SESSION['user_id'])) {
     </li>
     <li class="nav-item">
       <a class="nav-link" href="doclist.php">
-        <i class="bi bi-file-earmark"></i>
-        <span>Doctor List</span>
+        <i class="bi bi-eye"></i>
+        <span>View Doctor List</span>
       </a>
     </li>
 
@@ -190,8 +132,8 @@ if (isset($_SESSION['user_id'])) {
     </li>
     <li class="nav-item">
       <a class="nav-link" href="applist.php">
-        <i class="bi bi-file-earmark"></i>
-        <span>Appointment List</span>
+        <i class="bi bi-eye"></i>
+        <span>View Appointment List</span>
       </a>
     </li>
 
@@ -207,8 +149,8 @@ if (isset($_SESSION['user_id'])) {
     </li>
     <li class="nav-item">
       <a class="nav-link" href="catlist.php">
-        <i class="bi bi-file-earmark"></i>
-        <span>Category List</span>
+        <i class="bi bi-eye"></i>
+        <span>View Category List</span>
       </a>
     </li>
 
@@ -224,8 +166,8 @@ if (isset($_SESSION['user_id'])) {
     </li>
     <li class="nav-item">
       <a class="nav-link" href="petlist.php">
-        <i class="bi bi-file-earmark"></i>
-        <span>Pet List</span>
+        <i class="bi bi-eye"></i>
+        <span>View Pet List</span>
       </a>
     </li>
 
@@ -241,8 +183,8 @@ if (isset($_SESSION['user_id'])) {
     </li>
     <li class="nav-item">
       <a class="nav-link" href="acclist.php">
-        <i class="bi bi-file-earmark"></i>
-        <span>Accessory List</span>
+        <i class="bi bi-eye"></i>
+        <span>View Accessory List</span>
       </a>
     </li>
 
@@ -258,8 +200,8 @@ if (isset($_SESSION['user_id'])) {
     </li>
     <li class="nav-item">
       <a class="nav-link" href="foodlist.php">
-        <i class="bi bi-file-earmark"></i>
-        <span>Food List</span>
+        <i class="bi bi-eye"></i>
+        <span>View Food List</span>
       </a>
     </li>
 
@@ -269,8 +211,8 @@ if (isset($_SESSION['user_id'])) {
     </li>
     <li class="nav-item">
       <a class="nav-link" href="sellerlist.php">
-        <i class="bi bi-file-earmark"></i>
-        <span>Seller List</span>
+        <i class="bi bi-eye"></i>
+        <span>View Seller List</span>
       </a>
     </li>
     <li class="nav-item">
@@ -278,10 +220,20 @@ if (isset($_SESSION['user_id'])) {
     </li>
     <li class="nav-item">
       <a class="nav-link" href="contactlist.php">
-        <i class="bi bi-file-earmark"></i>
-        <span>contact List</span>
+        <i class="bi bi-eye"></i>
+        <span>View contact List</span>
       </a>
     </li>
+    <li class="nav-item">
+      <h5 class="sidebar-heading">Order List:</h5>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="order_list.php">
+        <i class="bi bi-eye"></i>
+        <span>View order List</span>
+      </a>
+    </li>
+    
 
   </ul>
 </aside>
@@ -294,12 +246,22 @@ if (isset($_SESSION['user_id'])) {
   <?php 
 if ($role=="User") {
 ?>
+ <header id="header" class="header fixed-top d-flex align-items-center">
+
+ <div class="text-center">
+    <div class="main-logo">
+        <a href="index.php">
+            <img src="../NiceAdmin/assets/img/paltoo.png" alt="logo" class="img-fluid logo-img" style="height: 80px; width: auto;">
+        </a>
+    </div>
+</div>
+
 <aside id="sidebar" class="sidebar">
   <ul class="sidebar-nav" id="sidebar-nav">
     
     <!-- Dashboard -->
     <li class="nav-item">
-      <a class="nav-link" href="index.php">
+      <a class="nav-link" href="#">
         <i class="bi bi-grid"></i>
         <span>Dashboard</span>
       </a>
@@ -310,23 +272,47 @@ if ($role=="User") {
       <h5 class="sidebar-heading">Users :</h5>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="adduser.php">
+      <a class="nav-link" href="post_list.php">
         <i class="bi bi-card-list"></i>
-        <span>Add User</span>
+        <span>My Posts</span>
       </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="currentuser.php">
-        <i class="bi bi-file-earmark"></i>
-        <span>User List</span>
+      <a class="nav-link" href="user_order_list.php">
+        <i class="bi bi-card-list"></i>
+        <span>My order list</span>
       </a>
     </li>
+    <li class="nav-item">
+    <a class="nav-link" href="../waGGy-1.0.0/index.php">
+        <i class="bi bi-house-door"></i> <!-- House icon from Bootstrap Icons -->
+        <span>Back to Home</span>
+    </a>
+</li>
+
   </ul>
 </aside>
+</header>
 <?php
 }
 ?>
-  <!-- Scripts -->
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+<!-- Scripts -->
+<!-- Include jQuery first -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+<!-- Bootstrap Bundle with Popper -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+
+<!-- DataTables Script -->
+<script src="https://cdn.datatables.net/2.1.3/js/dataTables.min.js"></script>
+
+<!-- sweet alert -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<!-- Initialize DataTables -->
+<script>
+$(document).ready(function() {
+    $('#myTable').DataTable();
+});
+</script>
 <!-- End Sidebar-->

@@ -1,30 +1,109 @@
 <?php
 include("header.php");
-include("connection.php");
+$user = ['role' => $_SESSION['role']]; // Example user data
+
+// Check if the user is allowed to add a new pet (only admins can add pets)
+if (!authorize('view_pet', $user)) {
+    echo '<div class="d-flex justify-content-center"><div class="alert alert-danger text-center col-6" role="alert">You are not authorized to update this pet.Only admins can perform this action.</div></div>';
+    exit;
+}
 ?>
 
-<main id="main" class="main">
 
-    <div class="pagetitle">
-        <h1>Pets Table</h1>
-        <nav>
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-                <li class="breadcrumb-item">Tables</li>
-                <li class="breadcrumb-item active">Pets</li>
-            </ol>
-        </nav>
-    </div><!-- End Page Title -->
+    <style>
+        /* Include the same CSS styles as above */
+        .table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 20px 0;
+            font-size: 1rem;
+            color: #333;
+        }
+
+        .table thead th {
+            background-color: #f4f4f4;
+            color: #333;
+            padding: 12px;
+            text-align: left;
+            border-bottom: 2px solid #ddd;
+        }
+
+        .table tbody tr {
+            border-bottom: 1px solid #ddd;
+        }
+
+        .table tbody tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .table tbody td {
+            padding: 12px;
+        }
+
+        .table tbody td a {
+            text-decoration: none;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            border-radius: 5px;
+            text-align: center;
+            color: black;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+            border: none;
+        }
+
+        .btn-danger:hover {
+            background-color: #c82333;
+            transform: translateY(-2px);
+        }
+
+        .card {
+            border: none;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        .pagetitle {
+            margin-bottom: 20px;
+        }
+    </style>
+<body>
+
+<main id="main" class="main">
+   
 
     <section class="section">
         <div class="row">
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Pets Table</h5>
+                        <h5 class="card-title">Pets List</h5>
 
                         <!-- Pets Table -->
-                        <table class="table">
+                        <table class="table" id="myTable">
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
@@ -73,14 +152,21 @@ include("connection.php");
             </div>
         </div>
     </section>
-
 </main><!-- End #main -->
 
 <?php
 include("footer.php");
+mysqli_close($con);
 ?>
 
+</body>
+</html>
+
+
+
+<!-- 
 <?php
 // Close the database connection
 mysqli_close($con);
-?>
+?> -->
+

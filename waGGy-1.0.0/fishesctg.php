@@ -6,14 +6,14 @@ include("header.php");
     <section id="foodies" class="my-5">
         <div class="container my-5 py-5">
     
-          <div class="section-header d-md-flex justify-content-between align-items-center">
-            <h2 class="display-3 fw-normal">FISHES</h2>
+        <div class="section-header text-center"> <!-- Add text-center class -->
+        <h2 class="display-3 fw-normal">Fish </h2>
             <div>
-              <a href="#" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">
+              <!-- <a href="#" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">
                 shop now
                 <svg width="24" height="24" viewBox="0 0 24 24" class="mb-1">
                   <use xlink:href="#arrow-right"></use>
-                </svg></a>
+                </svg></a> -->
             </div>
           </div>
     
@@ -29,6 +29,7 @@ include("header.php");
               <!-- <div class="z-1 position-absolute rounded-3 m-3 px-3 border border-dark-subtle">
                 New
               </div> -->
+            
               <div class="card position-relative">
                 <a href="pets_detail.php?id=<?php echo $row['id'] ?>"><img src="<?php echo $row['image']; ?>" class="img-fluid rounded-4" alt="image"></a>
                 <div class="card-body p-0">
@@ -43,17 +44,35 @@ include("header.php");
                   <div class="card-text">
                     <span class="rating secondary-font">
                     <?php echo $u_row['name']; ?></span>
+                    <?php
+              // Assuming $row is already populated from a database query
+              if ($row['role'] === "Admin") {
+              ?>
+                  <span class="rating secondary-font">
+    Verified
+   
+    <iconify-icon icon="mdi:check-circle" class="text-primary"></iconify-icon> <!-- Verified icon -->
+</span>
+
+              <?php
+              } else{?>
+                <span class="rating secondary-font">
+                    <?php echo $u_row['name']; ?></span>
+              
+              <?php    }
+              ?>
     
-                    <h3 class="secondary-font text-primary">PKR.<?php echo $row['price']; ?></h3>
+                    <h3 class="secondary-font text-primary">PKR: <?php echo $row['price']; ?></h3>
     
                     <div class="d-flex flex-wrap mt-3">
                       <a href="pets_detail.php" class="btn-cart me-3 px-4 pt-3 pb-3">
-                        <h5 class="text-uppercase m-0">Add to Cart</h5>
+                        <h5 class="text-uppercase m-0">Buy Now</h5>
                       </a>
-                      <a href="#" class="btn-wishlist px-4 pt-3 ">
+                      <!-- <a href="#" class="btn-wishlist px-4 pt-3 ">
                         <iconify-icon icon="fluent:heart-28-filled" class="fs-5"></iconify-icon>
-                      </a>
+                      </a> -->
                     </div>
+    
     
     
                   </div>

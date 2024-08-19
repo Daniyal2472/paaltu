@@ -1,49 +1,81 @@
 <?php
 include("header.php");
-include("connection.php");
 
-if (isset($_GET['id'])) {
-    $id = $_GET['id'];
+// Example user data
+$user = ['role' => $_SESSION['role']];
 
-    // Fetch doctor details from the database
-    $query = "SELECT * FROM doctors WHERE id='$id'";
-    $result = mysqli_query($con, $query);
-    $doctor = mysqli_fetch_assoc($result);
+// Check if the user is allowed to update a doctor (only admins can update doctors)
+if (!authorize('update_doctors', $user)) {
+    echo '<div class="d-flex justify-content-center"><div class="alert alert-danger text-center col-6" role="alert">You are not authorized to update this doctor. Only admins can perform this action.</div></div>';
+    exit;
 }
 
-if (isset($_POST['update_doctor'])) {
-    $name = $_POST['name'];
-    $email = $_POST['email'];
-    $qualification = $_POST['qualification'];
+if (isset($_GET['id']) && is_numeric($_GET['id'])) {
+    $id = (int) $_GET['id']; // Sanitize ID
 
-    $query = "UPDATE doctors SET name='$name', email='$email', qualification='$qualification' WHERE id='$id'";
-    $result = mysqli_query($con, $query);
+    // Fetch doctor details from the database using prepared statements
+    $fetchDoctorStmt = $con->prepare("SELECT * FROM doctors WHERE id = ?");
+    $fetchDoctorStmt->bind_param('i', $id);
+    $fetchDoctorStmt->execute();
+    $result = $fetchDoctorStmt->get_result();
+    $doctor = $result->fetch_assoc();
 
-    if ($result) {
-        echo "<script>
+    if (!$doctor) {
+        echo '<script>
                 Swal.fire({
-                    position: 'top-end',
-                    icon: 'success',
-                    title: 'Doctor updated successfully',
-                    showConfirmButton: false,
-                    timer: 1500
+                    title: "Error!",
+                    text: "Doctor not found!",
+                    icon: "error"
                 }).then(function() {
-                    window.location.href = 'doctors_table.php';
+                    window.location.href = "doclist.php";
                 });
-              </script>";
-    } else {
-        echo "<script>
-                Swal.fire({
-                    position: 'top-end',
-                    icon: 'error',
-                    title: 'Error updating doctor',
-                    showConfirmButton: false,
-                    timer: 1500
-                }).then(function() {
-                    window.location.href = 'doctors_table.php';
-                });
-              </script>";
+              </script>';
+        exit;
     }
+
+    // Handle form submission for updating doctor details
+    if (isset($_POST['update_doctor'])) {
+        $name = $_POST['name'];
+        $email = $_POST['email'];
+        $qualification = $_POST['qualification'];
+
+        // Prepare the update statement
+        $updateDoctorStmt = $con->prepare("UPDATE doctors SET name = ?, email = ?, qualification = ? WHERE id = ?");
+        $updateDoctorStmt->bind_param('sssi', $name, $email, $qualification, $id);
+
+        try {
+            $result = $updateDoctorStmt->execute();
+
+            if ($result) {
+                echo '<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>';
+                echo '<script>
+                        Swal.fire({
+                            title: "Good job!",
+                            text: "Doctor updated successfully!",
+                            icon: "success"
+                        }).then(function() {
+                            window.location.href = "doclist.php";
+                        });
+                      </script>';
+            } else {
+                throw new Exception('Failed to update doctor');
+            }
+        } catch (Exception $e) {
+            echo '<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>';
+            echo '<script>
+                    Swal.fire({
+                        title: "Error!",
+                        text: "Failed to update doctor: ' . htmlspecialchars($e->getMessage(), ENT_QUOTES, 'UTF-8') . '",
+                        icon: "error"
+                    }).then(function() {
+                        window.location.href = "doclist.php";
+                    });
+                  </script>';
+        } 
+    }
+} else {
+    header("Location: doclist.php");
+    exit(); // Always use exit() after header redirection to stop script execution
 }
 ?>
 
@@ -56,15 +88,15 @@ if (isset($_POST['update_doctor'])) {
                     <form method="post" action="">
                         <div class="mb-3">
                             <label for="name" class="form-label">Name</label>
-                            <input type="text" class="form-control form-control-lg" name="name" id="name" value="<?php echo $doctor['name']; ?>" required>
+                            <input type="text" class="form-control form-control-lg" name="name" id="name" value="<?php echo htmlspecialchars($doctor['name'], ENT_QUOTES, 'UTF-8'); ?>" required>
                         </div>
                         <div class="mb-3">
                             <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control form-control-lg" name="email" id="email" value="<?php echo $doctor['email']; ?>" required>
+                            <input type="email" class="form-control form-control-lg" name="email" id="email" value="<?php echo htmlspecialchars($doctor['email'], ENT_QUOTES, 'UTF-8'); ?>" required>
                         </div>
                         <div class="mb-3">
                             <label for="qualification" class="form-label">Qualification</label>
-                            <input type="text" class="form-control form-control-lg" name="qualification" id="qualification" value="<?php echo $doctor['qualification']; ?>" required>
+                            <input type="text" class="form-control form-control-lg" name="qualification" id="qualification" value="<?php echo htmlspecialchars($doctor['qualification'], ENT_QUOTES, 'UTF-8'); ?>" required>
                         </div>
                         <div class="d-grid gap-2">
                             <input name="update_doctor" type="submit" class="btn btn-dark btn-lg rounded-1" value="Update Doctor">

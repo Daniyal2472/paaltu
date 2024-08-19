@@ -18,7 +18,7 @@ include("header.php");
                 <h2 class="banner-title display-1 fw-normal">Best destination for <span class="text-primary">your
                     pets</span>
                 </h2>
-                <a href="shopnow.php" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">
+                <a href="dogctg.php" class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">
                   shop now
                   <svg width="24" height="24" viewBox="0 0 24 24" class="mb-1">
                     <use xlink:href="#arrow-right"></use>
@@ -150,15 +150,13 @@ include("header.php");
                 <iconify-icon icon="clarity:star-solid" class="text-primary"></iconify-icon>
                 5.0
               </span>
-              <h3 class="secondary-font text-primary">PKR <?php echo $row['price']; ?></h3>
-              <div class="d-flex flex-wrap mt-3">
-                <a href="#" class="btn-cart me-3 px-4 pt-3 pb-3">
-                  <h5 class="text-uppercase m-0">Add to Cart</h5>
-                </a>
-                <a href="#" class="btn-wishlist px-4 pt-3">
-                  <iconify-icon icon="fluent:heart-28-filled" class="fs-5"></iconify-icon>
-                </a>
-              </div>
+              <h3 class="secondary-font text-primary">PKR:  <?php echo htmlspecialchars($row['price']); ?></h3>
+                            <div class="d-flex flex-wrap mt-3">
+                                <a href="food_detail.php?id=<?php echo $row['id']; ?>" class="btn-cart me-3 px-4 pt-3 pb-3">
+                                    <h5 class="text-uppercase m-0">Buy Now</h5>
+                                </a>
+                              
+                            </div>
             </div>
           </div>
         </div>
@@ -413,6 +411,80 @@ include("header.php");
       </div>
     </section>
 </section>
+
+ 
+<section class="container pt-5 pb-5" id="planter">
+  <!-- Heading Section -->
+  <div class="row mb-5">
+    <div class="col-12 text-center">
+      <h2 class="display-3 fw-normal">OUR GALLERY</h2>
+    </div>
+  </div>
+
+  <!-- Product Cards Section -->
+  <div class="row">
+    <!-- Dog Card -->
+    <div class="col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3 col-xxl-3">
+      <div class="flip-card w-100 bg-transparent mt-5 products">
+        <div class="product flip-card-inner position-relative text-center shadow-lg w-100 h-100">
+          <div class="flip-card-front">
+            <img src="images/dog1.jpg" alt="Golden Retriever" class="w-100">
+          </div>
+          <div class="flip-card-back">
+            <h3 class="fw-bold text-bg">Golden Retriever</h3>
+            <p class="text-dark h5 ps-3 pe-3 fw-bold mb-4">Friendly and energetic, Golden Retrievers are known for their loving nature and intelligence. They make great family pets.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cat Card -->
+    <div class="col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3 col-xxl-3">
+      <div class="flip-card w-100 bg-transparent mt-5 products">
+        <div class="product flip-card-inner position-relative text-center shadow-lg w-100 h-100">
+          <div class="flip-card-front">
+            <img src="images/cat1.jpg" alt="Siamese Cat" class="w-100">
+          </div>
+          <div class="flip-card-back">
+            <h3 class="fw-bold text-bg">Siamese Cat</h3>
+            <p class="text-dark h5 ps-3 pe-3 fw-bold mb-4">Siamese cats are known for their striking blue eyes and sleek fur. They are vocal and affectionate, making them a favorite among cat lovers.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bird Card -->
+    <div class="col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3 col-xxl-3">
+      <div class="flip-card w-100 bg-transparent mt-5 products">
+        <div class="product flip-card-inner position-relative text-center shadow-lg w-100 h-100">
+          <div class="flip-card-front">
+            <img src="images/bird1.jpg" alt="African Grey Parrot" class="w-100">
+          </div>
+          <div class="flip-card-back">
+            <h3 class="fw-bold text-bg">African Grey Parrot</h3>
+            <p class="text-dark h5 ps-3 pe-3 fw-bold mb-4">African Grey Parrots are known for their incredible intelligence and ability to mimic human speech. They are playful and require a lot of social interaction.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Fish Card -->
+    <div class="col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3 col-xxl-3">
+      <div class="flip-card w-100 bg-transparent mt-5 products">
+        <div class="product flip-card-inner position-relative text-center shadow-lg w-100 h-100">
+          <div class="flip-card-front">
+            <img src="images/fish 1.jpg" alt="Angelfish" class="w-100">
+          </div>
+          <div class="flip-card-back">
+            <h3 class="fw-bold text-bg">Angelfish</h3>
+            <p class="text-dark h5 ps-3 pe-3 fw-bold mb-4">Angelfish are known for their striking colors and elegant fins. They make a beautiful addition to any aquarium and are relatively easy to care for.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 
     <div class="bg-gray-light mt-5"style="background: url('images/background-img.png') no-repeat;">
       <div class="container">
@@ -726,79 +798,7 @@ include("header.php");
 
 
 
-  
-<section class="container" id="planter">
-  <!-- Heading Section -->
-  <div class="row mb-5">
-    <div class="col-12 text-center">
-      <h2 class="display-3 fw-normal">OUR GALLERY</h2>
-    </div>
-  </div>
-
-  <!-- Product Cards Section -->
-  <div class="row">
-    <!-- Dog Card -->
-    <div class="col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3 col-xxl-3">
-      <div class="flip-card w-100 bg-transparent mt-5 products">
-        <div class="product flip-card-inner position-relative text-center shadow-lg w-100 h-100">
-          <div class="flip-card-front">
-            <img src="images/dog1.jpg" alt="Golden Retriever" class="w-100">
-          </div>
-          <div class="flip-card-back">
-            <h3 class="fw-bold text-bg">Golden Retriever</h3>
-            <p class="text-dark h5 ps-3 pe-3 fw-bold mb-4">Friendly and energetic, Golden Retrievers are known for their loving nature and intelligence. They make great family pets.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Cat Card -->
-    <div class="col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3 col-xxl-3">
-      <div class="flip-card w-100 bg-transparent mt-5 products">
-        <div class="product flip-card-inner position-relative text-center shadow-lg w-100 h-100">
-          <div class="flip-card-front">
-            <img src="images/cat1.jpg" alt="Siamese Cat" class="w-100">
-          </div>
-          <div class="flip-card-back">
-            <h3 class="fw-bold text-bg">Siamese Cat</h3>
-            <p class="text-dark h5 ps-3 pe-3 fw-bold mb-4">Siamese cats are known for their striking blue eyes and sleek fur. They are vocal and affectionate, making them a favorite among cat lovers.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Bird Card -->
-    <div class="col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3 col-xxl-3">
-      <div class="flip-card w-100 bg-transparent mt-5 products">
-        <div class="product flip-card-inner position-relative text-center shadow-lg w-100 h-100">
-          <div class="flip-card-front">
-            <img src="images/bird1.jpg" alt="African Grey Parrot" class="w-100">
-          </div>
-          <div class="flip-card-back">
-            <h3 class="fw-bold text-bg">African Grey Parrot</h3>
-            <p class="text-dark h5 ps-3 pe-3 fw-bold mb-4">African Grey Parrots are known for their incredible intelligence and ability to mimic human speech. They are playful and require a lot of social interaction.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Fish Card -->
-    <div class="col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3 col-xxl-3">
-      <div class="flip-card w-100 bg-transparent mt-5 products">
-        <div class="product flip-card-inner position-relative text-center shadow-lg w-100 h-100">
-          <div class="flip-card-front">
-            <img src="images/fish 1.jpg" alt="Angelfish" class="w-100">
-          </div>
-          <div class="flip-card-back">
-            <h3 class="fw-bold text-bg">Angelfish</h3>
-            <p class="text-dark h5 ps-3 pe-3 fw-bold mb-4">Angelfish are known for their striking colors and elegant fins. They make a beautiful addition to any aquarium and are relatively easy to care for.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
+ 
 
 
   <section id="latest-blog" class="my-5">

@@ -1,20 +1,15 @@
 <?php
 include("header.php");
-include("connection.php");
+$user = ['role' => $_SESSION['role']]; // Example user data
+
+// Check if the user is allowed to view the pets list (only admins or authorized users can view the list)
+if (!authorize('view_seller', $user)) {
+    echo '<div class="d-flex justify-content-center"><div class="alert alert-danger text-center col-6" role="alert">You are not authorized to view this page. Only admins can perform this action.</div></div>';
+    exit;
+}
 ?>
 
 <main id="main" class="main">
-
-    <div class="pagetitle">
-        <h1>Pets Table</h1>
-        <nav>
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-                <li class="breadcrumb-item">Tables</li>
-                <li class="breadcrumb-item active">Pets</li>
-            </ol>
-        </nav>
-    </div><!-- End Page Title -->
 
     <section class="section">
         <div class="row">
@@ -25,7 +20,7 @@ include("connection.php");
                         <h5 class="card-title">Pets</h5>
 
                         <!-- Pets Table -->
-                        <table class="table">
+                        <table class="table" id="myTable">
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
@@ -43,29 +38,38 @@ include("connection.php");
                             </thead>
                             <tbody>
                                 <?php
-                                $query = mysqli_query($con, "SELECT * FROM pets");
-                                if (mysqli_num_rows($query) > 0) {
-                                    while ($row = mysqli_fetch_assoc($query)) {
-                                        $imagePath = '../accessories/' . (isset($row['image']) ? $row['image'] : '');
-                                        echo "<tr>";
-                                        echo "<th scope='row'>" . $row['id'] . "</th>";
-                                        echo "<td>" . (isset($row['user_id']) ? $row['user_id'] : '') . "</td>";
-                                        echo "<td>" . (isset($row['name']) ? $row['name'] : '') . "</td>";
-                                        echo "<td>" . (isset($row['category_id']) ? $row['category_id'] : '') . "</td>";
-                                        echo "<td>" . (isset($row['breed']) ? $row['breed'] : '') . "</td>";
-                                        echo "<td>" . (isset($row['price']) ? $row['price'] : '') . "</td>";
-                                        echo "<td>" . (isset($row['age']) ? $row['age'] : '') . "</td>";
-                                        echo "<td>" . (isset($row['description']) ? $row['description'] : '') . "</td>";
-                                        echo "<td><img src='" . $imagePath . "' alt='Pet Image' style='width: 100px; height: auto;'></td>";
-                                        echo "<td>" . (isset($row['role']) ? $row['role'] : '') . "</td>";
-                                        echo "<td>";
-                                        echo "<a href='seller_update.php?id=" . $row['id'] . "' class='btn btn-primary btn-sm'>Update</a> ";
-                                        echo "<a href='seller_delete.php?id=" . $row['id'] . "' class='btn btn-danger btn-sm'>Delete</a>";
-                                        echo "</td>";
-                                        echo "</tr>";
+                                // Prepare and execute the query
+                                $query = "SELECT * FROM pets";
+                                if ($stmt = $con->prepare($query)) {
+                                    $stmt->execute();
+                                    $result = $stmt->get_result();
+                                    
+                                    if ($result->num_rows > 0) {
+                                        while ($row = $result->fetch_assoc()) {
+                                            $imagePath = '../accessories/' . htmlspecialchars($row['image'], ENT_QUOTES, 'UTF-8');
+                                            echo "<tr>";
+                                            echo "<th scope='row'>" . htmlspecialchars($row['id'], ENT_QUOTES, 'UTF-8') . "</th>";
+                                            echo "<td>" . htmlspecialchars($row['user_id'], ENT_QUOTES, 'UTF-8') . "</td>";
+                                            echo "<td>" . htmlspecialchars($row['name'], ENT_QUOTES, 'UTF-8') . "</td>";
+                                            echo "<td>" . htmlspecialchars($row['category_id'], ENT_QUOTES, 'UTF-8') . "</td>";
+                                            echo "<td>" . htmlspecialchars($row['breed'], ENT_QUOTES, 'UTF-8') . "</td>";
+                                            echo "<td>" . htmlspecialchars($row['price'], ENT_QUOTES, 'UTF-8') . "</td>";
+                                            echo "<td>" . htmlspecialchars($row['age'], ENT_QUOTES, 'UTF-8') . "</td>";
+                                            echo "<td>" . htmlspecialchars($row['description'], ENT_QUOTES, 'UTF-8') . "</td>";
+                                            echo "<td><img src='" . $imagePath . "' alt='Pet Image' style='width: 100px; height: auto;'></td>";
+                                            echo "<td>" . htmlspecialchars($row['role'], ENT_QUOTES, 'UTF-8') . "</td>";
+                                            echo "<td>";
+                                            echo "<a href='seller_update.php?id=" . htmlspecialchars($row['id'], ENT_QUOTES, 'UTF-8') . "' class='btn btn-primary btn-sm'>Update</a> ";
+                                            echo "<a href='seller_delete.php?id=" . htmlspecialchars($row['id'], ENT_QUOTES, 'UTF-8') . "' class='btn btn-danger btn-sm'>Delete</a>";
+                                            echo "</td>";
+                                            echo "</tr>";
+                                        }
+                                    } else {
+                                        echo "<tr><td colspan='11'>No pets found</td></tr>";
                                     }
+                                    $stmt->close();
                                 } else {
-                                    echo "<tr><td colspan='11'>No pets found</td></tr>";
+                                    echo "<tr><td colspan='11'>Error fetching data</td></tr>";
                                 }
                                 ?>
                             </tbody>

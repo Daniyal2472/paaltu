@@ -24,10 +24,19 @@
 </head>
 <body>
     <section id="register" style="background: url('waGGy-1.0.0/images/background-img.png') no-repeat;">
-        <div class="container ">
+        <div class="container">
           <div class="row my-5 py-5 mt-0 mb-0">
-            <div class="offset-md-3 col-md-6 my-5 ">
-              <h2 class="display-3 fw-normal text-center">PALTO <br> <span class="text-primary">LOGIN FORM</span></h2>
+            <div class="offset-md-3 col-md-6 my-5 text-center">
+    <div class="text-center">
+    <div class="main-logo">
+        <a href="index.php">
+            <img src="waGGy-1.0.0/images/paltoo.png" alt="logo" class="img-fluid logo-img" style="height: 100px; width: auto;">
+        </a>
+    </div>
+</div>
+
+              <h2 class="display-3 fw-normal text-center mt-4"> 
+              <span class="text-primary">LOGIN FORM</span></h2>
               <form method="post" action="" onsubmit="return validateForm()">
                 <div class="mb-3">
                   <input type="email" class="form-control form-control-lg" name="email" id="email" placeholder="Enter Your Email Address">
@@ -39,7 +48,7 @@
                   <input name="signin" type="submit" class="btn btn-dark btn-lg rounded-1" value="Sign In">
                 </div>
                 <div class="mb-3 pt-4">
-                  <p class="text-center">Don't have an account? <a href="waGGy-1.0.0\register.php" class="btn btn-link">Create Your Account</a></p>
+                  <p class="text-center">Don't have an account? <a href="waGGy-1.0.0/register.php" class="btn btn-link">Create Your Account</a></p>
                 </div>
               </form>
             </div>

@@ -5,9 +5,7 @@
             <!-- About Us Section -->
             <div class="col-md-3">
                 <div class="footer-menu">
-                    <img src="images/logo.png" alt="logo" class="img-fluid">
-                    <p class="blog-paragraph fs-6 mt-3">Join our pet-loving community! Subscribe to our newsletter for the latest updates and offers on premium pet products.</p>
-                  
+                    <img src="../waGGy-1.0.0/images/paltoo.png" alt="logo" class="img-fluid" style="max-width: 190px;">
                 </div>
             </div>
 
@@ -20,52 +18,35 @@
                             <a href="index.php" class="nav-link">Home</a>
                         </li>
                         <li class="menu-item">
-                            <a href="#" class="nav-link">About Us</a>
+                            <a href="about_us.php" class="nav-link">About Us</a>
                         </li>
                         <li class="menu-item">
-                            <a href="#" class="nav-link">Offers</a>
+                            <a href="foodctg.php" class="nav-link">Pet Foods</a>
                         </li>
                         <li class="menu-item">
-                            <a href="shopnow.php" class="nav-link">Shop</a>
+                            <a href="acc.php" class="nav-link">Pet Accessories</a>
                         </li>
                         <li class="menu-item">
-                            <a href="#" class="nav-link">Contact Us</a>
+                            <a href="contact.php" class="nav-link">Contact Us</a>
                         </li>
                     </ul>
                 </div>
             </div>
 
-            <!-- Help Center Section -->
+
+              <!-- Newsletter Section -->
             <div class="col-md-3">
                 <div class="footer-menu">
-                    <h3>Help Center</h3>
-                    <ul class="menu-list list-unstyled">
-                        <li class="menu-item">
-                            <a href="#" class="nav-link">FAQs</a>
-                        </li>
-                        <li class="menu-item">
-                            <a href="#" class="nav-link">Payment</a>
-                        </li>
-                        <li class="menu-item">
-                            <a href="#" class="nav-link">Returns & Refunds</a>
-                        </li>
-                        <li class="menu-item">
-                            <a href="#" class="nav-link">Checkout</a>
-                        </li>
-                        <li class="menu-item">
-                            <a href="#" class="nav-link">Delivery Information</a>
-                        </li>
-                    </ul>
+                    <h3>Stay Updated!</h3>
+                    <p class="blog-paragraph fs-6 mt-3">Join our pet-loving community! Subscribe to our newsletter for the latest updates and special offers on premium pet products.</p>
                 </div>
             </div>
 
-            <!-- Newsletter Section -->
-            <div class="col-md-3">
-                <div>
-                    <h3>Our Newsletter</h3>
-                    <p class="blog-paragraph fs-6">Stay updated on our latest pet products and special offers by subscribing to our newsletter.</p>
+            <!-- Social Media Links Section -->
+            <div class="col-md-3 text-center pt-5">
+                <div class="footer-menu">
                     <div class="social-links">
-                        <ul class="d-flex list-unstyled gap-2">
+                        <ul class="d-flex justify-content-center list-unstyled gap-2">
                             <li class="social">
                                 <a href="#">
                                     <iconify-icon class="social-icon" icon="ri:facebook-fill"></iconify-icon>
@@ -76,11 +57,7 @@
                                     <iconify-icon class="social-icon" icon="ri:twitter-fill"></iconify-icon>
                                 </a>
                             </li>
-                            <li class="social">
-                                <a href="#">
-                                    <iconify-icon class="social-icon" icon="ri:pinterest-fill"></iconify-icon>
-                                </a>
-                            </li>
+                            
                             <li class="social">
                                 <a href="#">
                                     <iconify-icon class="social-icon" icon="ri:instagram-fill"></iconify-icon>
@@ -93,7 +70,10 @@
                             </li>
                         </ul>
                     </div>
+                </div>
             </div>
+
+          
 
         </div>
     </div>

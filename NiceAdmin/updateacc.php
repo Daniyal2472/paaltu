@@ -1,14 +1,30 @@
 <?php
 include("header.php");
-include("connection.php");
+
+// Example user data
+$user = ['role' => $_SESSION['role']]; 
+
+// Check if the user is allowed to update an accessory (only authorized users can perform this action)
+if (!authorize('update_accessory', $user)) {
+    echo '<div class="d-flex justify-content-center"><div class="alert alert-danger text-center col-6" role="alert">You are not authorized to update this accessory. Only authorized users can perform this action.</div></div>';
+    exit;
+}
 
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
 
-    // Fetch accessory details from the database
-    $query = "SELECT * FROM accessories WHERE id='$id'";
-    $result = mysqli_query($con, $query);
-    $accessory = mysqli_fetch_assoc($result);
+    // Fetch accessory details from the database using a prepared statement
+    $query = "SELECT * FROM accessories WHERE id = ?";
+    if ($stmt = $con->prepare($query)) {
+        $stmt->bind_param('i', $id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $accessory = $result->fetch_assoc();
+        $stmt->close();
+    } else {
+        echo "<div class='alert alert-danger'>Error fetching accessory details.</div>";
+        exit;
+    }
 }
 
 if (isset($_POST['update_acc'])) {
@@ -17,33 +33,49 @@ if (isset($_POST['update_acc'])) {
     $category = $_POST['category'];
     $description = $_POST['description'];
 
-    // Handle file uploads if a new file is uploaded
-    if ($_FILES['picture']['name']) {
+    // Prepare SQL query to prevent SQL injection
+    if (!empty($_FILES['picture']['name'])) {
         $pictureFileName = $_FILES['picture']['name'];
         $pictureTmpName = $_FILES['picture']['tmp_name'];
-        $pictureDestination = '../accessories/' . $pictureFileName;
         $pictureExtension = strtolower(pathinfo($pictureFileName, PATHINFO_EXTENSION));
 
         if (in_array($pictureExtension, ['jpg', 'jpeg', 'png'])) {
+            $pictureDestination = '../accessories/' . basename($pictureFileName);
             move_uploaded_file($pictureTmpName, $pictureDestination);
-            $query = "UPDATE accessories SET name='$name', price='$price', category_id='$category', image='$pictureDestination', description='$description' WHERE id='$id'";
+
+            // Update query with image path
+            $query = "UPDATE accessories SET name=?, price=?, category_id=?, image=?, description=? WHERE id=?";
+            if ($stmt = $con->prepare($query)) {
+                $stmt->bind_param('sdisii', $name, $price, $category, $pictureDestination, $description, $id);
+                $stmt->execute();
+                $stmt->close();
+            }
         } else {
             echo "<script>alert('Error: Unsupported file extension. Please use jpg, jpeg, png for pictures.');</script>";
             exit;
         }
     } else {
-        $query = "UPDATE accessories SET name='$name', price='$price', category_id='$category', description='$description' WHERE id='$id'";
+        // Update query without changing the image
+        $query = "UPDATE accessories SET name=?, price=?, category_id=?, description=? WHERE id=?";
+        if ($stmt = $con->prepare($query)) {
+            $stmt->bind_param('sdisi', $name, $price, $category, $description, $id);
+            $stmt->execute();
+            $stmt->close();
+        }
     }
 
-    $result = mysqli_query($con, $query);
-
-    if ($result) {
-        echo "<script>
-                alert('Accessory updated successfully!');
-                window.location.href = 'acclist.php';
-              </script>";
+    if ($stmt) {
+        echo '<script>
+                Swal.fire({
+                    title: "Good job!",
+                    text: "Accessory updated successfully!",
+                    icon: "success"
+                }).then(function() {
+                    window.location.href = "acclist.php";
+                });
+              </script>';
     } else {
-        echo "<script>alert('Error updating accessory.');</script>";
+        echo "<script>alert('Error updating accessory');</script>";
     }
 }
 ?>
@@ -56,29 +88,29 @@ if (isset($_POST['update_acc'])) {
                     <h2 class="display-3 fw-normal text-center">Update <span class="text-primary">Accessory</span></h2>
                     <form method="post" action="" enctype="multipart/form-data">
                         <div class="mb-3">
-                            <input type="text" class="form-control form-control-lg" name="name" id="name" value="<?php echo $accessory['name']; ?>" required>
+                            <input type="text" class="form-control form-control-lg" name="name" id="name" value="<?php echo htmlspecialchars($accessory['name'], ENT_QUOTES, 'UTF-8'); ?>" required>
                         </div>
                         <div class="mb-3">
-                            <input type="number" class="form-control form-control-lg" name="price" id="price" value="<?php echo $accessory['price']; ?>" required>
+                            <input type="number" class="form-control form-control-lg" name="price" id="price" value="<?php echo htmlspecialchars($accessory['price'], ENT_QUOTES, 'UTF-8'); ?>" required>
                         </div>
                         <div class="mb-3">
                             <label for="category" class="form-label">Select Category:</label>
                             <select class="form-select" id="category" name="category" required>
                                 <option value="">Select Category</option>
                                 <?php
+                                // Fetch categories and display them
                                 $categories_query = "SELECT * FROM `categories`";
-                                $categories_result = mysqli_query($con, $categories_query);
-                                if ($categories_result) {
-                                    while ($row = mysqli_fetch_assoc($categories_result)) {
+                                if ($categories_result = $con->query($categories_query)) {
+                                    while ($row = $categories_result->fetch_assoc()) {
                                         $selected = $row['id'] == $accessory['category_id'] ? 'selected' : '';
-                                        echo "<option value='" . $row['id'] . "' $selected>" . $row['name'] . "</option>";
+                                        echo "<option value='" . htmlspecialchars($row['id'], ENT_QUOTES, 'UTF-8') . "' $selected>" . htmlspecialchars($row['name'], ENT_QUOTES, 'UTF-8') . "</option>";
                                     }
                                 }
                                 ?>
                             </select>
                         </div>
                         <div class="mb-3">
-                            <input type="text" class="form-control form-control-lg" name="description" id="description" value="<?php echo $accessory['description']; ?>" required>
+                            <input type="text" class="form-control form-control-lg" name="description" id="description" value="<?php echo htmlspecialchars($accessory['description'], ENT_QUOTES, 'UTF-8'); ?>" required>
                         </div>
                         <div class="mb-3">
                             <label for="formFileSm" class="form-label">Image</label>
@@ -89,4 +121,12 @@ if (isset($_POST['update_acc'])) {
                             <input name="update_acc" type="submit" class="btn btn-dark btn-lg rounded-1" value="Update Accessory">
                         </div>
                     </form>
-                </div
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+
+<?php
+include("footer.php");
+?>

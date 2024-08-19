@@ -24,7 +24,7 @@ if ($result->num_rows > 0) {
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>PALTOO</title>
+  <title>PAALTOO</title>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -36,6 +36,10 @@ if ($result->num_rows > 0) {
 
   <!-- Swiper Stylesheet -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+
+   <!-- Favicons -->
+   <link href="../waGGy-1.0.0/images/paltoo.png" rel="icon" >
+   <link href="../waGGy-1.0.0/images/paltoo.png" rel="apple-touch-icon"   >
 
   <!-- Bootstrap Stylesheet -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -73,6 +77,8 @@ if ($result->num_rows > 0) {
 
   <!-- SweetAlert -->
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+  
 </head>
 
 
@@ -195,13 +201,14 @@ if ($result->num_rows > 0) {
     <div class="container py-2">
       <div class="row py-4 pb-0 pb-sm-4 align-items-center ">
 
-        <div class="col-sm-4 col-lg-3 text-center text-sm-start">
-          <div class="main-logo">
-            <a href="index.php">
-              <img src="images/logo.png" alt="logo" class="img-fluid">
-            </a>
-          </div>
-        </div>
+      <div class="col-sm-4 col-lg-3 text-center text-sm-start">
+    <div class="main-logo">
+        <a href="index.php">
+            <img src="images/paltoo.png" alt="logo" class="img-fluid logo-img" style="height: 100px; width: auto;">
+        </a>
+    </div>
+</div>
+
 
         <form class="search-form" method="POST" action="search.php">
     <input type="text" name="searchTerm" class="search-input" placeholder="Search" value="">
@@ -291,12 +298,15 @@ if ($result->num_rows > 0) {
         <button class="dropdown-button nav-link dropdown-toggle">Pets</button>
         <div class="dropdown-content">
             <?php foreach ($categories as $category): ?>
-                <a href="<?php echo htmlspecialchars($category['file_name']); ?>">
+              <a href=category.php?id=<?php echo $category['id']; ?>>
                     <?php echo htmlspecialchars($category['name']); ?>
                 </a>
             <?php endforeach; ?>
         </div>
     </div>
+    <li class="nav-item">
+                <a href="about_us.php" class="nav-link">About us</a>
+              </li>
            
               <li class="nav-item">
                 <a href="contact.php" class="nav-link">Contact</a>
@@ -349,19 +359,23 @@ if ($result->num_rows > 0) {
              <div class="d-none d-lg-flex align-items-end">
               <ul class="d-flex justify-content-end list-unstyled m-0">
               
-                <li>
+                <!-- <li>
                   <a href="wishlist.php" class="mx-3">
                     <iconify-icon icon="mdi:heart" class="fs-4"></iconify-icon>
                   </a>
-                </li>
+                </li> -->
 
                 <!-- Cart Icon -->
-                <li>
+                <!-- <li>
         <a href="add_to_cart.php" class="mx-3" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart" aria-controls="offcanvasCart">
             <iconify-icon icon="mdi:cart" class="fs-4 position-relative"></iconify-icon>
             <span id="cart-badge" class="badge rounded-circle bg-primary">0</span>
         </a>
-    </li>
+    </li> -->
+
+                <!-- <div class="pb-1 ">
+                    <a href="#" class="blue-color"><i class="fa-solid fa-bag-shopping fs-4 pe-3"></i></a>
+                </div> -->
 
   
 
@@ -373,10 +387,11 @@ if ($result->num_rows > 0) {
             <div class="dropdown">
     <a class="dropdown-toggle" href="#" role="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
         <span class="iconify w-50" data-icon="healthicons:person"></span>
+        
     </a>
     <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile" aria-labelledby="userDropdown">
-   
-          <?php
+        
+    <?php
         if (isset($_SESSION['user_id'])) {
           ?>
             <li class="dropdown-header">
@@ -392,9 +407,9 @@ if ($result->num_rows > 0) {
         </li>
 
         <li>
-            <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+            <a class="dropdown-item d-flex align-items-center" href="../NiceAdmin/header.php">
                 <i class="bi bi-person"></i>
-                <span>My Profile</span>
+                <span>My panel</span>
             </a>
         </li>
         <li>
@@ -404,9 +419,10 @@ if ($result->num_rows > 0) {
         <li>
             <hr class="dropdown-divider">
         </li>
+       
 
         <li>
-            <a class="dropdown-item d-flex align-items-center" href="pages-faq.html">
+            <a class="dropdown-item d-flex align-items-center" href="contact.php">
                 <i class="bi bi-question-circle"></i>
                 <span>Need Help?</span>
             </a>
@@ -459,3 +475,6 @@ if (isset($_SESSION['user_id'])) {
   <script src="js/plugins.js"></script>
   <script src="js/script.js"></script>
   <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+
+  <!-- sweet alert -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

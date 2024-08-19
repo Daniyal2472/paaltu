@@ -21,14 +21,29 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Chilanka&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    #register {
+      background: url('images/background-img.png') no-repeat center center;
+      background-size: cover;
+      height: 140vh; /* Full viewport height */
+    }
+  </style>
 </head>
 
 <body>
-    <section id="register" style="background: url('images/background-img.png') no-repeat;">
+    <section id="register">
         <div class="container">
           <div class="row my-5 py-5 mt-0 mb-0">
             <div class="offset-md-3 col-md-6 my-5">
-              <h2 class="display-3 fw-normal text-center">PALTO <br> <span class="text-primary">Register FORM</span></h2>
+              <div class="text-center">
+                <div class="main-logo">
+                    <a href="index.php">
+                        <img src="images/paltoo.png" alt="logo" class="img-fluid logo-img" style="height: 100px; width: auto;">
+                    </a>
+                </div>
+              </div>
+              <h2 class="display-3 fw-normal text-center mt-4"> 
+              <span class="text-primary">Register FORM</span></h2>
               <form method="post" action="" onsubmit="return validateForm()">
                 <div class="mb-3">
                   <input type="text" class="form-control form-control-lg" name="username" id="username" placeholder="Enter Your Full Name">
@@ -101,26 +116,17 @@ if (isset($_POST['signup'])) {
         echo "<script>alert('Invalid email format');</script>";
     } elseif (strlen($password) < 8) {
         echo "<script>alert('Password must be at least 8 characters long');</script>";
-    } else {
-        $password = password_hash($password, PASSWORD_BCRYPT); // Encrypting the password before storing
+    } else {  
         $query = mysqli_query($con, "INSERT INTO `users`(`id`, `name`, `email`, `password`, `role`) VALUES ('', '$name', '$email', '$password', 'User')");
 
         if ($query == 1) {
-            echo "<script>
-                Swal.fire({
-                    position: 'top-end',
-                    icon: 'success',
-                    title: 'User registered successfully',
-                    showConfirmButton: false,
-                    timer: 1500
-                });
-                setTimeout(function() {
-                    location.assign('login.php');
-                }, 1500);
-            </script>";
-        } else {
-            echo "<script>alert('Registration failed');</script>";
-        }
+          echo "<script>
+          alert('User registered successfully');
+          window.location.href = '../login.php';
+      </script>";
+  } else {
+      echo "<script>alert('Registration failed');</script>";
+  }
     }
 }
 ?>

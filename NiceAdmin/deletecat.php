@@ -1,25 +1,60 @@
 <?php
-include("connection.php");
+include("header.php");
 
-if (isset($_GET['id'])) {
-    $id = $_GET['id'];
+// Example user data
+$user = ['role' => $_SESSION['role']];
 
-    // Delete the category from the database
-    $query = "DELETE FROM categories WHERE id='$id'";
-    $result = mysqli_query($con, $query);
+// Check if the user is allowed to delete a category (only admins can delete categories)
+if (!authorize('delete_category', $user)) {
+    echo '<div class="d-flex justify-content-center"><div class="alert alert-danger text-center col-6" role="alert">You are not authorized to delete this category. Only admins can perform this action.</div></div>';
+    exit;
+}
 
-    if ($result) {
-        echo "<script>
-                alert('Accessory deleted successfully!');
-                window.location.href = 'catlist.php';
-              </script>";
-    } else {
-        echo "<script>
-                alert('Error deleting accessory.');
-                window.location.href = 'catlist.php';
-              </script>";
+if (isset($_GET['id']) && is_numeric($_GET['id'])) {
+    $id = (int) $_GET['id']; // Sanitize ID
+
+    // Prepare the statement to avoid SQL injection
+    $deleteCategoryStmt = $con->prepare("DELETE FROM categories WHERE id = ?");
+    $deleteCategoryStmt->bind_param('i', $id);
+
+    try {
+        $result = $deleteCategoryStmt->execute();
+
+        if ($result) {
+            // Output the SweetAlert script
+            echo '<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>';
+            echo '<script>
+                    Swal.fire({
+                        title: "Good job!",
+                        text: "Category deleted successfully!",
+                        icon: "success"
+                    }).then(function() {
+                        window.location.href = "catlist.php";
+                    });
+                  </script>';
+        } else {
+            throw new Exception('Error deleting category');
+        }
+    } catch (Exception $e) {
+        // Output the SweetAlert error script
+        echo '<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>';
+        echo '<script>
+                Swal.fire({
+                    title: "Error!",
+                    text: "Failed to delete category: ' . htmlspecialchars($e->getMessage(), ENT_QUOTES, 'UTF-8') . '",
+                    icon: "error"
+                }).then(function() {
+                    window.location.href = "catlist.php";
+                });
+              </script>';
+    } finally {
+        // Close the prepared statement
+        $deleteCategoryStmt->close();
+        // Close the database connection
+        
     }
 } else {
-    header("Location:catlist.php");
+    header("Location: catlist.php");
+    exit(); // Ensure to call exit() after header redirection
 }
 ?>

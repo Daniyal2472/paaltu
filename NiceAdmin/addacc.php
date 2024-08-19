@@ -1,54 +1,70 @@
 <?php
 include("header.php");
+$user = ['role' => $_SESSION['role']]; // Example user data
+
+// Check if the user is allowed to add a new accessory (only admins can add accessories)
+if (!authorize('create_accessory', $user)) {
+    echo '<div class="d-flex justify-content-center"><div class="alert alert-danger text-center col-6" role="alert">You are not authorized to add a new accessory. Only admins can perform this action.</div></div>';
+    exit;
+}
 ?>
 
 <body>
-    <section id="register" style="background: url('images/background-img.png') no-repeat;">
-        <div class="container">
-            <div class="row my-5 py-5 mt-0 mb-0">
-                <div class="offset-md-3 col-md-6 my-5">
-                    <h2 class="display-3 fw-normal text-center">Add <span class="text-primary">Accessory</span></h2>
-                    <form method="post" action="" enctype="multipart/form-data">
-                        <div class="mb-3">
-                            <input type="text" class="form-control form-control-lg" name="name" id="name" placeholder="Enter Name" required>
-                        </div>
-                        <div class="mb-3">
-                            <input type="number" class="form-control form-control-lg" name="price" id="price" placeholder="Enter Price" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="category" class="form-label">Select Category:</label>
-                            <select class="form-select" id="category" name="category" required>
-                                <option value="">Select Category</option>
-                                <?php
-                                $query = "SELECT * FROM `categories`";
-                                $result = mysqli_query($con, $query);
-                                if ($result) {
-                                    while ($row = mysqli_fetch_assoc($result)) {
-                                ?>
-                                    <option value="<?php echo $row['id']; ?>"><?php echo $row['name']; ?></option>
-                                <?php
-                                    }
-                                }
-                                ?>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <input type="text" class="form-control form-control-lg" name="description" id="description" placeholder="Enter Description" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="formFileSm" class="form-label">Image</label>
-                            <input name="picture" class="form-control form-control-sm" id="formFileSm" type="file" required>
-                        </div>
-
-                        <div class="d-grid gap-2">
-                            <input name="add_acc" type="submit" class="btn btn-dark btn-lg rounded-1" value="Add Accessory">
-                        </div>
-                    </form>
-
+<section id="register" style="background: url('images/background-img.png') no-repeat;">
+    <div class="container">
+        <div class="row my-5 py-5 mt-0 mb-0">
+            <div class="offset-md-3 col-md-6 my-5 text-center">
+                <div class="text-center">
+                    <div class="main-logo">
+                        <a href="index.php">
+                            <img src="../NiceAdmin/assets/img/paltoo.png" alt="logo" class="img-fluid logo-img" style="height: 120px; width: auto;">
+                        </a>
+                    </div>
                 </div>
+
+                <h6 class="display-5 fw-normal text-center mt-2">
+                    <span class="text-black">ADD ACCESSORIES</span></h6>
+                <form method="post" action="" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <input type="text" class="form-control form-control-lg" name="name" id="name" placeholder="Enter Name" required>
+                    </div>
+                    <div class="mb-3">
+                        <input type="number" class="form-control form-control-lg" name="price" id="price" placeholder="Enter Price" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="category" class="form-label">Select Category:</label>
+                        <select class="form-select" id="category" name="category" required>
+                            <option value="">Select Category</option>
+                            <?php
+                            $query = "SELECT * FROM `categories`";
+                            $result = mysqli_query($con, $query);
+                            if ($result) {
+                                while ($row = mysqli_fetch_assoc($result)) {
+                                    ?>
+                                    <option value="<?php echo htmlspecialchars($row['id']); ?>"><?php echo htmlspecialchars($row['name']); ?></option>
+                                    <?php
+                                }
+                            }
+                            ?>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <input type="text" class="form-control form-control-lg" name="description" id="description" placeholder="Enter Description" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="formFileSm" class="form-label">Image</label>
+                        <input name="picture" class="form-control form-control-sm" id="formFileSm" type="file" required>
+                    </div>
+
+                    <div class="d-grid gap-2">
+                        <input name="add_acc" type="submit" class="btn btn-dark btn-lg rounded-1" value="Add Accessory">
+                    </div>
+                </form>
+
             </div>
         </div>
-    </section>
+    </div>
+</section>
 </body>
 
 </html>
@@ -72,31 +88,36 @@ if (isset($_POST['add_acc'])) {
 
     if (in_array($pictureExtension, ['jpg', 'jpeg', 'png'])) {
         // Move uploaded files to specific directory
-        move_uploaded_file($pictureTmpName, $pictureDestination);
+        if (move_uploaded_file($pictureTmpName, $pictureDestination)) {
 
-        // Insert data into the database
-        $query = "INSERT INTO accessories(name, price, category_id, image, description) VALUES ('$name', '$price', '$category', '$pictureDestination', '$description')";
-        $result = mysqli_query($con, $query);
+            // Use prepared statements to insert data into the database
+            $stmt = $con->prepare("INSERT INTO accessories (name, price, category_id, image, description) VALUES (?, ?, ?, ?, ?)");
+            $stmt->bind_param("sdiss", $name, $price, $category, $pictureDestination, $description);
 
-        if ($result) {
-            $_SESSION['status'] = "Accessory added successfully!";
-      if(isset($_SESSION['status'])){?>
-        <script>
-          swal({
-          title: "<?php echo $_SESSION['status']; ?>",
-          icon: "success",
-          button: "Okay",
-        });
-        </script>
-          
-          <?php
-          unset($_SESSION['status']);
-          }
+            if ($stmt->execute()) {
+                $_SESSION['status'] = "Accessory added successfully!";
+                if (isset($_SESSION['status'])) {
+                    echo '<script>
+                            Swal.fire({
+                                title: "Good job!",
+                                text: "Accessory added successfully!",
+                                icon: "success"
+                            }).then(function() {
+                                window.location.href = "acclist.php";
+                            });
+                          </script>';
+                    unset($_SESSION['status']);
+                }
+            } else {
+                echo "<script>alert('Error adding accessory.');</script>";
+            }
+
+            $stmt->close(); // Close the statement
         } else {
-            echo "<script>alert('Error adding accessory.');</script>";
+            echo "<script>alert('Error uploading file.');</script>";
         }
     } else {
-        echo "<script>alert('Error: Unsupported file extension. Please use jpg, jpeg, png for pictures.')</script>";
+        echo "<script>alert('Error: Unsupported file extension. Please use jpg, jpeg, or png for pictures.')</script>";
     }
 }
 ?>

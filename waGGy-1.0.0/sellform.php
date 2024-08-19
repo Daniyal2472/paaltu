@@ -55,10 +55,23 @@ include("header.php");
         <label for="email" class="formbold-form-label">Email Address</label>
         <input type="email" name="email" id="email" placeholder="Enter your email" class="formbold-form-input" />
       </div>
-      <div class="formbold-mb-5">
-        <label for="pet_type" class="formbold-form-label">Pet's Type</label>
-        <input type="text" name="pet_type" id="pet_type" placeholder="Enter pet's type (e.g., Dog, Cat)" class="formbold-form-input" />
-      </div>
+      <div class="mb-3">
+                            <label for="category" class="form-label">Pet category:</label>
+                            <select class="form-select form-control-lg" id="category" name="category" required>
+                                <option value="">Select Category</option>
+                                <?php
+                                $query = "SELECT * FROM `categories`";
+                                $result = mysqli_query($con, $query);
+                                if ($result) {
+                                    while ($row = mysqli_fetch_assoc($result)) {
+                                ?>
+                                    <option value="<?php echo $row['id']; ?>"><?php echo $row['name']; ?></option>
+                                <?php
+                                    }
+                                }
+                                ?>
+                            </select>
+                        </div>
       <div class="formbold-mb-5">
         <label for="pet_breed" class="formbold-form-label">Pet's Breed</label>
         <input type="text" name="pet_breed" id="pet_breed" placeholder="Enter pet's breed" class="formbold-form-input" />
@@ -91,12 +104,13 @@ function validateForm() {
     var seller_name = document.getElementById("seller_name").value;
     var phone = document.getElementById("phone").value;
     var email = document.getElementById("email").value;
-    var pet_type = document.getElementById("pet_type").value;
+    var pet_type = document.getElementById("category").value;
     var pet_breed = document.getElementById("pet_breed").value;
     var pet_age = document.getElementById("pet_age").value;
     var pet_price = document.getElementById("pet_price").value;
     var pet_description = document.getElementById("pet_description").value;
     var pet_image = document.getElementById("pet_image").value;
+
 
     if (seller_name == "" || phone == "" || email == "" || pet_type == "" || pet_breed == "" || pet_age == "" || pet_price == "" || pet_description == "" || pet_image == "") {
         alert("All fields must be filled out");
@@ -134,7 +148,7 @@ function validateForm() {
         return false;
     }
     return true;
-}
+}}
 </script>
 
 <?php
@@ -147,7 +161,7 @@ if (isset($_POST['sell'])) {
   $seller_name = $_POST['seller_name'];
   $phone = $_POST['phone'];
   $email = $_POST['email'];
-  $pet_type = $_POST['pet_type'];
+  $pet_type = $_POST['category'];
   $pet_breed = $_POST['pet_breed'];
   $pet_age = $_POST['pet_age'];
   $pet_price = $_POST['pet_price'];
@@ -166,9 +180,9 @@ if (isset($_POST['sell'])) {
   if (in_array($pictureExtension, ['jpg', 'jpeg', 'png'])) {
       // Move uploaded files to specific directories
       move_uploaded_file($pictureTmpName, $pictureDestination);
-
+      $seller_id = $_SESSION['user_id'];
       // Insert data into the database
-      $query = "INSERT INTO pets(id, user_id, name, category_id, breed, price, age, description, image, role) VALUES ('','2','$seller_name','1','$pet_breed','$pet_price','$pet_age','$pet_description','$pictureDestination','$role')";
+      $query = "INSERT INTO pets(user_id, name, category_id, breed, price, age, description, image, role) VALUES ('$seller_id','$seller_name','$pet_type','$pet_breed','$pet_price','$pet_age','$pet_description','$pictureDestination','$role')";
       $result = mysqli_query($con, $query);
 
       if ($result) {

@@ -1,20 +1,11 @@
 <?php
 include("header.php");
-include("connection.php");
+
 ?>
 
 <main id="main" class="main">
 
-    <div class="pagetitle">
-        <h1>General Tables</h1>
-        <nav>
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                <li class="breadcrumb-item">Tables</li>
-                <li class="breadcrumb-item active">General</li>
-            </ol>
-        </nav>
-    </div><!-- End Page Title -->
+    
 
     <section class="section">
         <div class="row">
@@ -52,7 +43,7 @@ include("connection.php");
                                         echo "</tr>";
                                     }
                                 } else {
-                                    echo "<tr><td colspan='3'>No categories found</td></tr>";
+                                    echo "<tr><td colspan='3'>No contact found</td></tr>";
                                 }
                                 ?>
                             </tbody>

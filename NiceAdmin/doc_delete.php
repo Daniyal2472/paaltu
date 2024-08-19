@@ -1,39 +1,60 @@
 <?php
-include("connection.php");
+include("header.php");
 
-if (isset($_GET['id'])) {
-    $id = $_GET['id'];
+// Example user data
+$user = ['role' => $_SESSION['role']];
 
-    // Delete the doctor from the database
-    $query = "DELETE FROM doctors WHERE id='$id'";
-    $result = mysqli_query($con, $query);
+// Check if the user is allowed to delete a doctor (only admins can delete doctors)
+if (!authorize('delete_doctors', $user)) {
+    echo '<div class="d-flex justify-content-center"><div class="alert alert-danger text-center col-6" role="alert">You are not authorized to delete this doctor. Only admins can perform this action.</div></div>';
+    exit;
+}
 
-    if ($result) {
-        echo "<script>
+if (isset($_GET['id']) && is_numeric($_GET['id'])) {
+    $id = (int) $_GET['id']; // Sanitize ID
+
+    // Prepare the statement to avoid SQL injection
+    $deleteDoctorStmt = $con->prepare("DELETE FROM doctors WHERE id = ?");
+    $deleteDoctorStmt->bind_param('i', $id);
+
+    try {
+        $result = $deleteDoctorStmt->execute();
+
+        if ($result) {
+            // Output the SweetAlert script
+            echo '<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>';
+            echo '<script>
+                    Swal.fire({
+                        title: "Good job!",
+                        text: "Doctor deleted successfully!",
+                        icon: "success"
+                    }).then(function() {
+                        window.location.href = "doclist.php";
+                    });
+                  </script>';
+        } else {
+            throw new Exception('Error deleting doctor');
+        }
+    } catch (Exception $e) {
+        // Output the SweetAlert error script
+        echo '<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>';
+        echo '<script>
                 Swal.fire({
-                    position: 'top-end',
-                    icon: 'success',
-                    title: 'Doctor deleted successfully',
-                    showConfirmButton: false,
-                    timer: 1500
+                    title: "Error!",
+                    text: "Failed to delete doctor: ' . htmlspecialchars($e->getMessage(), ENT_QUOTES, 'UTF-8') . '",
+                    icon: "error"
                 }).then(function() {
-                    window.location.href = 'doctors_table.php';
+                    window.location.href = "doclist.php";
                 });
-              </script>";
-    } else {
-        echo "<script>
-                Swal.fire({
-                    position: 'top-end',
-                    icon: 'error',
-                    title: 'Error deleting doctor',
-                    showConfirmButton: false,
-                    timer: 1500
-                }).then(function() {
-                    window.location.href = 'doctors_table.php';
-                });
-              </script>";
+              </script>';
+    } finally {
+        // Close the prepared statement
+        $deleteDoctorStmt->close();
+        // Close the database connection
+       
     }
 } else {
     header("Location: doctors_table.php");
+    exit(); // Always use exit() after header redirection to stop script execution
 }
 ?>

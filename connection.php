@@ -1,4 +1,5 @@
 <?php
+include('policies.php');
 session_start(); // Ensure session is started
 
 $host = "localhost";
@@ -36,7 +37,7 @@ if (isset($_POST['signin'])) {
                 $_SESSION['role'] = $user['role'];
 
                 if ($user['role'] == 'Admin') {
-                    header("Location: NiceAdmin/index.php");
+                    header("Location: NiceAdmin/admin_welcom.php");
                 } else {
                     include 'session.php'; // Include the session initialization file
                     header("Location: waGGy-1.0.0/index.php");
