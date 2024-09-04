@@ -15,57 +15,65 @@ if ($categoryResult) {
 // Process form submission
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Sanitize and validate input
-    $name = $_POST['name'];
-    $category_id = $_POST['category_id'];
-    $breed = $_POST['breed'];
-    $price = $_POST['price'];
-    $age = $_POST['age'];
-    $colour = $_POST['colour'];
-    $weight = $_POST['weight'];
-    $height = $_POST['height'];
-    $gender = $_POST['gender'];
-    $vaccination_status = $_POST['vaccination_status'];
-    $description = $_POST['description'];
+    $name = htmlspecialchars($_POST['name']);
+    $category_id = intval($_POST['category_id']);
+    $breed = htmlspecialchars($_POST['breed']);
+    $price = floatval($_POST['price']);
+    $age = intval($_POST['age']);
+    $colour = htmlspecialchars($_POST['colour']);
+    $weight = floatval($_POST['weight']);
+    $height = floatval($_POST['height']);
+    $gender = htmlspecialchars($_POST['gender']);
+    $vaccination_status = htmlspecialchars($_POST['vaccination_status']);
+    $description = htmlspecialchars($_POST['description']);
+    $pet_id = intval($_POST['pet_id']);
     $role = 'Admin'; // Get the role from the session
 
     // Handle file upload
     if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
-        $image = $_FILES['image']['name'];
+        $image = basename($_FILES['image']['name']);
         $imageTmpName = $_FILES['image']['tmp_name'];
-        $imagePath = 'uploads/' . basename($image);
+        $imagePath = 'uploads/' . $image;
+        
+        // Validate image file
+        $allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
+        if (!in_array($_FILES['image']['type'], $allowedTypes)) {
+            echo "<script>alert('Invalid image type.');</script>";
+            exit();
+        }
         
         // Move the file to the uploads directory
         if (!move_uploaded_file($imageTmpName, $imagePath)) {
-            $alertMessage = "Failed to upload image.";
-            echo "<script>alert('$alertMessage');</script>";
+            echo "<script>alert('Failed to upload image.');</script>";
             exit(); // Exit script if image upload fails
         }
     } else {
-        $image = null; // Set default value if no file is uploaded
+        $image = htmlspecialchars($_POST['existing_image']); // Keep existing image if no new file is uploaded
     }
 
     // Determine pet status
     $status = ($role === 'Admin') ? 'Approved' : 'Unapproved';
 
-    // Prepare SQL query
-    $stmt = $con->prepare("INSERT INTO pets (`user_id`, `name`, `category_id`, `breed`, `price`, `age`, `description`, `image`, `role`, `colour`, `weight`, `height`, `gender`, `vaccination_status`, `status`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-    $user_id = 1;
-    //$user_id = $_SESSION['user_id']; // Ensure user_id is set in session
-    $stmt->bind_param("isisddssssddsss", $user_id, $name, $category_id, $breed, $price, $age, $description, $image, $role, $colour, $weight, $height, $gender, $vaccination_status, $status);
+    // Prepare SQL query for update
+    $stmt = $con->prepare("UPDATE `pets` SET `name` = ?, `category_id` = ?, `breed` = ?, `price` = ?, `age` = ?, `description` = ?, `image` = ?, `role` = ?, `colour` = ?, `weight` = ?, `height` = ?, `gender` = ?, `vaccination_status` = ?, `status` = ? WHERE `id` = ?");
+    $stmt->bind_param("sisddssssddsssi", $name, $category_id, $breed, $price, $age, $description, $image, $role, $colour, $weight, $height, $gender, $vaccination_status, $status, $pet_id);
 
     if ($stmt->execute()) {
-        echo "<script>alert('Pet added successfully.'); window.location.href='pets.php';</script>";
+        echo "<script>alert('Pet updated successfully.'); window.location.href='pets.php';</script>";
     } else {
-        $alertMessage = "Error: " . $stmt->error;
-        echo "<script>alert('$alertMessage');</script>";
+        echo "<script>alert('Error: " . $stmt->error . "');</script>";
     }
 
     $stmt->close();
     $con->close();
 }
+
+// Fetch the pet details for editing
+$pet_id = intval($_GET['id']);
+$petQuery = "SELECT * FROM `pets` WHERE id = $pet_id";
+$petResult = $con->query($petQuery);
+$pet = $petResult->fetch_assoc();
 ?>
-
-
 
 <div class="container">
     <div class="page-inner">
@@ -73,10 +81,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <div class="card-title">Add Pet</div>
+                        <div class="card-title">Edit Pet</div>
                     </div>
                     <div class="card-body">
-                        <form id="addPetForm" method="post" enctype="multipart/form-data">
+                        <form id="editPetForm" method="post" enctype="multipart/form-data">
+                            <input type="hidden" name="pet_id" value="<?php echo htmlspecialchars($pet['id']); ?>">
+                            <input type="hidden" name="existing_image" value="<?php echo htmlspecialchars($pet['image']); ?>">
                             <div class="row">
                                 <!-- Basic Pet Information -->
                                 <div class="col-md-6 col-lg-4">
@@ -87,6 +97,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                             class="form-control"
                                             id="petName"
                                             name="name"
+                                            value="<?php echo htmlspecialchars($pet['name']); ?>"
                                             placeholder="Enter pet name"
                                             required
                                         />
@@ -103,7 +114,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                         >
                                             <option value="">Select Category</option>
                                             <?php foreach ($categories as $category): ?>
-                                                <option value="<?php echo htmlspecialchars($category['id']); ?>">
+                                                <option value="<?php echo htmlspecialchars($category['id']); ?>" <?php echo ($category['id'] == $pet['category_id']) ? 'selected' : ''; ?>>
                                                     <?php echo htmlspecialchars($category['name']); ?>
                                                 </option>
                                             <?php endforeach; ?>
@@ -118,6 +129,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                             class="form-control"
                                             id="petBreed"
                                             name="breed"
+                                            value="<?php echo htmlspecialchars($pet['breed']); ?>"
                                             placeholder="Enter pet breed"
                                             required
                                         />
@@ -134,6 +146,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                                 aria-label="Amount (to the nearest pkr)"
                                                 id="petPrice"
                                                 name="price"
+                                                value="<?php echo htmlspecialchars($pet['price']); ?>"
                                                 placeholder="Enter pet price"
                                                 required
                                             />
@@ -149,6 +162,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                             class="form-control"
                                             id="petAge"
                                             name="age"
+                                            value="<?php echo htmlspecialchars($pet['age']); ?>"
                                             placeholder="Enter pet age"
                                             required
                                         />
@@ -162,6 +176,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                             class="form-control"
                                             id="petColour"
                                             name="colour"
+                                            value="<?php echo htmlspecialchars($pet['colour']); ?>"
                                             placeholder="Enter pet colour"
                                             required
                                         />
@@ -175,6 +190,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                             class="form-control"
                                             id="petWeight"
                                             name="weight"
+                                            value="<?php echo htmlspecialchars($pet['weight']); ?>"
                                             placeholder="Enter pet weight"
                                             step="0.01"
                                             required
@@ -189,6 +205,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                             class="form-control"
                                             id="petHeight"
                                             name="height"
+                                            value="<?php echo htmlspecialchars($pet['height']); ?>"
                                             placeholder="Enter pet height"
                                             step="0.01"
                                             required
@@ -206,6 +223,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                                     name="gender"
                                                     id="genderMale"
                                                     value="Male"
+                                                    <?php echo ($pet['gender'] == 'Male') ? 'checked' : ''; ?>
                                                     required
                                                 />
                                                 <label
@@ -222,7 +240,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                                     name="gender"
                                                     id="genderFemale"
                                                     value="Female"
-                                                    required                                                    
+                                                    <?php echo ($pet['gender'] == 'Female') ? 'checked' : ''; ?>
+                                                    required
                                                 />
                                                 <label
                                                     class="form-check-label"
@@ -244,9 +263,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                             required
                                         >
                                             <option value="">Select Vaccination Status</option>
-                                            <option value="Fully Vaccinated">Fully Vaccinated</option>
-                                            <option value="Partially Vaccinated">Partially Vaccinated</option>
-                                            <option selected value="Not Vaccinated">Not Vaccinated</option>
+                                            <option value="Fully Vaccinated" <?php echo ($pet['vaccination_status'] == 'Fully Vaccinated') ? 'selected' : ''; ?>>Fully Vaccinated</option>
+                                            <option value="Partially Vaccinated" <?php echo ($pet['vaccination_status'] == 'Partially Vaccinated') ? 'selected' : ''; ?>>Partially Vaccinated</option>
+                                            <option value="Not Vaccinated" <?php echo ($pet['vaccination_status'] == 'Not Vaccinated') ? 'selected' : ''; ?>>Not Vaccinated</option>
                                         </select>
                                     </div>
                                 </div>
@@ -260,7 +279,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                             rows="5"
                                             placeholder="Enter a description for the pet"
                                             required
-                                        ></textarea>
+                                        ><?php echo htmlspecialchars($pet['description']); ?></textarea>
                                     </div>
                                 </div>
                                 <div class="col-md-6 col-lg-4">
@@ -271,12 +290,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                             class="form-control-file"
                                             id="petImage"
                                             name="image"
-                                            required
                                         />
+                                        <input type="hidden" name="existing_image" value="<?php echo htmlspecialchars($pet['image']); ?>">
+                                        <?php if ($pet['image']): ?>
+                                            <img src="uploads/<?php echo htmlspecialchars($pet['image']); ?>" width="100" height="100" alt="Current Image">
+                                        <?php endif; ?>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
-                                    <button type="submit" class="btn btn-primary">Add Pet</button>
+                                    <button type="submit" class="btn btn-primary">Update Pet</button>
                                 </div>
                             </div>
                         </form>

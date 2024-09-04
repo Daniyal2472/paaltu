@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 20, 2024 at 09:17 PM
+-- Generation Time: Sep 04, 2024 at 08:22 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -131,10 +131,10 @@ CREATE TABLE `categories` (
 --
 
 INSERT INTO `categories` (`id`, `name`, `file_name`) VALUES
-(1, 'Cat', 'cat.php'),
-(2, 'Dog', 'dogctg.php'),
-(3, 'bird', 'birdsctg.php'),
-(7, 'fishes', 'fishectg.php');
+(2, 'Fish', ''),
+(6, 'Dog', ''),
+(7, 'Cat+', ''),
+(8, 'Car', '');
 
 -- --------------------------------------------------------
 
@@ -168,10 +168,8 @@ CREATE TABLE `doctors` (
 --
 
 INSERT INTO `doctors` (`id`, `name`, `email`, `qualification`, `image`) VALUES
-(8, 'Abeer Hussain', 'abeerhussain922@gmail.com', 'mbbs', 'Screenshot 2024-07-21 211410.png'),
-(9, 'Abeer Hussain', 'abeerhussain922@gmail.com', 'mbbs', 'Screenshot 2024-07-27 153728.png'),
-(10, 'Abeer Hussain', 'abeerhussain922@gmail.com', 'mbbs', 'Screenshot 2024-07-28 182612.png'),
-(11, 'mahad', 'mahad@abc.com', 'mbbs', '../doctors/rabbit.jpeg');
+(42, 'Abeer', 'abeer@gmail.com', 'MD', 'pexels-kooldark-19601385.jpg'),
+(43, 'Abeer', 'abeer@gmail.com', 'MBBS', 'pexels-kooldark-19601385.jpg');
 
 -- --------------------------------------------------------
 
@@ -191,14 +189,6 @@ CREATE TABLE `foods` (
   `role` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `foods`
---
-
-INSERT INTO `foods` (`id`, `name`, `description`, `category_id`, `image`, `weight`, `price`, `user_id`, `role`) VALUES
-(15, 'cat food', 'adaffwsfsfsfwefsaffew2ff', 1, '../accessories/close-up-adorable-kitten-couch.jpg', 12, 10000, 1, ''),
-(16, 'cat food', 'adaffwsfsfsfwefsaffew2ff', 1, '../accessories/close-up-adorable-kitten-couch.jpg', 12, 10000, 1, '');
-
 -- --------------------------------------------------------
 
 --
@@ -211,14 +201,6 @@ CREATE TABLE `food_orders` (
   `product_id` int(11) DEFAULT NULL,
   `time` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `food_orders`
---
-
-INSERT INTO `food_orders` (`id`, `user_id`, `product_id`, `time`) VALUES
-(1, 1, 16, '2024-08-10 11:33:24'),
-(2, 1, 16, '2024-08-10 11:35:19');
 
 -- --------------------------------------------------------
 
@@ -241,19 +223,9 @@ CREATE TABLE `pets` (
   `weight` decimal(5,2) DEFAULT NULL,
   `height` decimal(5,2) DEFAULT NULL,
   `gender` enum('Male','Female') DEFAULT NULL,
-  `vaccination_status` enum('Vaccinated','Not Vaccinated') DEFAULT 'Not Vaccinated',
+  `vaccination_status` enum('Fully Vaccinated','Partially Vaccinated','Not Vaccinated') DEFAULT 'Not Vaccinated',
   `status` enum('Approved','Unapproved') DEFAULT 'Unapproved'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `pets`
---
-
-INSERT INTO `pets` (`id`, `user_id`, `name`, `category_id`, `breed`, `price`, `age`, `description`, `image`, `role`, `colour`, `weight`, `height`, `gender`, `vaccination_status`, `status`) VALUES
-(16, 1, 'Cat a', 1, 'persian', '10000', 12, 'ghghg', '../accessories/close-up-adorable-kitten-couch.jpg', 'Admin', '', 12.00, 2.00, '', '', 'Approved'),
-(17, 1, 'Cat', 1, 'persian', '1', 3, '', '../accessories/close-up-adorable-kitten-couch.jpg', 'Admin', 'brown', 12.00, 2.00, '', '', 'Approved'),
-(18, 1, 'Cat', 1, 'persian', '100000', 2, '', '../accessories/close-up-adorable-kitten-couch.jpg', 'Admin', 'brown', 12.00, 2.00, 'Male', '', 'Approved'),
-(19, 1, 'Cat', 1, 'persian', '100000', 3, 'qdadsascewd2qdaascqweqdwAXSQEQ', '../accessories/close-up-adorable-kitten-couch.jpg', 'Admin', 'brown', 12.00, 2.00, 'Male', '', 'Approved');
 
 -- --------------------------------------------------------
 
@@ -449,7 +421,7 @@ ALTER TABLE `accessory_orders`
 -- AUTO_INCREMENT for table `appointments`
 --
 ALTER TABLE `appointments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `blogs`
@@ -467,7 +439,7 @@ ALTER TABLE `cart`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `contact`
@@ -479,7 +451,7 @@ ALTER TABLE `contact`
 -- AUTO_INCREMENT for table `doctors`
 --
 ALTER TABLE `doctors`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- AUTO_INCREMENT for table `foods`
@@ -497,7 +469,7 @@ ALTER TABLE `food_orders`
 -- AUTO_INCREMENT for table `pets`
 --
 ALTER TABLE `pets`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT for table `pet_orders`
@@ -539,8 +511,8 @@ ALTER TABLE `accessory_orders`
 -- Constraints for table `appointments`
 --
 ALTER TABLE `appointments`
-  ADD CONSTRAINT `appointments_ibfk_1` FOREIGN KEY (`doctor_id`) REFERENCES `doctors` (`id`),
-  ADD CONSTRAINT `appointments_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+  ADD CONSTRAINT `appointments_ibfk_1` FOREIGN KEY (`doctor_id`) REFERENCES `doctors` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `appointments_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `blogs`
@@ -566,8 +538,8 @@ ALTER TABLE `foods`
 -- Constraints for table `food_orders`
 --
 ALTER TABLE `food_orders`
-  ADD CONSTRAINT `food_orders_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
-  ADD CONSTRAINT `food_orders_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `foods` (`id`);
+  ADD CONSTRAINT `food_orders_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `food_orders_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `foods` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `pets`
